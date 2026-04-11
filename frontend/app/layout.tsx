@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Cairo, Almarai } from 'next/font/google'
 import './globals.css'
 import { Providers } from '@/components/providers'
+import { SplashScreen } from '@/components/ui/splash-screen'
 
 const cairo = Cairo({
   subsets: ['arabic', 'latin'],
@@ -39,6 +40,7 @@ export default function RootLayout({
     <html lang="ar" dir="rtl" className={`${cairo.variable} ${almarai.variable}`}>
       <body className="font-cairo antialiased">
         <Providers>
+          <SplashScreen />
           {children}
         </Providers>
       </body>
