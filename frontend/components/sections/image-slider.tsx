@@ -95,8 +95,8 @@ function BaseSlider({ slides }: { slides: { src: string; badge?: string }[] }) {
   if (slides.length === 0) return null
 
   return (
-    <div className="relative rounded-xl overflow-hidden bg-background-alt">
-      <div className="relative aspect-[16/9]">
+    <div className="relative rounded-2xl overflow-hidden shadow-xl" style={{ background: '#f8f9fa' }}>
+      <div className="plan-slider-container">
         {slides.map((slide, i) => (
           <div
             key={i}
@@ -106,10 +106,11 @@ function BaseSlider({ slides }: { slides: { src: string; badge?: string }[] }) {
             <img
               src={slide.src}
               alt={slide.badge || `slide ${i + 1}`}
-              className="w-full h-full object-contain bg-gray-50"
+              className="plan-slide-img img-4k"
             />
             {slide.badge && (
-              <div className="absolute top-4 right-4 bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold z-10">
+              <div className="absolute top-4 right-4 z-10 px-4 py-2 rounded-xl text-sm font-bold shadow-lg"
+                style={{ background: 'linear-gradient(135deg, #C9A84C, #A8863A)', color: '#0A1628' }}>
                 {slide.badge}
               </div>
             )}
@@ -121,31 +122,34 @@ function BaseSlider({ slides }: { slides: { src: string; badge?: string }[] }) {
         <>
           <button
             onClick={prev}
-            className="absolute top-1/2 right-3 -translate-y-1/2 z-20 w-10 h-10 bg-white/80 hover:bg-white rounded-full flex items-center justify-center shadow-md transition-colors"
+            className="slider-arrow right-3 gold-glow"
+            style={{ right: '12px' }}
           >
             <ChevronRight className="w-5 h-5 text-secondary" />
           </button>
           <button
             onClick={next}
-            className="absolute top-1/2 left-3 -translate-y-1/2 z-20 w-10 h-10 bg-white/80 hover:bg-white rounded-full flex items-center justify-center shadow-md transition-colors"
+            className="slider-arrow left-3 gold-glow"
+            style={{ left: '12px' }}
           >
             <ChevronLeft className="w-5 h-5 text-secondary" />
           </button>
 
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
             {slides.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setIndex(i)}
                 className={cn(
-                  'h-2 rounded-full transition-all',
-                  index === i ? 'bg-primary w-6' : 'bg-white/60 w-2 hover:bg-white'
+                  'h-2 rounded-full transition-all duration-300',
+                  index === i ? 'bg-gold w-7 shadow-gold' : 'bg-white/60 w-2 hover:bg-white'
                 )}
               />
             ))}
           </div>
 
-          <div className="absolute bottom-3 right-4 text-white/80 text-xs z-20 bg-black/30 px-2 py-1 rounded">
+          <div className="absolute bottom-4 right-4 text-white text-xs z-20 font-bold px-3 py-1 rounded-lg"
+            style={{ background: 'rgba(10,22,40,0.6)', backdropFilter: 'blur(8px)' }}>
             {index + 1} / {slides.length}
           </div>
         </>

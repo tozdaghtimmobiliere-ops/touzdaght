@@ -390,3 +390,268 @@ h1, h2, h3, h4, h5, h6 {
   .apartment-circle { @apply w-10 h-10 text-xs; }
   .project-card-luxury:hover { transform: translateY(-4px); }
 }
+
+/* ══════════════════════════════════════════════════════
+   ✨ 4K PREMIUM ENHANCEMENT LAYER
+   ══════════════════════════════════════════════════════ */
+
+/* ─── 4K Image Rendering ───────────────────────────── */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Keyframes ────────────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50%       { transform: translateY(-18px) rotate(2deg); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201,168,76,0); }
+  50%       { box-shadow: 0 0 0 12px rgba(201,168,76,0.18); }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 1; }
+}
+@keyframes slide-right {
+  from { transform: translateX(-100%); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
+
+/* ─── Animation Utilities ──────────────────────────── */
+.animate-float       { animation: float 4s ease-in-out infinite; }
+.animate-float-slow  { animation: float-slow 6s ease-in-out infinite; }
+.animate-fade-up     { animation: fade-up 0.7s ease forwards; }
+.animate-scale-in    { animation: scale-in 0.5s ease forwards; }
+.animate-spin-slow   { animation: spin-slow 12s linear infinite; }
+.animate-glow-pulse  { animation: glow-pulse 2.5s ease-in-out infinite; }
+.animate-slide-right { animation: slide-right 0.6s ease forwards; }
+
+/* ─── Shimmer Text ─────────────────────────────────── */
+.shimmer-text {
+  background: linear-gradient(90deg,
+    var(--gold) 0%, var(--gold-light) 30%,
+    #fff8e7 50%, var(--gold-light) 70%, var(--gold) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+/* ─── Gold Glow ─────────────────────────────────────── */
+.gold-glow {
+  box-shadow: 0 0 20px rgba(201,168,76,0.35), 0 0 60px rgba(201,168,76,0.12);
+}
+.gold-glow:hover {
+  box-shadow: 0 0 30px rgba(201,168,76,0.55), 0 0 80px rgba(201,168,76,0.2);
+}
+.shadow-gold { box-shadow: 0 8px 40px rgba(201,168,76,0.25); }
+
+/* ─── Premium Image Viewer (Plans) ─────────────────── */
+.plan-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #f8f9fa;
+  cursor: zoom-in;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.plan-image-wrapper:hover {
+  transform: scale(1.01);
+  box-shadow: 0 20px 60px rgba(10,22,40,0.15), 0 0 0 2px rgba(201,168,76,0.3);
+}
+.plan-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  transition: transform 0.5s ease;
+}
+.plan-image-wrapper:hover img {
+  transform: scale(1.03);
+}
+
+/* ─── Plan Fullscreen Slider ────────────────────────── */
+.plan-slider-container {
+  aspect-ratio: 4 / 3;
+  min-height: 400px;
+  max-height: 700px;
+  background: linear-gradient(135deg, #f0f0f0, #fafafa);
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+}
+.plan-slide-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  image-rendering: high-quality;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* ─── Stats Counter Cards ───────────────────────────── */
+.stat-card-premium {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.stat-card-premium::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(201,168,76,0.08), transparent);
+  transition: transform 0.6s ease;
+}
+.stat-card-premium:hover { transform: translateY(-6px) scale(1.02); }
+.stat-card-premium:hover::after { transform: scale(2); }
+
+/* ─── Section Reveal ────────────────────────────────── */
+.reveal-section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1),
+              transform 0.8s cubic-bezier(0.4,0,0.2,1);
+}
+.reveal-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Premium Border Gradient ───────────────────────── */
+.border-gradient {
+  position: relative;
+}
+.border-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(135deg, var(--gold), transparent 50%, var(--gold));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.border-gradient:hover::before { opacity: 1; }
+
+/* ─── Nav Link Underline Hover ──────────────────────── */
+.nav-link-fancy {
+  position: relative;
+  overflow: hidden;
+}
+.nav-link-fancy::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 80%;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 2px;
+  transition: transform 0.3s ease;
+}
+.nav-link-fancy:hover::after { transform: translateX(-50%) scaleX(1); }
+
+/* ─── Hero Particle Orbs ────────────────────────────── */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+}
+.orb-gold {
+  background: radial-gradient(circle, rgba(201,168,76,0.25), transparent);
+  animation: float-slow 8s ease-in-out infinite;
+}
+.orb-blue {
+  background: radial-gradient(circle, rgba(10,22,40,0.3), transparent);
+  animation: float-slow 10s ease-in-out infinite reverse;
+}
+
+/* ─── Tooltip ───────────────────────────────────────── */
+.tooltip-gold {
+  position: relative;
+}
+.tooltip-gold::before {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.85);
+  background: linear-gradient(135deg, var(--dark), #1A2E4A);
+  color: var(--gold);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s ease;
+  z-index: 100;
+}
+.tooltip-gold:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+/* ─── Loading Spinner Gold ──────────────────────────── */
+.spinner-gold {
+  width: 44px; height: 44px;
+  border: 3px solid rgba(201,168,76,0.2);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin-slow 0.9s linear infinite;
+}
+
+/* ─── Image Quality Enhancement ─────────────────────── */
+.img-4k {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* ─── Scrollbar Gold ─────────────────────────────────── */
+::-webkit-scrollbar { width: 7px; }
+::-webkit-scrollbar-track { background: var(--cream-alt); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, var(--gold), var(--gold-dark));
+  border-radius: 10px;
+  border: 1px solid rgba(201,168,76,0.2);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, var(--gold-light), var(--gold));
+}
