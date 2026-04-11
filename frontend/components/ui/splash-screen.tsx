@@ -71,11 +71,11 @@ export function SplashScreen() {
              <motion.img 
                src="/images/logo.png" 
                alt="Tozdaght Logo"
-               initial={{ filter: 'brightness(0.5)' }}
-               animate={{ filter: 'brightness(1.5)' }}
-               transition={{ duration: 1.5, repeat: Infinity, repeatType: 'reverse' }}
-               className="w-48 md:w-64 h-auto relative z-10 drop-shadow-2xl"
-               style={{ mixBlendMode: 'screen' }}
+               initial={{ opacity: 0.8, scale: 0.95 }}
+               animate={{ opacity: 1, scale: 1.05 }}
+               transition={{ duration: 1.5, repeat: Infinity, repeatType: 'reverse', ease: "easeInOut" }}
+               className="w-48 md:w-64 h-auto relative z-10"
+               style={{ mixBlendMode: 'screen', filter: 'drop-shadow(0px 0px 10px rgba(201, 168, 76, 0.4))' }}
              />
 
              {/* Welcome Text */}
