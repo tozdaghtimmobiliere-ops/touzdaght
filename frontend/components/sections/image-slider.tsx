@@ -75,22 +75,22 @@ function BaseSlider({ slides }: { slides: { src: string; badge?: string }[] }) {
   useEffect(() => {
     if (slides.length <= 1) return
     const timer = setInterval(() => {
-      setIndex((prev) => (prev + 1) % slides.length)
+      setIndex((prev: number) => (prev + 1) % slides.length)
     }, 4000)
     return () => clearInterval(timer)
   }, [slides.length])
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') setIndex((prev) => (prev + 1) % slides.length)
-      if (e.key === 'ArrowRight') setIndex((prev) => (prev - 1 + slides.length) % slides.length)
+      if (e.key === 'ArrowLeft') setIndex((prev: number) => (prev + 1) % slides.length)
+      if (e.key === 'ArrowRight') setIndex((prev: number) => (prev - 1 + slides.length) % slides.length)
     }
     window.addEventListener('keydown', handleKey)
     return () => window.removeEventListener('keydown', handleKey)
   }, [slides.length])
 
-  const prev = () => setIndex((prev) => (prev - 1 + slides.length) % slides.length)
-  const next = () => setIndex((prev) => (prev + 1) % slides.length)
+  const prev = () => setIndex((prev: number) => (prev - 1 + slides.length) % slides.length)
+  const next = () => setIndex((prev: number) => (prev + 1) % slides.length)
 
   if (slides.length === 0) return null
 
