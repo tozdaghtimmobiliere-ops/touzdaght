@@ -1,0 +1,392 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Almarai:wght@400;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --gold: #C9A84C;
+  --gold-light: #E8D5A0;
+  --gold-dark: #A8863A;
+  --dark: #0A1628;
+  --dark-light: #1A2E4A;
+  --cream: #FAF7F2;
+  --cream-alt: #F5F3EE;
+  --border: #E8E2D9;
+}
+
+* { box-sizing: border-box; padding: 0; margin: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Cairo', sans-serif;
+  color: var(--dark);
+  background: var(--cream);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Almarai', sans-serif;
+  font-weight: 700;
+}
+
+[dir="rtl"] { text-align: right; }
+[dir="ltr"] { text-align: left; }
+
+/* ─── Scrollbar ────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream-alt); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, var(--gold), var(--gold-dark));
+  border-radius: 10px;
+}
+
+/* ─── Selection ────────────────────────────────────── */
+::selection { background: var(--gold); color: var(--dark); }
+
+/* ─── Container ────────────────────────────────────── */
+.section-padding { @apply py-16 md:py-24 px-4 sm:px-6 lg:px-8; }
+.container-custom { @apply max-w-7xl mx-auto; }
+
+/* ─── Hero Overlay ─────────────────────────────────── */
+.hero-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(10, 22, 40, 0.92) 0%,
+    rgba(10, 22, 40, 0.70) 60%,
+    rgba(201, 168, 76, 0.15) 100%
+  );
+}
+
+/* ─── Card Hover ───────────────────────────────────── */
+.card-hover {
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 60px rgba(10, 22, 40, 0.12), 0 0 0 1px rgba(201, 168, 76, 0.3);
+}
+
+/* ─── PROJECT CARD LUXE ────────────────────────────── */
+.project-card-luxury {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+.project-card-luxury::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  padding: 1px;
+  background: linear-gradient(135deg, transparent, rgba(201, 168, 76, 0), transparent);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  transition: all 0.4s ease;
+  pointer-events: none;
+}
+.project-card-luxury:hover {
+  transform: translateY(-10px);
+  box-shadow:
+    0 30px 80px rgba(10, 22, 40, 0.15),
+    0 0 0 1px rgba(201, 168, 76, 0.4);
+  border-color: rgba(201, 168, 76, 0.5);
+}
+.project-card-luxury:hover::before {
+  background: linear-gradient(135deg, var(--gold), transparent, var(--gold));
+}
+
+/* ─── Gold Line ────────────────────────────────────── */
+.gold-line {
+  height: 2px;
+  background: linear-gradient(to right, var(--gold), var(--gold-light), var(--gold));
+  border-radius: 2px;
+}
+
+/* ─── Gold Badge ───────────────────────────────────── */
+.gold-badge {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: var(--dark);
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  box-shadow: 0 2px 8px rgba(201, 168, 76, 0.3);
+}
+
+/* ─── Section Title ────────────────────────────────── */
+.luxury-title {
+  font-family: 'Almarai', sans-serif;
+  font-weight: 800;
+  color: var(--dark);
+  position: relative;
+}
+.luxury-title::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 2px;
+  background: linear-gradient(to right, var(--gold), var(--gold-light));
+  border-radius: 2px;
+  margin-top: 10px;
+}
+
+/* ─── Buttons ──────────────────────────────────────── */
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+  color: var(--dark);
+  font-weight: 700;
+  padding: 12px 28px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(201, 168, 76, 0.35);
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-gold:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(201, 168, 76, 0.5);
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+}
+
+.btn-dark {
+  background: var(--dark);
+  color: white;
+  font-weight: 700;
+  padding: 12px 28px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(10, 22, 40, 0.3);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-dark:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(10, 22, 40, 0.4);
+  border-color: var(--gold);
+}
+
+.btn-outline-gold {
+  background: transparent;
+  color: var(--gold);
+  font-weight: 700;
+  padding: 11px 27px;
+  border-radius: 12px;
+  border: 2px solid var(--gold);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-outline-gold:hover {
+  background: var(--gold);
+  color: var(--dark);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(201, 168, 76, 0.4);
+}
+
+/* ─── Legacy button compatibility ─────────────────── */
+.btn-primary { @apply btn-gold; }
+.btn-secondary { @apply btn-outline-gold; }
+
+/* ─── Form ─────────────────────────────────────────── */
+.form-input {
+  @apply w-full px-4 py-3 border rounded-xl focus:outline-none transition-all duration-200;
+  border-color: var(--border);
+  background: white;
+  color: var(--dark);
+}
+.form-input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+}
+.form-label {
+  @apply block text-sm font-semibold mb-2;
+  color: var(--dark);
+}
+
+/* ─── Tabs ─────────────────────────────────────────── */
+.tab-active {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: var(--dark);
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(201, 168, 76, 0.3);
+}
+.tab-inactive {
+  background: white;
+  color: #4B5563;
+}
+.tab-inactive:hover {
+  background: var(--cream-alt);
+  color: var(--dark);
+}
+
+/* ─── Apartment Circle ─────────────────────────────── */
+.apartment-circle {
+  @apply w-12 h-12 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-300 cursor-pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.apartment-circle.available {
+  background: linear-gradient(135deg, #38A169, #2F855A);
+  color: white;
+}
+.apartment-circle.sold {
+  background: linear-gradient(135deg, #E53E3E, #C53030);
+  color: white;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+.apartment-circle.reserved {
+  background: linear-gradient(135deg, #F6AD55, #DD6B20);
+  color: white;
+}
+.apartment-circle.available:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 20px rgba(56, 161, 105, 0.5);
+}
+
+/* ─── Slider ───────────────────────────────────────── */
+.slider-arrow {
+  @apply absolute top-1/2 -translate-y-1/2 w-11 h-11 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 z-10;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 20px rgba(10, 22, 40, 0.2);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+}
+.slider-arrow:hover {
+  background: white;
+  border-color: var(--gold);
+  box-shadow: 0 6px 25px rgba(201, 168, 76, 0.3);
+}
+.slider-dot {
+  @apply w-2 h-2 rounded-full cursor-pointer transition-all duration-300;
+  background: rgba(255, 255, 255, 0.4);
+}
+.slider-dot.active {
+  background: var(--gold);
+  width: 28px;
+  border-radius: 4px;
+}
+
+/* ─── Status ───────────────────────────────────────── */
+.status-available { background-color: #38A169; }
+.status-sold { background-color: #E53E3E; }
+.status-reserved { background-color: #F6AD55; }
+
+/* ─── Info Cards ───────────────────────────────────── */
+.info-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+.info-card:hover {
+  border-color: rgba(201, 168, 76, 0.4);
+  box-shadow: 0 8px 30px rgba(201, 168, 76, 0.1);
+  transform: translateY(-2px);
+}
+
+/* ─── WhatsApp ─────────────────────────────────────── */
+.whatsapp-btn {
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  color: white;
+  border-radius: 14px;
+  padding: 12px 24px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.whatsapp-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.45);
+}
+
+/* ─── Luxury Section Header ────────────────────────── */
+.section-header-luxury {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.section-header-luxury h2 {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 12px;
+}
+.section-header-luxury p {
+  color: #4B5563;
+  max-width: 600px;
+  margin: 0 auto 16px;
+}
+.section-header-luxury .gold-line {
+  width: 60px;
+  margin: 0 auto;
+}
+
+/* ─── Glass Card ───────────────────────────────────── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  border-radius: 16px;
+}
+
+/* ─── Admin ────────────────────────────────────────── */
+.admin-sidebar {
+  @apply fixed right-0 top-0 h-full w-64 z-50;
+  background: var(--dark);
+  border-left: 1px solid rgba(201, 168, 76, 0.15);
+}
+.admin-sidebar-link {
+  @apply flex items-center gap-3 px-6 py-3 transition-all;
+  color: rgba(255,255,255,0.7);
+  border-radius: 10px;
+  margin: 2px 8px;
+}
+.admin-sidebar-link:hover {
+  color: white;
+  background: rgba(201, 168, 76, 0.1);
+}
+.admin-sidebar-link.active {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: var(--dark);
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(201, 168, 76, 0.3);
+}
+
+/* ─── Animate ──────────────────────────────────────── */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── Gradient Text ────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Responsive ───────────────────────────────────── */
+@media (max-width: 768px) {
+  .section-padding { @apply py-12 px-4; }
+  .apartment-circle { @apply w-10 h-10 text-xs; }
+  .project-card-luxury:hover { transform: translateY(-4px); }
+}
