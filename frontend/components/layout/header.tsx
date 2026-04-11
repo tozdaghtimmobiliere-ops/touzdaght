@@ -22,19 +22,11 @@ const navLinks = {
     { href: '/contact', label: 'Contact' },
     { href: '/admin', label: 'Admin' },
   ],
-  en: [
-    { href: '/', label: 'Home' },
-    { href: '/about', label: 'About us' },
-    { href: '/projects', label: 'Projects' },
-    { href: '/contact', label: 'Contact' },
-    { href: '/admin', label: 'Admin' },
-  ],
 }
 
 const translations = {
   ar: { projects: 'جميع المشاريع' },
   fr: { projects: 'Tous les projets' },
-  en: { projects: 'All projects' },
 }
 
 export function Header() {
@@ -85,7 +77,8 @@ export function Header() {
               <img
                 src="/images/logo.png"
                 alt="توزدغت"
-                className="h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                className="h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-110"
+                style={{ mixBlendMode: 'screen' }}
               />
             </div>
             <div className="hidden sm:block">
@@ -174,7 +167,7 @@ export function Header() {
           <div className="flex items-center gap-3">
             {/* Language Switcher */}
             <div className="hidden sm:flex items-center gap-0.5 bg-white/5 rounded-lg p-1 border border-white/10">
-              {['ar', 'fr', 'en'].map((lang) => (
+              {['ar', 'fr'].map((lang) => (
                 <button
                   key={lang}
                   onClick={() => setLanguage(lang)}
@@ -249,7 +242,7 @@ export function Header() {
 
             {/* Language Switcher Mobile */}
             <div className="flex gap-2 mt-4 pt-4 border-t border-white/5">
-              {['ar', 'fr', 'en'].map((lang) => (
+              {['ar', 'fr'].map((lang) => (
                 <button
                   key={lang}
                   onClick={() => setLanguage(lang)}
@@ -260,7 +253,7 @@ export function Header() {
                       : 'bg-white/5 text-white/60 hover:text-white border border-white/10'
                   )}
                 >
-                  {lang === 'ar' ? 'العربية' : lang === 'fr' ? 'Français' : 'English'}
+                  {lang === 'ar' ? 'العربية' : 'Français'}
                 </button>
               ))}
             </div>

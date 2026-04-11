@@ -35,9 +35,9 @@ const content = {
       cta: 'اعرف المزيد',
       stats: [
         { number: '+10', label: 'سنوات خبرة' },
-        { number: '+6', label: 'مشاريع' },
-        { number: '+200', label: 'وحدة' },
-        { number: '+500', label: 'عميل' },
+        { number: '+15', label: 'مشاريع' },
+        { number: '+90', label: 'وحدة' },
+        { number: '+50', label: 'زبون' },
       ],
     },
     services: {
@@ -89,9 +89,9 @@ const content = {
       cta: 'En savoir plus',
       stats: [
         { number: '+10', label: 'Ans d\'exp.' },
-        { number: '+6', label: 'Projets' },
-        { number: '+200', label: 'Unités' },
-        { number: '+500', label: 'Clients' },
+        { number: '+15', label: 'Projets' },
+        { number: '+90', label: 'Unités' },
+        { number: '+50', label: 'Clients' },
       ],
     },
     services: {
@@ -143,9 +143,9 @@ const content = {
       cta: 'Learn more',
       stats: [
         { number: '+10', label: 'Years exp.' },
-        { number: '+6', label: 'Projets' },
-        { number: '+200', label: 'Units' },
-        { number: '+500', label: 'Clients' },
+        { number: '+15', label: 'Projects' },
+        { number: '+90', label: 'Units' },
+        { number: '+50', label: 'Clients' },
       ],
     },
     services: {
@@ -377,11 +377,7 @@ function AboutSection({ t }: { t: any }) {
             </div>
             <div className="absolute -top-3 -right-3 w-16 h-16 border-t-2 border-r-2 border-gold rounded-tr-xl opacity-60" />
             <div className="absolute -bottom-3 -left-3 w-16 h-16 border-b-2 border-l-2 border-gold rounded-bl-xl opacity-60" />
-            <div className="absolute -bottom-6 -right-6 rounded-2xl p-5 shadow-gold text-center"
-              style={{ background: 'linear-gradient(135deg, #C9A84C, #A8863A)' }}>
-              <span className="block text-3xl font-bold text-secondary">+10</span>
-              <span className="text-secondary/80 text-xs font-semibold">سنوات خبرة</span>
-            </div>
+
           </motion.div>
 
           <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }}

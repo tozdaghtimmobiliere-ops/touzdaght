@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { MapPin, Phone, Mail, Facebook, Instagram, Youtube, ArrowLeft } from 'lucide-react'
+import { MapPin, Phone, Mail, ArrowLeft } from 'lucide-react'
 import { useLanguage } from '@/components/providers'
 
 const footerContent = {
@@ -141,24 +141,10 @@ export function Footer() {
                 <div className="w-8 h-8 rounded-lg bg-gold/10 flex items-center justify-center flex-shrink-0">
                   <Mail className="w-4 h-4 text-gold" />
                 </div>
-                <a href="mailto:contact@tozdaght.ma" className="text-white/60 hover:text-gold transition-colors text-sm">
-                  contact@tozdaght.ma
+                <a href="mailto:Tozdaght.immobiliere@gmail.com" className="text-white/60 hover:text-gold transition-colors text-sm">
+                  Tozdaght.immobiliere@gmail.com
                 </a>
               </div>
-            </div>
-
-            {/* Social */}
-            <div className="flex items-center gap-2 mt-6">
-              {[
-                { Icon: Facebook, href: '#' },
-                { Icon: Instagram, href: '#' },
-                { Icon: Youtube, href: '#' },
-              ].map(({ Icon, href }, i) => (
-                <a key={i} href={href}
-                  className="w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center text-white/50 hover:text-gold hover:border-gold/40 transition-all duration-200">
-                  <Icon className="w-4 h-4" />
-                </a>
-              ))}
             </div>
           </div>
 
