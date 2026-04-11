@@ -174,3 +174,5 @@ Thumbs.db
 
 *.dll.node
 *.dll.node.tmp*
+
+.vercel
