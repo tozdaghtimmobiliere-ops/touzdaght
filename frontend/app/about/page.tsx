@@ -33,9 +33,9 @@ const content = {
       title: 'إنجازاتنا',
       items: [
         { number: '+10', label: 'سنوات الخبرة' },
-        { number: '+6', label: 'مشاريع منجزة' },
-        { number: '+200', label: 'وحدة عقارية' },
-        { number: '+500', label: 'عميل راضٍ' },
+        { number: '+15', label: 'مشاريع منجزة' },
+        { number: '+90', label: 'وحدة عقارية' },
+        { number: '+50', label: 'عميل راضٍ' },
       ],
     },
   },
@@ -64,9 +64,9 @@ const content = {
       title: 'Nos réalisations',
       items: [
         { number: '+10', label: 'Années d\'expérience' },
-        { number: '+6', label: 'Projets réalisés' },
-        { number: '+200', label: 'Unités immobilières' },
-        { number: '+500', label: 'Clients satisfaits' },
+        { number: '+15', label: 'Projets réalisés' },
+        { number: '+90', label: 'Unités immobilières' },
+        { number: '+50', label: 'Clients satisfaits' },
       ],
     },
   },
@@ -95,9 +95,9 @@ const content = {
       title: 'Our achievements',
       items: [
         { number: '+10', label: 'Years of experience' },
-        { number: '+6', label: 'Projects completed' },
-        { number: '+200', label: 'Real estate units' },
-        { number: '+500', label: 'Satisfied clients' },
+        { number: '+15', label: 'Projects completed' },
+        { number: '+90', label: 'Real estate units' },
+        { number: '+50', label: 'Satisfied clients' },
       ],
     },
   },
@@ -172,20 +172,14 @@ export default function AboutPage() {
             {/* Image */}
             <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.7 }} className="relative">
-              <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
+              <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border-gradient">
                 <img
                   src="https://www.lesmaisonsferrian.be/medias/photos/blog/2023/IMG-comment-vendre-bien-immobilier-rapidement-maison-vente-etapes-hainaut.jpg"
-                  alt="توزدغت" className="w-full h-full object-cover" />
+                  alt="توزدغت" className="w-full h-full object-cover img-4k transition-transform duration-700 hover:scale-105" />
               </div>
               {/* Gold corners */}
-              <div className="absolute -top-3 -right-3 w-16 h-16 border-t-2 border-r-2 border-gold rounded-tr-xl opacity-50" />
-              <div className="absolute -bottom-3 -left-3 w-16 h-16 border-b-2 border-l-2 border-gold rounded-bl-xl opacity-50" />
-              {/* Stats badge */}
-              <div className="absolute -bottom-6 -right-6 rounded-2xl p-5 text-center shadow-gold"
-                style={{ background: 'linear-gradient(135deg, #C9A84C, #A8863A)' }}>
-                <span className="block text-3xl font-bold text-secondary">+10</span>
-                <span className="text-secondary/80 text-xs font-semibold">سنوات خبرة</span>
-              </div>
+              <div className="absolute -top-3 -right-3 w-16 h-16 border-t-2 border-r-2 border-gold rounded-tr-xl opacity-60" />
+              <div className="absolute -bottom-3 -left-3 w-16 h-16 border-b-2 border-l-2 border-gold rounded-bl-xl opacity-60" />
             </motion.div>
           </div>
         </div>
@@ -279,12 +273,12 @@ export default function AboutPage() {
             {t.stats.items.map((stat: any, i: number) => (
               <motion.div key={i} initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }} className="text-center group">
-                <div className="w-24 h-24 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-gold/10 group-hover:border-gold/30 transition-all"
-                  style={{ background: 'rgba(201,168,76,0.05)' }}>
-                  <span className="font-almarai text-2xl font-bold text-gold">{stat.number}</span>
+                transition={{ delay: i * 0.1 }} className="text-center group stat-card-premium">
+                <div className="w-28 h-28 rounded-2xl flex flex-col items-center justify-center mx-auto mb-4 border border-gold/20 group-hover:border-gold/50 transition-all duration-300"
+                  style={{ background: 'linear-gradient(135deg, rgba(201,168,76,0.1), rgba(201,168,76,0.03))' }}>
+                  <span className="font-almarai text-3xl font-bold shimmer-text">{stat.number}</span>
                 </div>
-                <p className="text-white/40 text-sm">{stat.label}</p>
+                <p className="text-white/60 text-sm font-semibold tracking-wide">{stat.label}</p>
               </motion.div>
             ))}
           </div>
