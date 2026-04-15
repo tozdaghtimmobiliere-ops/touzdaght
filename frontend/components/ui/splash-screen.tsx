@@ -8,18 +8,21 @@ export function SplashScreen() {
   const { t } = useLanguage()
 
   useEffect(() => {
-    const hasSeenSplash = sessionStorage.getItem('hasSeenSplash_v3')
+    const hasSeenSplash = sessionStorage.getItem('hasSeenSplash_v4')
     if (hasSeenSplash) {
       setIsVisible(false)
+      document.body.style.overflow = 'auto'
       return
     }
 
+    document.body.style.overflow = 'hidden'
+
     const timer = setTimeout(() => {
       setIsVisible(false)
-      sessionStorage.setItem('hasSeenSplash_v3', 'true')
+      document.body.style.overflow = 'auto'
+      sessionStorage.setItem('hasSeenSplash_v4', 'true')
     }, 4000)
 
-    document.body.style.overflow = 'hidden'
     return () => {
       clearTimeout(timer)
       document.body.style.overflow = 'auto'
