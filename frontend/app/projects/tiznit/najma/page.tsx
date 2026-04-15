@@ -99,7 +99,7 @@ export default function NajmaSelectionPage() {
                   <div className="aspect-[4/3] relative flex items-center justify-center bg-cream/50 overflow-hidden">
                     <div className="absolute inset-0 bg-secondary/5 group-hover:bg-secondary/10 transition-colors duration-500" />
                     <img 
-                      src="/images/najma/najma-thumbnail.jpg" 
+                      src="/images/najma/pub-global.jpg" 
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                       alt={t('projects.najma.apartments')}
                     />

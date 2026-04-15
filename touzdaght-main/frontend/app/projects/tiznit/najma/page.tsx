@@ -91,7 +91,7 @@ export default function NajmaSelectionPage() {
                 <div className="bg-secondary hover:bg-secondary/90 rounded-2xl p-8 text-center cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl group">
                   <div className="w-20 h-20 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-primary transition-colors overflow-hidden">
                     <img 
-                      src="/images/najma/najma-thumbnail.jpg" 
+                      src="/images/najma/pub-global.jpg" 
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                       alt={t.immeuble.title}
                     />
