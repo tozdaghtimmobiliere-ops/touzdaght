@@ -152,6 +152,11 @@ const TERRAIN_PROGRESS_IMAGES = [
 ]
 
 const IMMEUBLE_PROGRESS_IMAGES = [
+  '/images/najma/immeuble/progress/1.jpg',
+  '/images/najma/immeuble/progress/2.jpg',
+  '/images/najma/immeuble/progress/3.jpg',
+  '/images/najma/immeuble/progress/6.jpeg',
+  '/images/najma/immeuble/progress/7.jpeg',
   '/m/new/WhatsApp%20Image%202026-04-14%20at%2018.41.04.jpeg',
   '/m/new/WhatsApp%20Image%202026-04-14%20at%2018.41.05.jpeg',
   '/m/new/WhatsApp%20Image%202026-04-14%20at%2018.41.05%20(1).jpeg',
