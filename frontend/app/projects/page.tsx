@@ -61,7 +61,7 @@ const projectImages: Record<string, string> = {
   'ain-zarqa': '/images/ain-zarqa/ain-zarqa.png',
   'tilila': '/images/tilila/tilila.png',
   'touhmo': '/images/touhmo/touhmo.png',
-  'hay-ta9adom': '/images/hay-ta9adom/hay-ta9adom.png',
+  'hay-ta9adom': '/images/hay-ta9adom/9li3a.jpg',
 }
 
 function ProjectCard({ project, types, t }: { project: any; types: any; t: any }) {

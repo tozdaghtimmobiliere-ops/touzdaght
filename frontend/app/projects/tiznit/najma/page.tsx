@@ -94,16 +94,16 @@ export default function NajmaSelectionPage() {
       {/* Selection Cards */}
       <section className="py-24 relative">
         <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto px-4">
 
             {/* Card Immeuble */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.1, duration: 0.8 }}
             >
               <Link href="/projects/tiznit/najma/immeuble" className="block group">
-                <div className="project-card-luxury bg-white group-hover:-translate-y-4 transition-all duration-500 overflow-hidden h-full">
+                <div className="project-card-luxury bg-white group-hover:-translate-y-4 transition-all duration-500 overflow-hidden">
                   <div className="aspect-[4/3] relative flex items-center justify-center bg-cream/50 overflow-hidden">
                     <div className="absolute inset-0 bg-secondary/5 group-hover:bg-secondary/10 transition-colors duration-500" />
                     <img
@@ -113,13 +113,13 @@ export default function NajmaSelectionPage() {
                     />
                   </div>
                   <div className="p-8 text-center">
-                    <h2 className="font-almarai text-xl md:text-2xl font-black text-secondary mb-4 group-hover:text-gold transition-colors duration-300">
+                    <h2 className="font-almarai text-2xl md:text-3xl font-black text-secondary mb-4 group-hover:text-gold transition-colors duration-300">
                       {t('projects.najma.apartments')}
                     </h2>
-                    <p className="font-cairo text-secondary/60 text-sm leading-relaxed mb-6 line-clamp-3">
+                    <p className="font-cairo text-secondary/60 text-lg leading-relaxed mb-6">
                       {t('projects.najma.apartments_desc')}
                     </p>
-                    <div className="inline-flex items-center gap-2 text-gold font-black uppercase tracking-widest text-[10px] border-b border-gold/30 pb-1 group-hover:border-gold transition-all">
+                    <div className="inline-flex items-center gap-2 text-gold font-black uppercase tracking-widest text-xs border-b border-gold/30 pb-1 group-hover:border-gold transition-all">
                       VOIR PLUS
                       <ArrowLeft className="w-4 h-4 rotate-180" />
                     </div>
@@ -130,12 +130,12 @@ export default function NajmaSelectionPage() {
 
             {/* Card Terrain */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
             >
               <Link href="/projects/tiznit/najma/terrain" className="block group">
-                <div className="project-card-luxury bg-white group-hover:-translate-y-4 transition-all duration-500 overflow-hidden h-full">
+                <div className="project-card-luxury bg-white group-hover:-translate-y-4 transition-all duration-500 overflow-hidden">
                   <div className="aspect-[4/3] relative flex items-center justify-center bg-cream/50 overflow-hidden">
                     <div className="absolute inset-0 bg-secondary/5 group-hover:bg-secondary/10 transition-colors duration-500" />
                     <img
@@ -145,45 +145,13 @@ export default function NajmaSelectionPage() {
                     />
                   </div>
                   <div className="p-8 text-center">
-                    <h2 className="font-almarai text-xl md:text-2xl font-black text-secondary mb-4 group-hover:text-gold transition-colors duration-300">
+                    <h2 className="font-almarai text-2xl md:text-3xl font-black text-secondary mb-4 group-hover:text-gold transition-colors duration-300">
                       {t('projects.najma.terrains')}
                     </h2>
-                    <p className="font-cairo text-secondary/60 text-sm leading-relaxed mb-6 line-clamp-3">
+                    <p className="font-cairo text-secondary/60 text-lg leading-relaxed mb-6">
                       {t('projects.najma.terrains_desc')}
                     </p>
-                    <div className="inline-flex items-center gap-2 text-gold font-black uppercase tracking-widest text-[10px] border-b border-gold/30 pb-1 group-hover:border-gold transition-all">
-                      VOIR PLUS
-                      <ArrowLeft className="w-4 h-4 rotate-180" />
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            </motion.div>
-
-            {/* Card Plateau Bureau */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.8 }}
-            >
-              <Link href="/projects/tiznit/najma/plateau" className="block group">
-                <div className="project-card-luxury bg-white group-hover:-translate-y-4 transition-all duration-500 overflow-hidden h-full">
-                  <div className="aspect-[4/3] relative flex items-center justify-center bg-cream/50 overflow-hidden">
-                    <div className="absolute inset-0 bg-secondary/5 group-hover:bg-secondary/10 transition-colors duration-500" />
-                    <img
-                      src="/images/najma/plateau.jpg"
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      alt={t('projects.najma.offices')}
-                    />
-                  </div>
-                  <div className="p-8 text-center">
-                    <h2 className="font-almarai text-xl md:text-2xl font-black text-secondary mb-4 group-hover:text-gold transition-colors duration-300">
-                      {t('projects.najma.offices')}
-                    </h2>
-                    <p className="font-cairo text-secondary/60 text-sm leading-relaxed mb-6 line-clamp-3">
-                      {t('projects.najma.offices_desc')}
-                    </p>
-                    <div className="inline-flex items-center gap-2 text-gold font-black uppercase tracking-widest text-[10px] border-b border-gold/30 pb-1 group-hover:border-gold transition-all">
+                    <div className="inline-flex items-center gap-2 text-gold font-black uppercase tracking-widest text-xs border-b border-gold/30 pb-1 group-hover:border-gold transition-all">
                       VOIR PLUS
                       <ArrowLeft className="w-4 h-4 rotate-180" />
                     </div>
