@@ -161,7 +161,9 @@ function NajmaSlider({ category, type }: { category: 'plans' | 'chantier'; type?
   if (type === 'immeuble') {
     const slides = category === 'plans'
       ? [
-          { src: '/images/najma/immeuble/plans/plan-globalnajma.png', badge: 'المخطط العام' },
+          { src: '/images/najma/immeuble/plans/3.jpeg', badge: 'المخطط العام 1' },
+          { src: '/images/najma/immeuble/plans/4.jpeg', badge: 'المخطط العام 2' },
+          { src: '/images/najma/immeuble/plans/5.jpeg', badge: 'المخطط العام 3' },
           { src: '/images/najma/immeuble/plans/plan-etage0najma.png', badge: 'مخطط الطابق السفلي' },
           { src: '/images/najma/immeuble/plans/plan-etage1najma.png', badge: 'مخطط الطابق الأول' },
           { src: '/images/najma/immeuble/plans/plan-etage2najma.png', badge: 'مخطط الطابق الثاني' },

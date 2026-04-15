@@ -183,7 +183,9 @@ export function ImageSlider({ images, projectSlug, category = 'plans', type }: I
     if (projectSlug === 'najma') {
       if (type === 'immeuble') {
         return [
-          { src: '/images/najma/immeuble/plans/plan-globalnajma.png', badge: 'المخطط العام' },
+          { src: '/images/najma/immeuble/plans/3.jpeg', badge: 'المخطط العام 1' },
+          { src: '/images/najma/immeuble/plans/4.jpeg', badge: 'المخطط العام 2' },
+          { src: '/images/najma/immeuble/plans/5.jpeg', badge: 'المخطط العام 3' },
           { src: '/images/najma/immeuble/plans/plan-etage0najma.png', badge: 'مخطط الطابق السفلي' },
           { src: '/images/najma/immeuble/plans/plan-etage1najma.png', badge: 'مخطط الطابق الأول' },
         ]

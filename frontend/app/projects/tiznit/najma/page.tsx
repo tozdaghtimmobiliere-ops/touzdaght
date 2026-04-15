@@ -12,13 +12,13 @@ const content = {
   ar: {
     title: 'مشروع تجزئة النجمة',
     subtitle: 'اختر القسم الذي تريد الاطلاع عليه',
-    immeuble: {
-      title: 'الشقق السكنية',
-      desc: 'شقق اقتصادية واجتماعية في موقع متميز بقلب مدينة تيزنيت',
-    },
     terrain: {
       title: 'البقع الأرضية',
       desc: 'استكشف البقع الأرضية المتوفرة ومواقعها الاستراتيجية',
+    },
+    immeuble: {
+      title: 'الشقق السكنية',
+      desc: 'شقق اقتصادية واجتماعية في موقع متميز بقلب مدينة تيزنيت',
     },
     city: 'تيزنيت',
   },
@@ -60,14 +60,14 @@ export default function NajmaSelectionPage() {
       {/* Hero */}
       <section className="relative pt-[70px] min-h-[40vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-dark-light">
-           <img 
-              src="/images/najma/najma.png" 
-              className="w-full h-full object-cover opacity-30 blur-sm scale-110" 
-              alt="Project Background"
-           />
-           <div className="absolute inset-0 bg-gradient-to-b from-dark/90 via-dark/40 to-cream" />
+          <img
+            src="/images/najma/najma.png"
+            className="w-full h-full object-cover opacity-30 blur-sm scale-110"
+            alt="Project Background"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-dark/90 via-dark/40 to-cream" />
         </div>
-        
+
         <div className="container-custom relative z-10 py-16 text-center">
           <BackButton />
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
@@ -98,9 +98,9 @@ export default function NajmaSelectionPage() {
                 <div className="project-card-luxury bg-white group-hover:-translate-y-4 transition-all duration-500 overflow-hidden">
                   <div className="aspect-[4/3] relative flex items-center justify-center bg-cream/50 overflow-hidden">
                     <div className="absolute inset-0 bg-secondary/5 group-hover:bg-secondary/10 transition-colors duration-500" />
-                    <img 
-                      src="/images/najma/pub-global.jpg" 
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                    <img
+                      src="/images/najma/pub-global.jpg"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       alt={t('projects.najma.apartments')}
                     />
                   </div>
@@ -112,8 +112,8 @@ export default function NajmaSelectionPage() {
                       {t('projects.najma.apartments_desc')}
                     </p>
                     <div className="inline-flex items-center gap-2 text-gold font-black uppercase tracking-widest text-xs border-b border-gold/30 pb-1 group-hover:border-gold transition-all">
-                       VOIR PLUS
-                       <ArrowLeft className="w-4 h-4 rotate-180" />
+                      VOIR PLUS
+                      <ArrowLeft className="w-4 h-4 rotate-180" />
                     </div>
                   </div>
                 </div>
@@ -142,8 +142,8 @@ export default function NajmaSelectionPage() {
                       {t('projects.najma.terrains_desc')}
                     </p>
                     <div className="inline-flex items-center gap-2 text-gold font-black uppercase tracking-widest text-xs border-b border-gold/30 pb-1 group-hover:border-gold transition-all">
-                       VOIR PLUS
-                       <ArrowLeft className="w-4 h-4 rotate-180" />
+                      VOIR PLUS
+                      <ArrowLeft className="w-4 h-4 rotate-180" />
                     </div>
                   </div>
                 </div>
