@@ -112,7 +112,7 @@ export default function NajmaSelectionPage() {
                       {t('projects.najma.apartments_desc')}
                     </p>
                     <div className="inline-flex items-center gap-2 text-gold font-black uppercase tracking-widest text-xs border-b border-gold/30 pb-1 group-hover:border-gold transition-all">
-                       Explorer
+                       VOIR PLUS
                        <ArrowLeft className="w-4 h-4 rotate-180" />
                     </div>
                   </div>
@@ -144,7 +144,7 @@ export default function NajmaSelectionPage() {
                       {t('projects.najma.terrains_desc')}
                     </p>
                     <div className="inline-flex items-center gap-2 text-gold font-black uppercase tracking-widest text-xs border-b border-gold/30 pb-1 group-hover:border-gold transition-all">
-                       Explorer
+                       VOIR PLUS
                        <ArrowLeft className="w-4 h-4 rotate-180" />
                     </div>
                   </div>
