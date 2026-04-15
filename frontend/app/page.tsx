@@ -15,6 +15,7 @@ const FEATURED_PROJECTS = [
   { slug: 'gelmim', name: 'شقق طريق كلميم', city: 'تيزنيت', citySlug: 'tiznit', status: 'active', image: '/images/gelmim/gelmim.png' },
   { slug: 'touhmo', name: 'توهمو', city: 'أيت ملول', citySlug: 'ait-melloul', status: 'active', image: '/images/touhmo/touhmo.png' },
   { slug: 'hay-ta9adom', name: 'حي التقدم', city: 'لقليعة', citySlug: 'l9li3a', status: 'active', image: '/images/hay-ta9adom/hay-ta9adom.png' },
+  { slug: 'najma-plateau', name: 'مكاتب إدارية النجمة', city: 'تيزنيت', citySlug: 'tiznit', status: 'active', image: '/images/najma/plateau.jpg' },
 ]
 
 // ─── Hero Slider ───────────────────────────────────────────────────────────────

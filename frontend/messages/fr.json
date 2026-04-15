@@ -22,7 +22,9 @@
       "terrains": "Projet An-Najma — Parcelles de terrain",
       "apartments": "Projet An-Najma — Appartements résidentiels",
       "terrains_desc": "Explorez des parcelles de terrain disponibles avec diverses superficies et emplacements stratégiques",
-      "apartments_desc": "Appartements résidentiels de luxe aux designs modernes et finitions de haute qualité"
+      "apartments_desc": "Appartements résidentiels de luxe aux designs modernes et finitions de haute qualité",
+      "offices": "Plateaux Bureau",
+      "offices_desc": "Plateaux de bureaux avec des superficies spacieuses et finitions modernes pour vos besoins professionnels"
     }
   },
   "nav": {
