@@ -176,7 +176,7 @@ const content = {
 
 // Projets fixes affichés dans l'accueil — najma et gelmim en priorité
 const FEATURED_PROJECTS = [
-  { slug: 'najma', name: 'تجزئة النجمة', city: 'تيزنيت', citySlug: 'tiznit', status: 'active', image: '/images/najma/najma.png' },
+  { slug: 'najma', name: 'تجزئة النجمة', city: 'تيزنيت', citySlug: 'tiznit', status: 'active', image: '/images/najma/najma-thumbnail.jpg' },
   { slug: 'gelmim', name: 'شقق طريق كلميم', city: 'تيزنيت', citySlug: 'tiznit', status: 'active', image: '/images/gelmim/gelmim.png' },
   { slug: 'touhmo', name: 'توهمو', city: 'أيت ملول', citySlug: 'ait-melloul', status: 'active', image: '/images/touhmo/touhmo.png' },
   { slug: 'hay-ta9adom', name: 'حي التقدم', city: 'لقليعة', citySlug: 'l9li3a', status: 'active', image: '/images/hay-ta9adom/hay-ta9adom.png' },

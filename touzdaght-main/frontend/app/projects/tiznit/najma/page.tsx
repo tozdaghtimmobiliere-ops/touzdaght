@@ -89,8 +89,12 @@ export default function NajmaSelectionPage() {
             >
               <Link href="/projects/tiznit/najma/immeuble">
                 <div className="bg-secondary hover:bg-secondary/90 rounded-2xl p-8 text-center cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl group">
-                  <div className="w-20 h-20 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-primary transition-colors">
-                    <Building2 className="w-10 h-10 text-white" />
+                  <div className="w-20 h-20 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-primary transition-colors overflow-hidden">
+                    <img 
+                      src="/images/najma/najma-thumbnail.jpg" 
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                      alt={t.immeuble.title}
+                    />
                   </div>
                   <h2 className="font-almarai text-2xl font-bold text-white mb-3">
                     {t.immeuble.title}
@@ -110,8 +114,12 @@ export default function NajmaSelectionPage() {
             >
               <Link href="/projects/tiznit/najma/terrain">
                 <div className="bg-secondary hover:bg-secondary/90 rounded-2xl p-8 text-center cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl group">
-                  <div className="w-20 h-20 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-accent transition-colors">
-                    <MapPin className="w-10 h-10 text-white" />
+                  <div className="w-20 h-20 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-accent transition-colors overflow-hidden">
+                    <img 
+                      src="/images/najma/najma-thumbnail.jpg" 
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                      alt={t.terrain.title}
+                    />
                   </div>
                   <h2 className="font-almarai text-2xl font-bold text-white mb-3">
                     {t.terrain.title}
