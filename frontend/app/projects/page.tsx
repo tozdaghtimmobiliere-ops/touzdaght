@@ -56,7 +56,7 @@ const projectTypes: Record<string, Record<string, string>> = {
 }
 
 const projectImages: Record<string, string> = {
-  'najma': '/images/najma/najma.png',
+  'najma': '/images/najma/najma-thumbnail.jpg',
   'gelmim': '/images/gelmim/gelmim.png',
   'ain-zarqa': '/images/ain-zarqa/ain-zarqa.png',
   'tilila': '/images/tilila/tilila.png',
@@ -67,49 +67,56 @@ const projectImages: Record<string, string> = {
 function ProjectCard({ project, types, t }: { project: any; types: any; t: any }) {
   return (
     <Link href={`/projects/${project.city.slug}/${project.slug}`}>
-      <div className="group bg-white rounded-2xl overflow-hidden border border-border hover:border-gold/40 transition-all duration-400 h-full"
-        style={{ boxShadow: '0 4px 20px rgba(10,22,40,0.06)' }}>
+      <div className="project-card-luxury group bg-white h-full flex flex-col">
         <div className="aspect-[16/10] relative overflow-hidden bg-background-alt">
           {projectImages[project.slug] ? (
             <img src={projectImages[project.slug]} alt={project.name}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 render-4k" />
           ) : (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-secondary/30 font-semibold">{project.name}</span>
+            <div className="absolute inset-0 flex items-center justify-center bg-secondary/5">
+              <Building className="w-12 h-12 text-gold/20" />
             </div>
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-secondary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          <div className="absolute top-3 right-3">
-            <span className={cn('px-3 py-1 rounded-full text-xs font-bold shadow-sm',
-              project.status === 'active' ? 'bg-status-available text-white' : 'bg-secondary/80 text-white backdrop-blur-sm')}>
+          <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 via-secondary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          
+          <div className="absolute top-4 right-4 z-10">
+            <span className={cn('px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg',
+              project.status === 'active' ? 'bg-gold text-secondary' : 'bg-secondary/80 text-white backdrop-blur-sm border border-white/10')}>
               {project.status === 'active' ? t.filter.active : t.filter.completed}
             </span>
           </div>
-          <div className="absolute bottom-3 left-3">
-            <span className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-secondary shadow-sm">
+
+          <div className="absolute bottom-4 left-4 z-10">
+            <span className="px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg text-[10px] font-black text-white uppercase tracking-widest">
               {types[project.type] || project.type}
             </span>
           </div>
         </div>
-        <div className="p-5 border-t border-border group-hover:border-gold/20 transition-colors">
-          <div className="flex items-center gap-1.5 text-gold text-xs font-bold mb-2 uppercase tracking-wider">
-            <MapPin className="w-3 h-3" />
+        
+        <div className="p-6 flex-grow flex flex-col">
+          <div className="flex items-center gap-2 text-gold text-[10px] font-black uppercase tracking-[0.2em] mb-3">
+            <MapPin className="w-3.5 h-3.5" />
             {project.city.name}
           </div>
-          <h3 className="font-almarai font-bold text-lg text-secondary mb-2 group-hover:text-gold transition-colors">
+          
+          <h3 className="font-almarai font-extrabold text-xl text-secondary group-hover:text-gold transition-colors duration-300 mb-3">
             {project.name}
           </h3>
+
           {project.description && (
-            <p className="text-secondary/50 text-sm line-clamp-2 mb-4">{project.description}</p>
+            <p className="text-secondary/60 text-sm line-clamp-2 mb-6 font-cairo">
+              {project.description}
+            </p>
           )}
-          <div className="flex items-center justify-between pt-3 border-t border-border/50">
-            <div className="flex items-center gap-1.5 text-secondary/40 text-xs">
-              <Building className="w-3.5 h-3.5" />
-              {project._count?.buildings > 0 ? `${project._count.buildings} مبنى`
-                : project._count?.parcels > 0 ? `${project._count.parcels} بقعة` : ''}
+
+          <div className="mt-auto flex items-center justify-between pt-5 border-t border-border/50">
+            <div className="flex items-center gap-2 text-secondary/40 text-[10px] font-bold uppercase tracking-wider">
+              <Building className="w-3.5 h-3.5 text-gold/40" />
+              {project._count?.buildings > 0 ? `${project._count.buildings} Units`
+                : project._count?.parcels > 0 ? `${project._count.parcels} Plots` : 'Units'}
             </div>
-            <span className="text-gold font-bold text-xs flex items-center gap-1 group-hover:gap-2 transition-all">
-              {t.viewDetails} <ArrowLeft className="w-3.5 h-3.5" />
+            <span className="text-gold font-black text-[10px] uppercase tracking-widest flex items-center gap-2 group-hover:gap-3 transition-all">
+              {t.viewDetails} <ArrowLeft className="w-4 h-4" />
             </span>
           </div>
         </div>

@@ -6,7 +6,7 @@ import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import { BackButton } from '@/components/ui/back-button'
 import { useLanguage } from '@/components/providers'
-import { Building2, MapPin } from 'lucide-react'
+import { Building2, MapPin, ArrowLeft } from 'lucide-react'
 
 const content = {
   ar: {
@@ -51,74 +51,103 @@ const content = {
 }
 
 export default function NajmaSelectionPage() {
-  const { language } = useLanguage()
-  const t = content[language as keyof typeof content] || content.ar
+  const { t } = useLanguage()
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-cream">
       <Header />
 
       {/* Hero */}
-      <section className="relative pt-[72px] bg-secondary">
-        <div className="absolute inset-0 hero-overlay" />
-        <div className="container-custom relative z-10 py-12 md:py-20">
+      <section className="relative pt-[70px] min-h-[40vh] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-dark-light">
+           <img 
+              src="/images/najma/najma-thumbnail.jpg" 
+              className="w-full h-full object-cover opacity-30 blur-sm scale-110" 
+              alt="Project Background"
+           />
+           <div className="absolute inset-0 bg-gradient-to-b from-dark/90 via-dark/40 to-cream" />
+        </div>
+        
+        <div className="container-custom relative z-10 py-16 text-center">
           <BackButton />
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <div className="flex items-center gap-2 text-accent text-sm mb-3">
-              <MapPin className="w-4 h-4" />
-              {t.city}
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
+            <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full border border-gold/30 bg-black/20 backdrop-blur-md mb-8">
+              <MapPin className="w-4 h-4 text-gold" />
+              <span className="text-white text-xs font-black uppercase tracking-[0.2em]">Tiznit, Maroc</span>
             </div>
-            <h1 className="font-almarai text-3xl md:text-5xl font-bold text-white mb-4">
-              {t.title}
+            <h1 className="font-almarai text-4xl md:text-6xl font-extrabold text-white mb-6">
+              {t('projects.najma.terrains').split(' — ')[0]}
             </h1>
-            <p className="text-white/80 text-lg">{t.subtitle}</p>
+            <div className="h-1 w-24 bg-gold mx-auto" />
           </motion.div>
         </div>
       </section>
 
-      {/* Cards sélection */}
-      <section className="section-padding bg-background-alt">
+      {/* Selection Cards */}
+      <section className="py-24 relative">
         <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto px-4">
 
             {/* Card Immeuble */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.1, duration: 0.8 }}
             >
-              <Link href="/projects/tiznit/najma/immeuble">
-                <div className="bg-secondary hover:bg-secondary/90 rounded-2xl p-8 text-center cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl group">
-                  <div className="w-20 h-20 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-primary transition-colors">
-                    <Building2 className="w-10 h-10 text-white" />
+              <Link href="/projects/tiznit/najma/immeuble" className="block group">
+                <div className="project-card-luxury bg-white group-hover:-translate-y-4 transition-all duration-500 overflow-hidden">
+                  <div className="aspect-[4/3] relative flex items-center justify-center bg-cream/50 overflow-hidden">
+                    <div className="absolute inset-0 bg-secondary/5 group-hover:bg-secondary/10 transition-colors duration-500" />
+                    <img 
+                      src="/images/najma/najma-thumbnail.jpg" 
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                      alt={t('projects.najma.apartments')}
+                    />
                   </div>
-                  <h2 className="font-almarai text-2xl font-bold text-white mb-3">
-                    {t.immeuble.title}
-                  </h2>
-                  <p className="text-white/70 text-sm leading-relaxed">
-                    {t.immeuble.desc}
-                  </p>
+                  <div className="p-8 text-center">
+                    <h2 className="font-almarai text-2xl md:text-3xl font-black text-secondary mb-4 group-hover:text-gold transition-colors duration-300">
+                      {t('projects.najma.apartments')}
+                    </h2>
+                    <p className="font-cairo text-secondary/60 text-lg leading-relaxed mb-6">
+                      {t('projects.najma.apartments_desc')}
+                    </p>
+                    <div className="inline-flex items-center gap-2 text-gold font-black uppercase tracking-widest text-xs border-b border-gold/30 pb-1 group-hover:border-gold transition-all">
+                       Explorer
+                       <ArrowLeft className="w-4 h-4 rotate-180" />
+                    </div>
+                  </div>
                 </div>
               </Link>
             </motion.div>
 
             {/* Card Terrain */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
             >
-              <Link href="/projects/tiznit/najma/terrain">
-                <div className="bg-secondary hover:bg-secondary/90 rounded-2xl p-8 text-center cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl group">
-                  <div className="w-20 h-20 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-accent transition-colors">
-                    <MapPin className="w-10 h-10 text-white" />
+              <Link href="/projects/tiznit/najma/terrain" className="block group">
+                <div className="project-card-luxury bg-white group-hover:-translate-y-4 transition-all duration-500 overflow-hidden">
+                  <div className="aspect-[4/3] relative flex items-center justify-center bg-cream/50 overflow-hidden">
+                    <div className="absolute inset-0 bg-secondary/5 group-hover:bg-secondary/10 transition-colors duration-500" />
+                    <img 
+                      src="/images/najma/najma-thumbnail.jpg" 
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                      alt={t('projects.najma.terrains')}
+                    />
                   </div>
-                  <h2 className="font-almarai text-2xl font-bold text-white mb-3">
-                    {t.terrain.title}
-                  </h2>
-                  <p className="text-white/70 text-sm leading-relaxed">
-                    {t.terrain.desc}
-                  </p>
+                  <div className="p-8 text-center">
+                    <h2 className="font-almarai text-2xl md:text-3xl font-black text-secondary mb-4 group-hover:text-gold transition-colors duration-300">
+                      {t('projects.najma.terrains')}
+                    </h2>
+                    <p className="font-cairo text-secondary/60 text-lg leading-relaxed mb-6">
+                      {t('projects.najma.terrains_desc')}
+                    </p>
+                    <div className="inline-flex items-center gap-2 text-gold font-black uppercase tracking-widest text-xs border-b border-gold/30 pb-1 group-hover:border-gold transition-all">
+                       Explorer
+                       <ArrowLeft className="w-4 h-4 rotate-180" />
+                    </div>
+                  </div>
                 </div>
               </Link>
             </motion.div>
@@ -126,6 +155,7 @@ export default function NajmaSelectionPage() {
           </div>
         </div>
       </section>
+
 
       <Footer />
     </main>

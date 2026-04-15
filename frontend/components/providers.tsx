@@ -6,12 +6,14 @@ interface LanguageContextType {
   language: string
   setLanguage: (lang: string) => void
   dir: string
+  t: (key: string) => string
 }
 
 const LanguageContext = createContext<LanguageContextType>({
   language: 'ar',
   setLanguage: () => {},
   dir: 'rtl',
+  t: (key: string) => key,
 })
 
 export const useLanguage = () => useContext(LanguageContext)
@@ -34,16 +36,15 @@ export const useAuth = () => useContext(AuthContext)
 
 export function Providers({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState('ar')
+  const [translations, setTranslations] = useState<Record<string, any>>({})
   const [user, setUser] = useState(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   useEffect(() => {
-    const savedLang = localStorage.getItem('tozdaght_lang')
-    if (savedLang) {
-      setLanguageState(savedLang)
-      document.documentElement.lang = savedLang
-      document.documentElement.dir = savedLang === 'ar' ? 'rtl' : 'ltr'
-    }
+    const savedLang = localStorage.getItem('tozdaght_lang') || 'ar'
+    setLanguageState(savedLang)
+    document.documentElement.lang = savedLang
+    document.documentElement.dir = savedLang === 'ar' ? 'rtl' : 'ltr'
 
     const token = localStorage.getItem('tozdaght_token')
     const savedUser = localStorage.getItem('tozdaght_user')
@@ -53,11 +54,33 @@ export function Providers({ children }: { children: ReactNode }) {
     }
   }, [])
 
+  useEffect(() => {
+    // Dynamically load translations
+    import(`../messages/${language}.json`).then((module) => {
+      setTranslations(module.default)
+    }).catch(err => {
+      console.error('Failed to load translations:', err)
+    })
+  }, [language])
+
   const setLanguage = (lang: string) => {
     setLanguageState(lang)
     localStorage.setItem('tozdaght_lang', lang)
     document.documentElement.lang = lang
     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr'
+  }
+
+  const t = (key: string): string => {
+    const keys = key.split('.')
+    let current = translations
+    for (const k of keys) {
+      if (current && current[k]) {
+        current = current[k]
+      } else {
+        return key // fallback to key
+      }
+    }
+    return typeof current === 'string' ? current : key
   }
 
   const login = (token: string, userData: any) => {
@@ -77,7 +100,7 @@ export function Providers({ children }: { children: ReactNode }) {
   const dir = language === 'ar' ? 'rtl' : 'ltr'
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, dir }}>
+    <LanguageContext.Provider value={{ language, setLanguage, dir, t }}>
       <AuthContext.Provider value={{ user, login, logout, isAuthenticated }}>
         {children}
       </AuthContext.Provider>

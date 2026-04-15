@@ -1,0 +1,80 @@
+{
+  "brand": {
+    "name": "Tozdaght",
+    "description": "Immobilier & Construction"
+  },
+  "splash": {
+    "loading": "Chargement...",
+    "welcome": "Bienvenue chez Tozdaght Immobilière",
+    "subtitle": "Concevoir l'avenir, bâtir vos rêves avec excellence"
+  },
+  "home": {
+    "hero": {
+      "badge": "Projet An-Najma – Tiznit",
+      "title": "Quartier résidentiel et commercial moderne au cœur de Tiznit",
+      "subtitle": "Nous proposons des projets immobiliers de standing alliant luxe et praticité.",
+      "cta": "Découvrir le projet",
+      "ctaSecondary": "Nous contacter"
+    }
+  },
+  "projects": {
+    "najma": {
+      "terrains": "Projet An-Najma — Parcelles de terrain",
+      "apartments": "Projet An-Najma — Appartements résidentiels",
+      "terrains_desc": "Explorez des parcelles de terrain disponibles avec diverses superficies et emplacements stratégiques",
+      "apartments_desc": "Appartements résidentiels de luxe aux designs modernes et finitions de haute qualité"
+    }
+  },
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "projects": "Projets",
+    "contact": "Contact",
+    "admin": "Admin",
+    "all_projects": "Tous les projets"
+  },
+  "status": {
+    "active": "Actif",
+    "sold": "Vendu",
+    "reserved": "Réservé",
+    "available": "Disponible",
+    "completed": "Terminé"
+  },
+  "project_detail": {
+    "tabs": {
+      "design": "Plan du projet",
+      "status": "État des appartements",
+      "progress": "Avancement des travaux",
+      "booking": "Réserver",
+      "parcels": "État des parcelles"
+    },
+    "info": {
+      "location": "Emplacement",
+      "type": "Type",
+      "status": "Statut",
+      "area": "Surface appartement",
+      "whatsapp": "Contacter sur WhatsApp",
+      "composition": "Composition"
+    },
+    "types": {
+      "residence": "Résidence",
+      "house": "Maison",
+      "lotissement": "Lotissement",
+      "commercial": "Commercial"
+    },
+    "specifications": {
+      "standard": "2 Chambres + Salon + Cuisine + 2 Salles de bain",
+      "small": "1 Chambre + Salon + Cuisine + Salle de bain",
+      "large": "3 Chambres + Salon + Cuisine + 2 Salles de bain"
+    }
+  },
+  "footer": {
+    "tagline": "Nous construisons vos rêves selon les plus hauts standards de qualité",
+    "companyTitle": "Contactez-nous",
+    "projectsTitle": "Nos projets",
+    "linksTitle": "Liens rapides",
+    "servicesTitle": "Nos services",
+    "rights": "© 2026 Tozdaght Immobilière — Tous droits réservés",
+    "address": "Appartement 2, 1er étage, Immeuble 34\nQuartier El Youssoufia, Tiznit"
+  }
+}

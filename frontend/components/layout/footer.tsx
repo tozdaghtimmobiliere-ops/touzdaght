@@ -4,90 +4,17 @@ import Link from 'next/link'
 import { MapPin, Phone, Mail, ArrowLeft } from 'lucide-react'
 import { useLanguage } from '@/components/providers'
 
-const footerContent = {
-  ar: {
-    tagline: 'نبني أحلامك بأعلى معايير الجودة',
-    companyTitle: 'تواصل معنا',
-    projectsTitle: 'مشاريعنا',
-    linksTitle: 'روابط سريعة',
-    servicesTitle: 'خدماتنا',
-    rights: '© 2026 Tozdaght Immobilière — جميع الحقوق محفوظة',
-    address: 'الشقة 2 الطابق 1 عمارة 34\nتجزئة الحرية، تيزنيت',
-    services: [
-      'تطوير المشاريع العقارية',
-      'البناء والتشييد',
-      'تهيئة الأراضي',
-      'إدارة المشاريع',
-      'استشارات عقارية',
-      'شراكات استثمارية',
-    ],
-    links: [
-      { href: '/', label: 'الرئيسية' },
-      { href: '/about', label: 'من نحن' },
-      { href: '/projects', label: 'المشاريع' },
-      { href: '/contact', label: 'اتصل بنا' },
-    ],
-  },
-  fr: {
-    tagline: 'Nous construisons vos rêves selon les plus hauts standards',
-    companyTitle: 'Contactez-nous',
-    projectsTitle: 'Nos projets',
-    linksTitle: 'Liens rapides',
-    servicesTitle: 'Nos services',
-    rights: '© 2026 Tozdaght Immobilière — Tous droits réservés',
-    address: 'Appartement 2, 1er étage, Immeuble 34\nQuartier El Youssoufia, Tiznit',
-    services: [
-      'Développement immobilier',
-      'Construction',
-      'Aménagement de terrains',
-      'Gestion de projets',
-      'Conseil immobilier',
-      'Partenariats',
-    ],
-    links: [
-      { href: '/', label: 'Accueil' },
-      { href: '/about', label: 'Qui sommes-nous' },
-      { href: '/projects', label: 'Projets' },
-      { href: '/contact', label: 'Contact' },
-    ],
-  },
-  en: {
-    tagline: 'Building your dreams to the highest standards',
-    companyTitle: 'Contact us',
-    projectsTitle: 'Our projects',
-    linksTitle: 'Quick links',
-    servicesTitle: 'Our services',
-    rights: '© 2026 Tozdaght Immobilière — All rights reserved',
-    address: 'Apartment 2, 1st floor, Building 34\nEl Youssoufia District, Tiznit',
-    services: [
-      'Real estate development',
-      'Construction',
-      'Land development',
-      'Project management',
-      'Real estate consulting',
-      'Investment partnerships',
-    ],
-    links: [
-      { href: '/', label: 'Home' },
-      { href: '/about', label: 'About us' },
-      { href: '/projects', label: 'Projects' },
-      { href: '/contact', label: 'Contact' },
-    ],
-  },
-}
-
-const projects = [
-  { name: 'تجزئة النجمة', href: '/projects/tiznit/najma', city: 'تيزنيت' },
-  { name: 'شقق طريق كلميم', href: '/projects/tiznit/gelmim', city: 'تيزنيت' },
-  { name: 'العين الزرقاء', href: '/projects/tiznit/ain-zarqa', city: 'تيزنيت' },
-  { name: 'تيليلا', href: '/projects/agadir/tilila', city: 'أكادير' },
-  { name: 'توهمو', href: '/projects/ait-melloul/touhmo', city: 'أيت ملول' },
-  { name: 'حي التقدم', href: '/projects/l9li3a/hay-ta9adom', city: 'لقليعة' },
-]
-
 export function Footer() {
-  const { language } = useLanguage()
-  const content = footerContent[language as keyof typeof footerContent] || footerContent.ar
+  const { t } = useLanguage()
+
+  const projects = [
+    { name: t('projects.najma.terrains').split(' — ')[0], href: '/projects/tiznit/najma', city: 'Tiznit' },
+    { name: 'Gelmim', href: '/projects/tiznit/gelmim', city: 'Tiznit' },
+    { name: 'Ain Zarqa', href: '/projects/tiznit/ain-zarqa', city: 'Tiznit' },
+    { name: 'Tilila', href: '/projects/agadir/tilila', city: 'Agadir' },
+    { name: 'Touhmo', href: '/projects/ait-melloul/touhmo', city: 'Ait Melloul' },
+    { name: 'Hay Ta9adom', href: '/projects/l9li3a/hay-ta9adom', city: 'L9li3a' },
+  ]
 
   return (
     <footer className="relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070E1A 0%, #0A1628 50%, #0D1F3C 100%)' }}>
@@ -112,36 +39,37 @@ export function Footer() {
           <div className="lg:col-span-1">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 mb-4 group">
-              <img src="/images/logo.png" alt="توزدغت" className="h-12 w-auto object-contain" />
+              <img src="/images/logo.png" alt={t('brand.name')} className="h-14 w-auto object-contain"
+                style={{ filter: 'drop-shadow(0 2px 8px rgba(201,168,76,0.25)) brightness(1.05)' }} />
               <div>
-                <span className="font-almarai font-bold text-xl text-white block">توزدغت</span>
-                <span className="text-gold text-xs tracking-widest">IMMOBILIÈRE</span>
+                <span className="font-almarai font-bold text-xl text-white block">{t('brand.name')}</span>
+                <span className="text-gold text-[10px] font-black tracking-[0.2em]">IMMOBILIÈRE</span>
               </div>
             </Link>
 
-            <p className="text-white/50 text-sm mb-6 leading-relaxed">{content.tagline}</p>
+            <p className="font-cairo text-white/50 text-sm mb-6 leading-relaxed uppercase tracking-wide">{t('footer.tagline')}</p>
 
-            <h4 className="text-gold font-bold mb-4 text-sm uppercase tracking-wider">{content.companyTitle}</h4>
-            <div className="space-y-3">
+            <h4 className="text-gold font-black mb-4 text-[10px] uppercase tracking-[0.2em]">{t('footer.companyTitle')}</h4>
+            <div className="space-y-4">
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-gold/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <div className="w-8 h-8 rounded-lg bg-gold/10 flex items-center justify-center flex-shrink-0 mt-0.5 border border-gold/20">
                   <MapPin className="w-4 h-4 text-gold" />
                 </div>
-                <p className="text-white/60 text-sm whitespace-pre-line leading-relaxed">{content.address}</p>
+                <p className="text-white/60 text-xs whitespace-pre-line leading-relaxed">{t('footer.address')}</p>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-gold/10 flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 rounded-lg bg-gold/10 flex items-center justify-center flex-shrink-0 border border-gold/20">
                   <Phone className="w-4 h-4 text-gold" />
                 </div>
-                <a href="tel:0702060323" className="text-white/60 hover:text-gold transition-colors text-sm">
+                <a href="tel:0702060323" className="text-white/60 hover:text-gold transition-colors text-xs font-bold">
                   0702060323
                 </a>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-gold/10 flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 rounded-lg bg-gold/10 flex items-center justify-center flex-shrink-0 border border-gold/20">
                   <Mail className="w-4 h-4 text-gold" />
                 </div>
-                <a href="mailto:Tozdaght.immobiliere@gmail.com" className="text-white/60 hover:text-gold transition-colors text-sm">
+                <a href="mailto:Tozdaght.immobiliere@gmail.com" className="text-white/60 hover:text-gold transition-colors text-xs font-bold break-all">
                   Tozdaght.immobiliere@gmail.com
                 </a>
               </div>
@@ -150,19 +78,19 @@ export function Footer() {
 
           {/* Projects */}
           <div>
-            <h4 className="text-gold font-bold mb-6 text-sm uppercase tracking-wider pb-2 border-b border-gold/20">
-              {content.projectsTitle}
+            <h4 className="text-gold font-black mb-6 text-[10px] uppercase tracking-[0.2em] pb-3 border-b border-gold/20">
+              {t('footer.projectsTitle')}
             </h4>
-            <ul className="space-y-2.5">
+            <ul className="space-y-3">
               {projects.map((project) => (
                 <li key={project.href}>
                   <Link href={project.href}
-                    className="group flex items-center justify-between text-white/60 hover:text-gold transition-all duration-200 text-sm py-1">
-                    <span className="flex items-center gap-2">
-                      <span className="w-1 h-1 bg-gold/40 rounded-full group-hover:bg-gold transition-colors" />
+                    className="group flex items-center justify-between text-white/60 hover:text-gold transition-all duration-300 text-xs font-bold py-1">
+                    <span className="flex items-center gap-3">
+                      <span className="w-1.5 h-1.5 bg-gold/20 rounded-full group-hover:bg-gold transition-colors group-hover:shadow-[0_0_8px_#C9A84C]" />
                       {project.name}
                     </span>
-                    <ArrowLeft className="w-3 h-3 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all" />
+                    <ArrowLeft className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all text-gold" />
                   </Link>
                 </li>
               ))}
@@ -171,19 +99,24 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-gold font-bold mb-6 text-sm uppercase tracking-wider pb-2 border-b border-gold/20">
-              {content.linksTitle}
+            <h4 className="text-gold font-black mb-6 text-[10px] uppercase tracking-[0.2em] pb-3 border-b border-gold/20">
+              {t('footer.linksTitle')}
             </h4>
-            <ul className="space-y-2.5">
-              {content.links.map((link) => (
+            <ul className="space-y-3">
+              {[
+                { href: '/', key: 'nav.home' },
+                { href: '/about', key: 'nav.about' },
+                { href: '/projects', key: 'nav.projects' },
+                { href: '/contact', key: 'nav.contact' },
+              ].map((link) => (
                 <li key={link.href}>
                   <Link href={link.href}
-                    className="group flex items-center justify-between text-white/60 hover:text-gold transition-all duration-200 text-sm py-1">
-                    <span className="flex items-center gap-2">
-                      <span className="w-1 h-1 bg-gold/40 rounded-full group-hover:bg-gold transition-colors" />
-                      {link.label}
+                    className="group flex items-center justify-between text-white/60 hover:text-gold transition-all duration-300 text-xs font-bold py-1">
+                    <span className="flex items-center gap-3">
+                      <span className="w-1.5 h-1.5 bg-gold/20 rounded-full group-hover:bg-gold transition-colors group-hover:shadow-[0_0_8px_#C9A84C]" />
+                      {t(link.key)}
                     </span>
-                    <ArrowLeft className="w-3 h-3 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all" />
+                    <ArrowLeft className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all text-gold" />
                   </Link>
                 </li>
               ))}
@@ -192,14 +125,13 @@ export function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="text-gold font-bold mb-6 text-sm uppercase tracking-wider pb-2 border-b border-gold/20">
-              {content.servicesTitle}
+            <h4 className="text-gold font-black mb-6 text-[10px] uppercase tracking-[0.2em] pb-3 border-b border-gold/20">
+              {t('footer.servicesTitle')}
             </h4>
-            <ul className="space-y-2.5">
-              {content.services.map((service, index) => (
-                <li key={index}
-                  className="flex items-center gap-2 text-white/60 text-sm py-1">
-                  <span className="w-1 h-1 bg-gold/40 rounded-full flex-shrink-0" />
+            <ul className="space-y-3">
+              {['Vente', 'Achat', 'Location', 'Conseil'].map((service, index) => (
+                <li key={index} className="flex items-center gap-3 text-white/50 text-xs font-bold uppercase tracking-widest">
+                  <span className="w-1.5 h-1.5 bg-gold/30 rounded-full flex-shrink-0" />
                   {service}
                 </li>
               ))}
@@ -208,11 +140,13 @@ export function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-6" />
+        <div className="h-px bg-gradient-to-r from-transparent via-gold to-transparent opacity-20 mb-8" />
 
         {/* Bottom */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-white/30 text-xs">{content.rights}</p>
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          <p className="text-white/30 text-[10px] font-bold uppercase tracking-widest leading-loose">
+             {t('footer.rights')}
+          </p>
           <div className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 bg-gold rounded-full animate-pulse" />
             <span className="text-white/30 text-xs">Made with ♥ in Morocco</span>

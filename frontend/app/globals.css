@@ -641,13 +641,21 @@ img {
   animation: spin-slow 0.9s linear infinite;
 }
 
-/* ─── Image Quality Enhancement ─────────────────────── */
-.img-4k {
+/* ─── 4K Rendering Utility ────────────────────────── */
+.render-4k {
   image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
+  image-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   backface-visibility: hidden;
   transform: translateZ(0);
-  will-change: transform;
+  filter: contrast(1.02) saturate(1.02) brightness(1.01);
+}
+
+.render-4k:hover {
+  filter: contrast(1.05) saturate(1.05) brightness(1.03);
+  transform: scale(1.02) translateZ(0);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ─── Scrollbar Gold ─────────────────────────────────── */

@@ -9,181 +9,17 @@ import { Footer } from '@/components/layout/footer'
 import { useLanguage } from '@/components/providers'
 import { cn } from '@/lib/utils'
 
-const content = {
-  ar: {
-    hero: {
-      badge: 'مشروع تجزئة وإقامة النجمة – تيزنيت',
-      title: 'تجزئة وإقامة النجمة في قلب مدينة تيزنيت',
-      subtitle: 'نقدم لكم مشاريع عقارية متطورة بمعايير عالمية تجمع بين الفخامة والعملية',
-      cta: 'اكتشف المشروع',
-      ctaSecondary: 'تواصل معنا',
-    },
-    about: {
-      label: 'من نحن',
-      title: 'توزدغت للعقار والبناء',
-      paragraph1: 'توزدغت هي شركة متخصصة في مجال العقار والبناء، تقدم حلولاً متكاملة في تطوير وإنجاز المشاريع العقارية وفق أعلى معايير الجودة والاحترافية.',
-      paragraph2: 'تتمثل مهمة الشركة في تصميم وتنفيذ مشاريع سكنية وعمرانية تلبي احتياجات العملاء، مع توفير مواكبة شاملة في جميع مراحل المشروع.',
-      servicesLabel: 'تقدم توزدغت مجموعة من الخدمات تشمل:',
-      services: [
-        'تطوير المشاريع العقارية',
-        'البناء والتشييد',
-        'تهيئة الأراضي',
-        'إدارة المشاريع',
-        'استشارات عقارية',
-        'شراكات استثمارية',
-      ],
-      cta: 'اعرف المزيد',
-      stats: [
-        { number: '+10', label: 'سنوات خبرة' },
-        { number: '+15', label: 'مشاريع' },
-        { number: '+90', label: 'وحدة' },
-        { number: '+50', label: 'زبون' },
-      ],
-    },
-    services: {
-      title: 'خدماتنا المتميزة',
-      subtitle: 'نقدم مجموعة شاملة من الخدمات العقارية بأعلى معايير الجودة',
-      items: [
-        { title: 'البناء والعمارة', desc: 'تشييد المباني السكنية والتجارية بأعلى معايير الجودة', icon: Building2 },
-        { title: 'تجهيز الأراضي', desc: 'تهيئة وتجهيز الأراضي وتحويلها إلى مشاريع سكنية متكاملة', icon: MapPin },
-        { title: 'تسيير المشاريع', desc: 'إدارة شاملة لجميع مراحل المشاريع العقارية', icon: Briefcase },
-        { title: 'الأعمال العقارية', desc: 'خدمات متكاملة في بيع وشراء وتأجير العقارات', icon: Home },
-        { title: 'الدراسات التقنية', desc: 'دراسات تقنية ومعمارية دقيقة لضمان نجاح المشاريع', icon: FileText },
-        { title: 'شراكات استثمارية', desc: 'فرص استثمارية مميزة بشراكات استراتيجية ناجحة', icon: Users },
-      ],
-    },
-    projects: {
-      title: 'مشاريعنا المتميزة',
-      subtitle: 'اكتشف مجموعة مشاريعنا العقارية في مختلف مدن المغرب',
-      cta: 'عرض جميع المشاريع',
-    },
-    cta: {
-      title: 'هل تبحث عن استثمار عقاري مضمون؟',
-      subtitle: 'تواصل معنا الآن للحصول على استشارة مجانية ومعرفة المزيد عن فرص الاستثمار',
-      button: 'تواصل معنا',
-      phone: 'اتصل بنا مباشرة',
-    },
-  },
-  fr: {
-    hero: {
-      badge: 'Projet An-Najma – Tiznit',
-      title: 'Quartier résidentiel et commercial moderne au cœur de Tiznit',
-      subtitle: 'Nous proposons des projets immobiliers de standing alliant luxe et praticité.',
-      cta: 'Découvrir le projet',
-      ctaSecondary: 'Nous contacter',
-    },
-    about: {
-      label: 'Qui sommes-nous',
-      title: 'Tozdaght Immobilier & Construction',
-      paragraph1: 'Tozdaght est une société spécialisée dans l\'immobilier et la construction, proposant des solutions intégrées selon les normes les plus élevées.',
-      paragraph2: 'Notre mission est de concevoir et réaliser des projets résidentiels répondant aux besoins des clients, avec un accompagnement complet.',
-      servicesLabel: 'Nos services comprennent :',
-      services: [
-        'Développement immobilier',
-        'Construction',
-        'Aménagement de terrains',
-        'Gestion de projets',
-        'Conseil immobilier',
-        'Partenariats',
-      ],
-      cta: 'En savoir plus',
-      stats: [
-        { number: '+10', label: 'Ans d\'exp.' },
-        { number: '+15', label: 'Projets' },
-        { number: '+90', label: 'Unités' },
-        { number: '+50', label: 'Clients' },
-      ],
-    },
-    services: {
-      title: 'Nos services',
-      subtitle: 'Une gamme complète de services immobiliers selon les plus hauts standards',
-      items: [
-        { title: 'Construction', desc: 'Construction de bâtiments résidentiels et commerciaux', icon: Building2 },
-        { title: 'Aménagement', desc: 'Viabilisation et aménagement de terrains', icon: MapPin },
-        { title: 'Gestion', desc: 'Gestion complète de toutes les phases des projets', icon: Briefcase },
-        { title: 'Transactions', desc: 'Services complets de vente, achat et location', icon: Home },
-        { title: 'Études techniques', desc: 'Études techniques et architecturales précises', icon: FileText },
-        { title: 'Partenariats', desc: 'Opportunités d\'investissement attractives', icon: Users },
-      ],
-    },
-    projects: {
-      title: 'Nos projets',
-      subtitle: 'Découvrez notre portfolio de projets immobiliers au Maroc',
-      cta: 'Voir tous les projets',
-    },
-    cta: {
-      title: 'Vous cherchez un investissement immobilier sûr ?',
-      subtitle: 'Contactez-nous pour une consultation gratuite',
-      button: 'Contactez-nous',
-      phone: 'Appelez-nous',
-    },
-  },
-  en: {
-    hero: {
-      badge: 'An-Najma Project – Tiznit',
-      title: 'Modern residential and commercial district in the heart of Tiznit',
-      subtitle: 'We offer premium real estate projects combining luxury and practicality.',
-      cta: 'Explore the project',
-      ctaSecondary: 'Contact us',
-    },
-    about: {
-      label: 'About us',
-      title: 'Tozdaght Real Estate & Construction',
-      paragraph1: 'Tozdaght is specialized in real estate and construction, providing integrated solutions according to the highest standards.',
-      paragraph2: 'Our mission is to design and implement residential projects that meet client needs with full support.',
-      servicesLabel: 'Our services include:',
-      services: [
-        'Real estate development',
-        'Construction',
-        'Land development',
-        'Project management',
-        'Real estate consulting',
-        'Investment partnerships',
-      ],
-      cta: 'Learn more',
-      stats: [
-        { number: '+10', label: 'Years exp.' },
-        { number: '+15', label: 'Projects' },
-        { number: '+90', label: 'Units' },
-        { number: '+50', label: 'Clients' },
-      ],
-    },
-    services: {
-      title: 'Our services',
-      subtitle: 'A comprehensive range of real estate services to the highest standards',
-      items: [
-        { title: 'Construction', desc: 'Building residential and commercial properties', icon: Building2 },
-        { title: 'Land development', desc: 'Preparation and development of land', icon: MapPin },
-        { title: 'Management', desc: 'Full management of all project phases', icon: Briefcase },
-        { title: 'Transactions', desc: 'Complete services for selling, buying, renting', icon: Home },
-        { title: 'Technical studies', desc: 'Precise technical and architectural studies', icon: FileText },
-        { title: 'Partnerships', desc: 'Attractive investment opportunities', icon: Users },
-      ],
-    },
-    projects: {
-      title: 'Our projects',
-      subtitle: 'Discover our real estate portfolio across Morocco',
-      cta: 'View all projects',
-    },
-    cta: {
-      title: 'Looking for a secure real estate investment?',
-      subtitle: 'Contact us now for a free consultation',
-      button: 'Contact us',
-      phone: 'Call us directly',
-    },
-  },
-}
-
 // Projets fixes affichés dans l'accueil — najma et gelmim en priorité
 const FEATURED_PROJECTS = [
-  { slug: 'najma', name: 'تجزئة النجمة', city: 'تيزنيت', citySlug: 'tiznit', status: 'active', image: '/images/najma/najma.png' },
+  { slug: 'najma', name: 'تجزئة النجمة', city: 'تيزنيت', citySlug: 'tiznit', status: 'active', image: '/images/najma/najma-thumbnail.jpg' },
   { slug: 'gelmim', name: 'شقق طريق كلميم', city: 'تيزنيت', citySlug: 'tiznit', status: 'active', image: '/images/gelmim/gelmim.png' },
   { slug: 'touhmo', name: 'توهمو', city: 'أيت ملول', citySlug: 'ait-melloul', status: 'active', image: '/images/touhmo/touhmo.png' },
   { slug: 'hay-ta9adom', name: 'حي التقدم', city: 'لقليعة', citySlug: 'l9li3a', status: 'active', image: '/images/hay-ta9adom/hay-ta9adom.png' },
 ]
 
 // ─── Hero Slider ───────────────────────────────────────────────────────────────
-function HeroSlider({ t }: { t: any }) {
+function HeroSlider() {
+  const { t } = useLanguage()
   const [selectedIndex, setSelectedIndex] = useState(0)
   const slides = [
     { id: 1, src: '/images/najma/slider-najma-1.png' },
@@ -201,53 +37,46 @@ function HeroSlider({ t }: { t: any }) {
   }, [slides.length])
 
   return (
-    <section className="relative h-screen overflow-hidden">
+    <section className="relative h-[90vh] md:h-screen overflow-hidden">
       {slides.map((slide, index) => (
         <div key={slide.id} className="absolute inset-0 transition-opacity duration-1000"
           style={{ opacity: selectedIndex === index ? 1 : 0, zIndex: selectedIndex === index ? 1 : 0 }}>
           <img src={slide.src} alt={`slide ${index}`}
-            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-          <div className="absolute inset-0 hero-overlay" />
+            className="w-full h-full object-cover render-4k" />
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
         </div>
       ))}
-
-      <div className="absolute top-0 left-0 right-0 h-[2px] z-10"
-        style={{ background: 'linear-gradient(to right, transparent, #C9A84C, transparent)' }} />
 
       <div className="absolute inset-0 flex items-center justify-center z-10">
         <div className="container-custom text-center text-white px-4">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            <div className="inline-flex items-center gap-2 mb-6">
-              <div className="h-px w-8 bg-gold opacity-70" />
-              <span className="text-gold text-xs font-bold tracking-widest uppercase px-4 py-2 border border-gold/30 rounded-full backdrop-blur-sm bg-black/20">
-                {t.hero.badge}
+            <div className="inline-flex items-center gap-2 mb-8 bg-black/30 backdrop-blur-md px-6 py-2 rounded-full border border-gold/30">
+              <span className="text-gold text-xs font-black tracking-[0.2em] uppercase">
+                {t('home.hero.badge')}
               </span>
-              <div className="h-px w-8 bg-gold opacity-70" />
             </div>
 
-           <h1 className="font-almarai font-bold mb-6 max-w-4xl mx-auto leading-tight text-center">
-            <span style={{ color: '#E53E3E', fontSize:'clamp(2rem, 8vw, 5rem)', lineHeight: '1' }} className="block mb-2">
-              جديد
-            </span>
-            <span className="text-gold block text-3xl md:text-5xl lg:text-6xl">
-              تجزئة وإقامة النجمة في قلب مدينة تيزنيت
-            </span>
-          </h1>
+            <h1 className="font-almarai font-extrabold mb-8 max-w-5xl mx-auto leading-tight">
+              <span className="text-white block text-4xl md:text-6xl lg:text-7xl mb-4">
+                {t('home.hero.title')}
+              </span>
+              <div className="h-1 w-24 bg-gold mx-auto mb-6" />
+            </h1>
 
-            <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto mb-10">
-              {t.hero.subtitle}
+            <p className="font-cairo text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-12 font-medium">
+              {t('home.hero.subtitle')}
             </p>
 
-            <div className="flex flex-wrap items-center justify-center gap-4">
+            <div className="flex flex-wrap items-center justify-center gap-6">
               <Link href="/projects/tiznit/najma"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-secondary transition-all duration-300 hover:shadow-gold-lg hover:-translate-y-1"
-                style={{ background: 'linear-gradient(135deg, #C9A84C, #A8863A)' }}>
-                {t.hero.cta}
-                <ArrowLeft className="w-5 h-5" />
+                className="group relative inline-flex items-center gap-3 px-10 py-5 rounded-2xl font-black text-secondary transition-all duration-500 hover:shadow-[0_0_30px_#C9A84C] hover:-translate-y-1 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-gold via-gold-light to-gold group-hover:scale-105 transition-transform duration-500" />
+                <span className="relative z-10">{t('home.hero.cta')}</span>
+                <ArrowLeft className="relative z-10 w-5 h-5 transition-transform duration-300 group-hover:-translate-x-1" />
               </Link>
               <Link href="/contact"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-white transition-all duration-300 hover:-translate-y-1 border border-white/30 backdrop-blur-sm bg-white/10 hover:bg-white/20">
-                {t.hero.ctaSecondary}
+                className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl font-black text-white transition-all duration-300 hover:-translate-y-1 border-2 border-white/40 backdrop-blur-md bg-white/5 hover:bg-white/10 hover:border-white">
+                {t('home.hero.ctaSecondary')}
               </Link>
             </div>
           </motion.div>
@@ -279,7 +108,19 @@ function HeroSlider({ t }: { t: any }) {
 }
 
 // ─── Stats Bar ─────────────────────────────────────────────────────────────────
-function StatsBar({ stats }: { stats: any[] }) {
+function StatsBar({ language }: { language: string }) {
+  const stats = language === 'ar' ? [
+    { number: '+10', label: 'سنوات خبرة' },
+    { number: '+15', label: 'مشاريع' },
+    { number: '+90', label: 'وحدة' },
+    { number: '+50', label: 'زبون' },
+  ] : [
+    { number: '+10', label: 'Ans d\'exp.' },
+    { number: '+15', label: 'Projets' },
+    { number: '+90', label: 'Unités' },
+    { number: '+50', label: 'Clients' },
+  ]
+
   return (
     <div className="relative z-10"
       style={{ background: 'linear-gradient(135deg, #0A1628, #1A2E4A)' }}>
@@ -299,8 +140,10 @@ function StatsBar({ stats }: { stats: any[] }) {
   )
 }
 
-// ─── Projects Section (juste après slider) ─────────────────────────────────────
-function ProjectsSection({ t }: { t: any }) {
+// ─── Projects Section ──────────────────────────────────────────────────────────
+function ProjectsSection() {
+  const { t, language } = useLanguage()
+  
   return (
     <section className="section-padding" style={{ background: '#FAF7F2' }}>
       <div className="container-custom">
@@ -308,40 +151,48 @@ function ProjectsSection({ t }: { t: any }) {
           viewport={{ once: true }} className="text-center mb-14">
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="h-px w-8 bg-gold opacity-60" />
-            <span className="text-gold text-xs font-bold uppercase tracking-widest">مشاريعنا</span>
+            <span className="text-gold text-xs font-bold uppercase tracking-widest">{language === 'ar' ? 'مشاريعنا' : 'PROJETS'}</span>
             <div className="h-px w-8 bg-gold opacity-60" />
           </div>
-          <h2 className="font-almarai text-3xl md:text-4xl font-bold text-secondary mb-4">{t.projects.title}</h2>
-          <p className="text-secondary/50 max-w-xl mx-auto text-sm">{t.projects.subtitle}</p>
+          <h2 className="font-almarai text-3xl md:text-4xl font-bold text-secondary mb-4">{language === 'ar' ? 'مشاريعنا المتميزة' : 'Nos Projets'}</h2>
+          <p className="text-secondary/50 max-w-xl mx-auto text-sm">{language === 'ar' ? 'اكتشف مجموعة مشاريعنا العقارية في مختلف مدن المغرب' : 'Découvrez notre portfolio immobilier à travers le Maroc'}</p>
           <div className="gold-line w-12 mx-auto mt-4" />
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {FEATURED_PROJECTS.map((project, index) => (
             <motion.div key={project.slug}
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }}>
               <Link href={`/projects/${project.citySlug}/${project.slug}`}>
-                <div className="group rounded-2xl overflow-hidden border border-border hover:border-gold/40 transition-all duration-400 bg-white"
-                  style={{ boxShadow: '0 4px 20px rgba(10,22,40,0.06)' }}>
+                <div className="project-card-luxury group bg-white h-full">
                   <div className="aspect-[4/3] relative overflow-hidden">
                     <img src={project.image} alt={project.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-secondary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <div className="absolute top-3 right-3">
-                      <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-status-available text-white">
-                        نشط
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 render-4k" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 via-secondary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    
+                    <div className="absolute top-4 right-4 z-10">
+                      <span className="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest bg-gold text-secondary shadow-lg">
+                        {t('status.active')}
                       </span>
                     </div>
+
+                    <div className="absolute bottom-4 right-4 z-10 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                       <div className="flex items-center gap-2 text-gold text-xs font-bold bg-secondary/80 backdrop-blur-md px-3 py-1.5 rounded-lg border border-gold/30">
+                         <span className="uppercase tracking-widest">Voir Projet</span>
+                         <ArrowLeft className="w-3 h-3 rotate-180" />
+                       </div>
+                    </div>
                   </div>
-                  <div className="p-4 border-t border-border group-hover:border-gold/20 transition-colors">
-                    <div className="flex items-center gap-1.5 text-gold text-xs font-semibold mb-1">
-                      <MapPin className="w-3 h-3" />
+                  <div className="p-6">
+                    <div className="flex items-center gap-2 text-gold text-[10px] font-black uppercase tracking-[0.2em] mb-3">
+                      <MapPin className="w-3.5 h-3.5" />
                       {project.city}
                     </div>
-                    <h3 className="font-almarai font-bold text-secondary group-hover:text-gold transition-colors">
+                    <h3 className="font-almarai font-extrabold text-xl text-secondary group-hover:text-gold transition-colors duration-300">
                       {project.name}
                     </h3>
+                    <div className="mt-4 h-[1px] w-8 bg-gold/30 transition-all duration-500 group-hover:w-full" />
                   </div>
                 </div>
               </Link>
@@ -352,7 +203,7 @@ function ProjectsSection({ t }: { t: any }) {
         <div className="text-center mt-10">
           <Link href="/projects"
             className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-sm transition-all duration-300 hover:-translate-y-1 border-2 border-secondary text-secondary hover:bg-secondary hover:text-white">
-            {t.projects.cta}
+            {language === 'ar' ? 'عرض جميع المشاريع' : 'Tous les Projets'}
             <ArrowLeft className="w-4 h-4" />
           </Link>
         </div>
@@ -362,37 +213,53 @@ function ProjectsSection({ t }: { t: any }) {
 }
 
 // ─── About Section ─────────────────────────────────────────────────────────────
-function AboutSection({ t }: { t: any }) {
+function AboutSection() {
+  const { language } = useLanguage()
+  const content = language === 'ar' ? {
+    label: 'من نحن',
+    title: 'توزدغت للعقار والبناء',
+    p1: 'توزدغت هي شركة متخصصة في مجال العقار والبناء، تقدم حلولاً متكاملة في تطوير وإنجاز المشاريع العقارية وفق أعلى معايير الجودة والاحترافية.',
+    p2: 'تتمثل مهمة الشركة في تصميم وتنفيذ مشاريع سكنية وعمرانية تلبي احتياجات العملاء، مع توفير مواكبة شاملة في جميع مراحل المشروع.',
+    servicesLabel: 'تقدم توزدغت مجموعة من الخدمات تشمل:',
+    services: ['تطوير المشاريع', 'البناء والتشييد', 'تهيئة الأراضي', 'إدارة المشاريع', 'استشارات عقارية', 'شراكات استثمارية'],
+    cta: 'اعرف المزيد'
+  } : {
+    label: 'À propos',
+    title: 'Tozdaght Immobilier & Construction',
+    p1: 'Tozdaght est une société spécialisée dans l\'immobilier et la construction, proposant des solutions intégrées selon les normes les plus élevées.',
+    p2: 'Notre mission est de concevoir et réaliser des projets résidentiels répondant aux besoins des clients, avec un accompagnement complet.',
+    servicesLabel: 'Nos services comprennent :',
+    services: ['Développement', 'Construction', 'Aménagement', 'Gestion', 'Conseil', 'Partenariats'],
+    cta: 'Savoir plus'
+  }
+
   return (
     <section className="section-padding" style={{ background: 'linear-gradient(135deg, #0A1628, #1A2E4A)' }}>
       <div className="container-custom">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-
           <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.7 }} className="relative">
             <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
-              <img
-                src="https://www.lesmaisonsferrian.be/medias/photos/blog/2023/IMG-comment-vendre-bien-immobilier-rapidement-maison-vente-etapes-hainaut.jpg"
-                alt="توزدغت" className="w-full h-full object-cover" />
+              <img src="https://www.lesmaisonsferrian.be/medias/photos/blog/2023/IMG-comment-vendre-bien-immobilier-rapidement-maison-vente-etapes-hainaut.jpg"
+                alt="Tozdaght" className="w-full h-full object-cover" />
             </div>
             <div className="absolute -top-3 -right-3 w-16 h-16 border-t-2 border-r-2 border-gold rounded-tr-xl opacity-60" />
             <div className="absolute -bottom-3 -left-3 w-16 h-16 border-b-2 border-l-2 border-gold rounded-bl-xl opacity-60" />
-
           </motion.div>
 
           <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.7 }}>
             <div className="flex items-center gap-3 mb-4">
               <div className="h-px w-8 bg-gold" />
-              <span className="text-gold font-bold text-xs uppercase tracking-widest">{t.about.label}</span>
+              <span className="text-gold font-bold text-xs uppercase tracking-widest">{content.label}</span>
             </div>
-            <h2 className="font-almarai text-3xl md:text-4xl font-bold text-white mb-4">{t.about.title}</h2>
+            <h2 className="font-almarai text-3xl md:text-4xl font-bold text-white mb-4">{content.title}</h2>
             <div className="gold-line w-12 mb-6" />
-            <p className="text-white/70 mb-4 leading-relaxed">{t.about.paragraph1}</p>
-            <p className="text-white/70 mb-6 leading-relaxed">{t.about.paragraph2}</p>
-            <p className="font-bold text-white mb-4 text-sm">{t.about.servicesLabel}</p>
+            <p className="text-white/70 mb-4 leading-relaxed">{content.p1}</p>
+            <p className="text-white/70 mb-6 leading-relaxed">{content.p2}</p>
+            <p className="font-bold text-white mb-4 text-sm">{content.servicesLabel}</p>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-8">
-              {t.about.services.map((service: string, index: number) => (
+              {content.services.map((service, index) => (
                 <li key={index} className="flex items-center gap-3 text-white/70 text-sm">
                   <div className="w-5 h-5 rounded-full bg-gold/10 flex items-center justify-center flex-shrink-0">
                     <Check className="w-3 h-3 text-gold" />
@@ -403,7 +270,7 @@ function AboutSection({ t }: { t: any }) {
             </ul>
             <Link href="/about"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm transition-all duration-300 hover:-translate-y-1 border border-gold/30 text-gold hover:bg-gold hover:text-secondary">
-              {t.about.cta}
+              {content.cta}
               <ArrowLeft className="w-4 h-4" />
             </Link>
           </motion.div>
@@ -414,37 +281,51 @@ function AboutSection({ t }: { t: any }) {
 }
 
 // ─── Services Section ──────────────────────────────────────────────────────────
-function ServicesSection({ t }: { t: any }) {
+function ServicesSection() {
+  const { language } = useLanguage()
+  const content = language === 'ar' ? {
+    title: 'خدماتنا المتميزة',
+    subtitle: 'نقدم مجموعة شاملة من الخدمات العقارية بأعلى معايير الجودة',
+    items: [
+      { title: 'البناء والعمارة', desc: 'تشييد المباني السكنية والتجارية بأعلى معايير الجودة', icon: Building2 },
+      { title: 'تجهيز الأراضي', desc: 'تهيئة وتجهيز الأراضي وتحويلها إلى مشاريع سكنية متكاملة', icon: MapPin },
+      { title: 'تسيير المشاريع', desc: 'إدارة شاملة لجميع مراحل المشاريع العقارية', icon: Briefcase },
+      { title: 'الأعمال العقارية', desc: 'خدمات متكاملة في بيع وشراء وتأجير العقارات', icon: Home },
+      { title: 'الدراسات التقنية', desc: 'دراسات تقنية ومعمارية دقيقة لضمان نجاح المشاريع', icon: FileText },
+      { title: 'شراكات استثمارية', desc: 'فرص استثمارية مميزة بشراكات استراتيجية ناجحة', icon: Users },
+    ]
+  } : {
+    title: 'Nos Services',
+    subtitle: 'Une gamme complète de solutions immobilières premium',
+    items: [
+      { title: 'Construction', desc: 'Construction de bâtiments résidentiels et commerciaux', icon: Building2 },
+      { title: 'Aménagement', desc: 'Viabilisation et aménagement de terrains', icon: MapPin },
+      { title: 'Gestion', desc: 'Gestion complète de toutes les phases des projets', icon: Briefcase },
+      { title: 'Transactions', desc: 'Vente, achat et location de propriétés', icon: Home },
+      { title: 'Études', desc: 'Études techniques et architecturales précises', icon: FileText },
+      { title: 'Partenariats', desc: 'Opportunités d\'investissement stratégiques', icon: Users },
+    ]
+  }
+
   return (
     <section className="section-padding" style={{ background: '#FAF7F2' }}>
       <div className="container-custom">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} className="text-center mb-14">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="h-px w-8 bg-gold opacity-60" />
-            <span className="text-gold text-xs font-bold uppercase tracking-widest">خدماتنا</span>
-            <div className="h-px w-8 bg-gold opacity-60" />
-          </div>
-          <h2 className="font-almarai text-3xl md:text-4xl font-bold text-secondary mb-4">{t.services.title}</h2>
-          <p className="text-secondary/50 max-w-xl mx-auto text-sm">{t.services.subtitle}</p>
+          <h2 className="font-almarai text-3xl md:text-4xl font-bold text-secondary mb-4">{content.title}</h2>
+          <p className="text-secondary/50 max-w-xl mx-auto text-sm">{content.subtitle}</p>
           <div className="gold-line w-12 mx-auto mt-4" />
         </motion.div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {t.services.items.map((service: any, index: number) => (
-            <motion.div key={index}
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+          {content.items.map((service, index) => (
+            <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group p-6 rounded-2xl border border-border hover:border-gold/30 transition-all duration-300 bg-white"
-              style={{ boxShadow: '0 4px 20px rgba(10,22,40,0.04)' }}>
-              <div className="w-12 h-12 rounded-xl mb-5 flex items-center justify-center transition-all duration-300 group-hover:scale-110"
-                style={{ background: 'linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.05))' }}>
+              className="group p-6 rounded-2xl border border-border hover:border-gold/30 transition-all duration-300 bg-white shadow-sm">
+              <div className="w-12 h-12 rounded-xl mb-5 flex items-center justify-center bg-gold/10">
                 <service.icon className="w-6 h-6 text-gold" />
               </div>
-              <h3 className="font-almarai font-bold text-lg text-secondary mb-2 group-hover:text-gold transition-colors">
-                {service.title}
-              </h3>
-              <p className="text-secondary/50 text-sm leading-relaxed">{service.desc}</p>
+              <h3 className="font-almarai font-bold text-lg text-secondary mb-2">{service.title}</h3>
+              <p className="text-secondary/50 text-sm">{service.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -454,42 +335,33 @@ function ServicesSection({ t }: { t: any }) {
 }
 
 // ─── CTA Section ───────────────────────────────────────────────────────────────
-function CTASection({ t }: { t: any }) {
-  return (
-    <section className="relative py-24 overflow-hidden"
-      style={{ background: 'linear-gradient(135deg, #070E1A 0%, #0A1628 60%, #0D1F3C 100%)' }}>
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 right-0 h-[1px]"
-          style={{ background: 'linear-gradient(to right, transparent, #C9A84C, transparent)' }} />
-        <div className="absolute top-0 right-0 w-80 h-80 rounded-full opacity-5"
-          style={{ background: 'radial-gradient(circle, #C9A84C, transparent)' }} />
-        <div className="absolute bottom-0 left-0 w-60 h-60 rounded-full opacity-5"
-          style={{ background: 'radial-gradient(circle, #3B7BC8, transparent)' }} />
-      </div>
+function CTASection() {
+  const { language } = useLanguage()
+  const content = language === 'ar' ? {
+    title: 'هل تبحث عن استثمار عقاري مضمون؟',
+    subtitle: 'تواصل معنا الآن للحصول على استشارة مجانية ومعرفة المزيد عن فرص الاستثمار',
+    button: 'تواصل معنا',
+    phone: 'اتصل بنا مباشرة'
+  } : {
+    title: 'Besoin d\'un investissement sûr ?',
+    subtitle: 'Contactez-nous pour une consultation gratuite et découvrez nos opportunités.',
+    button: 'Nous contacter',
+    phone: 'Appelez-nous'
+  }
 
-      <div className="container-custom relative z-10">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }} className="text-center">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="h-px w-8 bg-gold opacity-60" />
-            <span className="text-gold text-xs font-bold uppercase tracking-widest">استثمر معنا</span>
-            <div className="h-px w-8 bg-gold opacity-60" />
-          </div>
-          <h2 className="font-almarai text-3xl md:text-4xl font-bold text-white mb-4">{t.cta.title}</h2>
-          <p className="text-white/50 max-w-xl mx-auto mb-10 text-sm">{t.cta.subtitle}</p>
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            <Link href="/contact"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-secondary transition-all duration-300 hover:-translate-y-1 hover:shadow-gold-lg"
-              style={{ background: 'linear-gradient(135deg, #C9A84C, #A8863A)' }}>
-              {t.cta.button}
-            </Link>
-            <a href="tel:0702060323"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-white transition-all duration-300 hover:-translate-y-1 border border-white/20 hover:border-gold/40 bg-white/5 hover:bg-white/10">
-              <Phone className="w-4 h-4 text-gold" />
-              {t.cta.phone}
-            </a>
-          </div>
-        </motion.div>
+  return (
+    <section className="relative py-24 overflow-hidden" style={{ background: '#070E1A' }}>
+      <div className="container-custom relative z-10 text-center">
+        <h2 className="font-almarai text-3xl md:text-4xl font-bold text-white mb-4">{content.title}</h2>
+        <p className="text-white/50 max-w-xl mx-auto mb-10">{content.subtitle}</p>
+        <div className="flex flex-wrap items-center justify-center gap-4">
+          <Link href="/contact" className="px-8 py-4 rounded-xl font-bold bg-gold text-secondary hover:shadow-gold-lg transition-all">
+            {content.button}
+          </Link>
+          <a href="tel:0702060323" className="px-8 py-4 rounded-xl font-bold text-white border border-white/20 hover:bg-white/5 transition-all">
+            {content.phone}
+          </a>
+        </div>
       </div>
     </section>
   )
@@ -498,17 +370,16 @@ function CTASection({ t }: { t: any }) {
 // ─── Main ──────────────────────────────────────────────────────────────────────
 export default function HomePage() {
   const { language } = useLanguage()
-  const t = content[language as keyof typeof content] || content.ar
 
   return (
     <main className="min-h-screen">
       <Header />
-      <HeroSlider t={t} />
-      <StatsBar stats={t.about.stats} />
-      <ProjectsSection t={t} />
-      <AboutSection t={t} />
-      <ServicesSection t={t} />
-      <CTASection t={t} />
+      <HeroSlider />
+      <StatsBar language={language} />
+      <ProjectsSection />
+      <AboutSection />
+      <ServicesSection />
+      <CTASection />
       <Footer />
     </main>
   )

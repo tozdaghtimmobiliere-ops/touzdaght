@@ -1,282 +1,167 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { ChevronLeft, ChevronRight, Download } from 'lucide-react'
+import { useState, useEffect, useCallback } from 'react'
+import { ChevronLeft, ChevronRight, X, ZoomIn, Download, Maximize2 } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
-// ─── Config des plans par projet ───────────────────────────────────────────────
-const PROJECT_PLANS: Record<string, { src: string; badge: string }[]> = {
-  najma: [],
-  tilila: [
-    { src: '/images/tilila/plans/plan-tilila-1.png', badge: 'المخطط العام' },
-    { src: '/images/tilila/plans/plan-tilila-2.png', badge: 'مخطط الطابق الأول' },
-    { src: '/images/tilila/plans/plan-tilila-3.png', badge: 'مخطط الطابق الثاني' },
-    { src: '/images/tilila/plans/plan-terrasse-tilila.png', badge: 'مخطط السطح / التيراس' },
-  ],
-  'ain-zarqa': [
-    { src: '/images/ain-zarqa/plans/plan-ainzarqa-1.png', badge: 'المخطط العام' },
-    { src: '/images/ain-zarqa/plans/plan-ainzarqa-2.png', badge: 'الطابق السفلي' },
-    { src: '/images/ain-zarqa/plans/plan-ainzarqa-3.png', badge: 'الطابق الأول' },
-    { src: '/images/ain-zarqa/plans/plan-ainzarqa-4.png', badge: 'الطابق الثاني' },
-    { src: '/images/ain-zarqa/plans/plan-terrasse-ainzarqa.png', badge: 'مخطط السطح / التيراس' },
-  ],
-  gelmim: [
-    { src: '/images/gelmim/plans/plan-gelmim-1.png', badge: 'المخطط العام' },
-    { src: '/images/gelmim/plans/plan-gelmim-2.png', badge: 'مخطط الطوابق' },
-    { src: '/images/gelmim/plans/plan-gelmim-3.png', badge: 'مخطط الطابق الأخير' },
-    { src: '/images/gelmim/plans/plan-terrasse-gelmim.png', badge: 'مخطط السطح / التيراس' },
-  ],
-  touhmo: [
-    { src: '/images/touhmo/plans/plan-touhmo-1.png', badge: 'المخطط العام' },
-    { src: '/images/touhmo/plans/plan-touhmo-2.png', badge: 'مخطط الطابق الأرضي' },
-    { src: '/images/touhmo/plans/plan-touhmo-3.png', badge: 'مخطط الطابق الأول' },
-    { src: '/images/touhmo/plans/plan-touhmo-4.png', badge: 'مخطط الطابق الثاني' },
-    { src: '/images/touhmo/plans/plan-terrasse-touhmo.png', badge: 'مخطط السطح / التيراس' },
-  ],
-  'hay-ta9adom': [
-    { src: '/images/hay-ta9adom/plans/plan-hayta9adom-1.png', badge: 'المخطط العام' },
-    { src: '/images/hay-ta9adom/plans/plan-hayta9adom-2.png', badge: 'مخطط الطابق الأرضي' },
-    { src: '/images/hay-ta9adom/plans/plan-hayta9adom-3.png', badge: 'مخطط الطابق الأول' },
-  ],
+// ─── Image Components with Quality Filters ─────────────────────────────────────
+function HighQualityImage({ src, alt, className }: { src: string, alt: string, className?: string }) {
+  return (
+    <div className="relative w-full h-full overflow-hidden">
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        className={cn(
+          "w-full h-full object-cover transition-all duration-700",
+          "render-4k", // Custom class for sharpness
+          className
+        )}
+        style={{
+          filter: 'contrast(1.15) saturate(1.1) brightness(1.03)',
+          imageRendering: 'auto'
+        }}
+      />
+      {/* Subtle overlay for depth */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
+    </div>
+  )
 }
 
-const PROJECT_CHANTIER: Record<string, string[]> = {
-  tilila: [
-    '/images/tilila/chantier/chantier-tilila-1.png',
-    '/images/tilila/chantier/chantier-tilila-2.png',
-    '/images/tilila/chantier/chantier-tilila-3.png',
-  ],
-  'ain-zarqa': [
-    '/images/ain-zarqa/chantier/chantier-ainzarqa-1.png',
-    '/images/ain-zarqa/chantier/chantier-ainzarqa-2.png',
-    '/images/ain-zarqa/chantier/chantier-ainzarqa-3.png',
-  ],
-  gelmim: [
-    '/images/gelmim/chantier/chantier-gelmim-1.png',
-    '/images/gelmim/chantier/chantier-gelmim-2.png',
-    '/images/gelmim/chantier/chantier-gelmim-3.png',
-  ],
-  touhmo: [
-    '/images/touhmo/chantier/chantier-touhmo-1.png',
-    '/images/touhmo/chantier/chantier-touhmo-2.png',
-    '/images/touhmo/chantier/chantier-touhmo-3.png',
-  ],
-  'hay-ta9adom': [
-    '/images/hay-ta9adom/chantier/chantier-hayta9adom-1.png',
-    '/images/hay-ta9adom/chantier/chantier-hayta9adom-2.png',
-    '/images/hay-ta9adom/chantier/chantier-hayta9adom-3.png',
-  ],
+// ─── Modal Preview ─────────────────────────────────────────────────────────────
+function ImageModal({ src, onClose }: { src: string, onClose: () => void }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[200] flex items-center justify-center bg-black/95 backdrop-blur-xl p-4"
+      onClick={onClose}
+    >
+      <button
+        className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors"
+        onClick={onClose}
+      >
+        <X size={32} />
+      </button>
+      <motion.img
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        src={src}
+        alt="Preview"
+        className="max-w-full max-h-full object-contain rounded-lg shadow-2xl shadow-gold/10"
+        onClick={(e) => e.stopPropagation()}
+      />
+    </motion.div>
+  )
 }
 
-// ─── Slider de base ────────────────────────────────────────────────────────────
+// ─── Base Slider (Improved) ───────────────────────────────────────────────────
 function BaseSlider({ slides }: { slides: { src: string; badge?: string }[] }) {
   const [index, setIndex] = useState(0)
+  const [showModal, setShowModal] = useState(false)
+
+  const next = useCallback(() => setIndex((prev) => (prev + 1) % slides.length), [slides.length])
+  const prev = useCallback(() => setIndex((prev) => (prev - 1 + slides.length) % slides.length), [slides.length])
 
   useEffect(() => {
     if (slides.length <= 1) return
-    const timer = setInterval(() => {
-      setIndex((prev: number) => (prev + 1) % slides.length)
-    }, 4000)
+    const timer = setInterval(next, 5000)
     return () => clearInterval(timer)
-  }, [slides.length])
-
-  useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') setIndex((prev: number) => (prev + 1) % slides.length)
-      if (e.key === 'ArrowRight') setIndex((prev: number) => (prev - 1 + slides.length) % slides.length)
-    }
-    window.addEventListener('keydown', handleKey)
-    return () => window.removeEventListener('keydown', handleKey)
-  }, [slides.length])
-
-  const prev = () => setIndex((prev: number) => (prev - 1 + slides.length) % slides.length)
-  const next = () => setIndex((prev: number) => (prev + 1) % slides.length)
+  }, [slides.length, next])
 
   if (slides.length === 0) return null
 
   return (
-    <div className="relative rounded-2xl overflow-hidden shadow-xl" style={{ background: '#f8f9fa' }}>
-      <div className="plan-slider-container">
-        {slides.map((slide, i) => (
-          <div
-            key={i}
-            className="absolute inset-0 transition-opacity duration-700"
-            style={{ opacity: index === i ? 1 : 0, zIndex: index === i ? 1 : 0 }}
+    <div className="relative w-full max-w-[1200px] mx-auto group">
+      <div className="relative aspect-[16/9] md:aspect-[21/9] rounded-3xl overflow-hidden shadow-2xl border border-white/10 bg-secondary/5">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute inset-0 cursor-zoom-in"
+            onClick={() => setShowModal(true)}
           >
-            <img
-              src={slide.src}
-              alt={slide.badge || `slide ${i + 1}`}
-              className="plan-slide-img img-4k"
-            />
-            {slide.badge && (
-              <div className="absolute top-4 right-4 z-10 px-4 py-2 rounded-xl text-sm font-bold shadow-lg"
-                style={{ background: 'linear-gradient(135deg, #C9A84C, #A8863A)', color: '#0A1628' }}>
-                {slide.badge}
+            <HighQualityImage src={slides[index].src} alt={slides[index].badge || "Real Estate"} />
+
+            {slides[index].badge && (
+              <div className="absolute top-6 right-6 z-10 px-6 py-2.5 rounded-2xl text-xs font-black tracking-widest shadow-xl backdrop-blur-md bg-black/40 border border-white/20 text-gold uppercase">
+                {slides[index].badge}
               </div>
             )}
-          </div>
-        ))}
+
+            <div className="absolute bottom-6 left-6 z-10 text-white/50 text-xs font-mono">
+              {String(index + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}
+            </div>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Hover Controls */}
+        <div className="absolute inset-0 flex items-center justify-between px-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+          <button
+            onClick={(e) => { e.stopPropagation(); prev(); }}
+            className="w-14 h-14 rounded-full bg-white/10 hover:bg-gold backdrop-blur-xl border border-white/20 flex items-center justify-center transition-all duration-300 hover:scale-110 pointer-events-auto shadow-xl"
+          >
+            <ChevronRight className="w-6 h-6 text-white group-hover:text-secondary" />
+          </button>
+          <button
+            onClick={(e) => { e.stopPropagation(); next(); }}
+            className="w-14 h-14 rounded-full bg-white/10 hover:bg-gold backdrop-blur-xl border border-white/20 flex items-center justify-center transition-all duration-300 hover:scale-110 pointer-events-auto shadow-xl"
+          >
+            <ChevronLeft className="w-6 h-6 text-white group-hover:text-secondary" />
+          </button>
+        </div>
+
+        {/* Dots */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+          {slides.map((_, i) => (
+            <button
+              key={i}
+              onClick={(e) => { e.stopPropagation(); setIndex(i); }}
+              className={cn(
+                "h-1.5 rounded-full transition-all duration-500",
+                index === i ? "bg-gold w-8 shadow-[0_0_10px_#C9A84C]" : "bg-white/30 w-1.5 hover:bg-white/60"
+              )}
+            />
+          ))}
+        </div>
       </div>
 
-      {slides.length > 1 && (
-        <>
-          <button
-            onClick={prev}
-            className="slider-arrow right-3 gold-glow"
-            style={{ right: '12px' }}
-          >
-            <ChevronRight className="w-5 h-5 text-secondary" />
-          </button>
-          <button
-            onClick={next}
-            className="slider-arrow left-3 gold-glow"
-            style={{ left: '12px' }}
-          >
-            <ChevronLeft className="w-5 h-5 text-secondary" />
-          </button>
-
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
-            {slides.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setIndex(i)}
-                className={cn(
-                  'h-2 rounded-full transition-all duration-300',
-                  index === i ? 'bg-gold w-7 shadow-gold' : 'bg-white/60 w-2 hover:bg-white'
-                )}
-              />
-            ))}
-          </div>
-
-          <div className="absolute bottom-4 right-4 text-white text-xs z-20 font-bold px-3 py-1 rounded-lg"
-            style={{ background: 'rgba(10,22,40,0.6)', backdropFilter: 'blur(8px)' }}>
-            {index + 1} / {slides.length}
-          </div>
-        </>
-      )}
+      <AnimatePresence>
+        {showModal && <ImageModal src={slides[index].src} onClose={() => setShowModal(false)} />}
+      </AnimatePresence>
     </div>
   )
 }
 
-// ─── Slider Najma Spécial ──────────────────────────────────────────────────────
-function NajmaSlider({ category, type }: { category: 'plans' | 'chantier'; type?: 'immeuble' | 'terrain' }) {
+// ─── Static image lists (Vercel can't reliably scan public/ at runtime) ───────
+const TERRAIN_PROGRESS_IMAGES = [
+  '/m/WhatsApp%20Image%202026-04-12%20at%2012.14.44.jpeg',
+  '/m/WhatsApp%20Image%202026-04-12%20at%2012.14.44%20(1).jpeg',
+  '/m/WhatsApp%20Image%202026-04-12%20at%2012.14.44%20(3).jpeg',
+  '/m/WhatsApp%20Image%202026-04-12%20at%2012.14.44%20(5).jpeg',
+  '/m/WhatsApp%20Image%202026-04-12%20at%2012.14.45%20(1).jpeg',
+  '/m/WhatsApp%20Image%202026-04-12%20at%2012.14.45%20(2).jpeg',
+  '/m/WhatsApp%20Image%202026-04-14%20at%2018.41.30%20(1).jpeg',
+  '/m/WhatsApp%20Image%202026-04-14%20at%2018.41.30%20(2).jpeg',
+]
 
-  // ── Immeuble uniquement ──
-  if (type === 'immeuble') {
-    const slides = category === 'plans'
-      ? [
-          { src: '/images/najma/immeuble/plans/plan-globalnajma.png', badge: 'المخطط العام' },
-          { src: '/images/najma/immeuble/plans/plan-etage0najma.png', badge: 'مخطط الطابق السفلي' },
-          { src: '/images/najma/immeuble/plans/plan-etage1najma.png', badge: 'مخطط الطابق الأول' },
-          { src: '/images/najma/immeuble/plans/plan-etage2najma.png', badge: 'مخطط الطابق الثاني' },
-          { src: '/images/najma/immeuble/plans/plan-etage3najma.png', badge: 'مخطط الطابق الثالث' },
-          { src: '/images/najma/immeuble/plans/plan-etage4najma.png', badge: 'مخطط الطابق الرابع' },
-        ]
-      : [
-          { src: '/images/najma/immeuble/chantier/chantier-najma-1.png', badge: '' },
-          { src: '/images/najma/immeuble/chantier/chantier-najma-2.png', badge: '' },
-          { src: '/images/najma/immeuble/chantier/chantier-najma-3.png', badge: '' },
-        ]
-    return <BaseSlider slides={slides} />
-  }
+const IMMEUBLE_PROGRESS_IMAGES = [
+  '/m/new/WhatsApp%20Image%202026-04-14%20at%2018.41.04.jpeg',
+  '/m/new/WhatsApp%20Image%202026-04-14%20at%2018.41.05.jpeg',
+  '/m/new/WhatsApp%20Image%202026-04-14%20at%2018.41.05%20(1).jpeg',
+  '/m/new/WhatsApp%20Image%202026-04-14%20at%2018.41.05%20(2).jpeg',
+  '/m/new/WhatsApp%20Image%202026-04-14%20at%2018.41.05%20(3).jpeg',
+  '/m/new/WhatsApp%20Image%202026-04-14%20at%2018.41.05%20(4).jpeg',
+  '/m/new/WhatsApp%20Image%202026-04-14%20at%2018.41.05%20(5).jpeg',
+]
 
-  // ── Terrain uniquement ──
-  if (type === 'terrain') {
-    if (category === 'chantier') {
-      return (
-        <div className="bg-background-alt rounded-xl p-8 text-center">
-          <p className="text-text-muted text-lg font-semibold">لم تبدأ الأشغال بعد</p>
-        </div>
-      )
-    }
-    const slides = [
-      { src: '/images/najma/terrain/plans/plan-terrain-2d.png', badge: 'خطة التجزئة 2D' },
-      { src: '/images/najma/terrain/plans/plan-terrain-3d.png', badge: 'خطة التجزئة 3D' },
-    ]
-    return (
-      <div className="space-y-6">
-        <BaseSlider slides={slides} />
-        <a
-          href="/images/najma/terrain/plans/plan_terrain.pdf"
-          download="plan_terrain_najma.pdf"
-          className="inline-flex items-center gap-2 bg-primary text-white px-5 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors"
-        >
-          <Download className="w-5 h-5" />
-          تحميل مخطط التجزئة PDF
-        </a>
-      </div>
-    )
-  }
-
-  // ── Sans type : afficher immeuble + terrain ensemble (page générale najma) ──
-  const immeubleSlides = category === 'plans'
-    ? [
-        { src: '/images/najma/immeuble/plans/plan-globalnajma.png', badge: 'المخطط العام' },
-        { src: '/images/najma/immeuble/plans/plan-etage0najma.png', badge: 'مخطط الطابق السفلي' },
-        { src: '/images/najma/immeuble/plans/plan-etage1najma.png', badge: 'مخطط الطابق الأول' },
-        { src: '/images/najma/immeuble/plans/plan-etage2najma.png', badge: 'مخطط الطابق الثاني' },
-        { src: '/images/najma/immeuble/plans/plan-etage3najma.png', badge: 'مخطط الطابق الثالث' },
-        { src: '/images/najma/immeuble/plans/plan-etage4najma.png', badge: 'مخطط الطابق الرابع' },
-      ]
-    : [
-        { src: '/images/najma/immeuble/chantier/chantier-najma-1.png', badge: '' },
-        { src: '/images/najma/immeuble/chantier/chantier-najma-2.png', badge: '' },
-        { src: '/images/najma/immeuble/chantier/chantier-najma-3.png', badge: '' },
-      ]
-
-  const terrainSlides = category === 'plans'
-    ? [
-        { src: '/images/najma/terrain/plans/plan-terrain-2d.png', badge: 'خطة التجزئة 2D' },
-        { src: '/images/najma/terrain/plans/plan-terrain-3d.png', badge: 'خطة التجزئة 3D' },
-      ]
-    : []
-
-  return (
-    <div className="space-y-8">
-      <div>
-        <h3 className="font-almarai font-bold text-xl text-text-primary mb-4 flex items-center gap-2">
-          <span className="w-2 h-6 bg-primary rounded-full inline-block" />
-          {category === 'plans' ? 'مخططات العمارة' : 'تقدم أشغال العمارة'}
-        </h3>
-        <BaseSlider slides={immeubleSlides} />
-      </div>
-
-      {category === 'plans' && (
-        <div>
-          <h3 className="font-almarai font-bold text-xl text-text-primary mb-4 flex items-center gap-2">
-            <span className="w-2 h-6 bg-accent rounded-full inline-block" />
-            مخططات التجزئة
-          </h3>
-          <BaseSlider slides={terrainSlides} />
-          <div className="mt-4">
-            <a
-              href="/images/najma/terrain/plans/plan_terrain.pdf"
-              download="plan_terrain_najma.pdf"
-              className="inline-flex items-center gap-2 bg-primary text-white px-5 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors"
-            >
-              <Download className="w-5 h-5" />
-              تحميل مخطط التجزئة PDF
-            </a>
-          </div>
-        </div>
-      )}
-
-      {category === 'chantier' && (
-        <div>
-          <h3 className="font-almarai font-bold text-xl text-text-primary mb-4 flex items-center gap-2">
-            <span className="w-2 h-6 bg-accent rounded-full inline-block" />
-            تقدم أشغال التجزئة
-          </h3>
-          <div className="bg-background-alt rounded-xl p-8 text-center">
-            <p className="text-text-muted text-lg font-semibold">لم تبدأ الأشغال بعد</p>
-          </div>
-        </div>
-      )}
-    </div>
-  )
-}
-
-// ─── Interface & Export principal ──────────────────────────────────────────────
+// ─── ImageSlider Main Component ──────────────────────────────────────────────
 interface ImageSliderProps {
   images: any[]
   projectSlug?: string
@@ -285,31 +170,99 @@ interface ImageSliderProps {
 }
 
 export function ImageSlider({ images, projectSlug, category = 'plans', type }: ImageSliderProps) {
-  if (projectSlug === 'najma') {
+  const [modalImage, setModalImage] = useState<string | null>(null)
+
+  const getSlides = () => {
+    // ── تقدم الأشغال tabs: load real construction photos ─────────────────────
+    if (projectSlug === 'najma' && category === 'chantier') {
+      const srcs = type === 'terrain' ? TERRAIN_PROGRESS_IMAGES : IMMEUBLE_PROGRESS_IMAGES
+      return srcs.map(src => ({ src }))
+    }
+
+    // ── Plan tabs: architectural plans ───────────────────────────────────────
+    if (projectSlug === 'najma') {
+      if (type === 'immeuble') {
+        return [
+          { src: '/images/najma/immeuble/plans/plan-globalnajma.png', badge: 'المخطط العام' },
+          { src: '/images/najma/immeuble/plans/plan-etage0najma.png', badge: 'مخطط الطابق السفلي' },
+          { src: '/images/najma/immeuble/plans/plan-etage1najma.png', badge: 'مخطط الطابق الأول' },
+        ]
+      }
+      if (type === 'terrain') {
+        return [
+          { src: '/images/najma/terrain/plans/plan-terrain-2d.png', badge: '2D Plan' },
+          { src: '/images/najma/terrain/plans/plan-terrain-3d.png', badge: '3D Plan' },
+        ]
+      }
+    }
+
+    return images.length > 0 ? images.map(img => ({ src: img.url, badge: img.label })) : []
+  }
+
+  const slides = getSlides()
+
+  // ─── Premium 4K photo grid for تقدم الأشغال ─────────────────────────────
+  if (category === 'chantier' && projectSlug === 'najma') {
+    if (slides.length === 0) {
+      return (
+        <div className="text-center py-20 bg-secondary/5 rounded-3xl border border-dashed border-white/10">
+          <p className="text-secondary/40 font-almarai tracking-wider text-sm">لا توجد صور متاحة</p>
+        </div>
+      )
+    }
     return (
-      <div className="bg-white rounded-xl p-6 md:p-8">
-        <NajmaSlider category={category} type={type} />
+      <div className="space-y-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          {slides.map((slide, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.04 }}
+              className="group relative aspect-[4/3] rounded-2xl overflow-hidden cursor-zoom-in bg-secondary/5
+                         shadow-md hover:shadow-2xl hover:shadow-gold/10 transition-all duration-500
+                         border border-white/5 hover:border-gold/20"
+              onClick={() => setModalImage(slide.src)}
+            >
+              <HighQualityImage
+                src={slide.src}
+                alt={`تقدم الأشغال ${i + 1}`}
+                className="group-hover:scale-110 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-all duration-500" />
+              <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="w-9 h-9 rounded-full bg-gold/95 backdrop-blur-md flex items-center justify-center shadow-lg">
+                  <Maximize2 size={15} className="text-secondary" />
+                </div>
+              </div>
+              <div className="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="text-[10px] font-bold text-white/70 font-mono">
+                  {String(i + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}
+                </span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <AnimatePresence>
+          {modalImage && <ImageModal src={modalImage} onClose={() => setModalImage(null)} />}
+        </AnimatePresence>
       </div>
     )
   }
 
-  const localSlides = projectSlug && category === 'plans'
-    ? PROJECT_PLANS[projectSlug] || []
-    : projectSlug && category === 'chantier'
-    ? (PROJECT_CHANTIER[projectSlug] || []).map((src) => ({ src }))
-    : images.map((img) => ({ src: img.url, badge: img.label }))
-
-  if (localSlides.length === 0) {
+  if (slides.length === 0) {
     return (
-      <div className="bg-white rounded-xl p-12 text-center">
-        <p className="text-text-muted">لا توجد صور متاحة</p>
+      <div className="text-center py-20 bg-secondary/5 rounded-3xl border border-dashed border-white/10">
+        <p className="text-secondary/40 font-almarai tracking-wider text-sm">لا توجد صور متاحة</p>
       </div>
     )
   }
 
   return (
-    <div className="bg-white rounded-xl p-6 md:p-8">
-      <BaseSlider slides={localSlides} />
+    <div className="overflow-hidden">
+      <BaseSlider slides={slides} />
     </div>
   )
 }

@@ -36,7 +36,7 @@ const content = {
 }
 
 const projectImages: Record<string, string> = {
-  'najma': '/images/najma/najma.png',
+  'najma': '/images/najma/najma-thumbnail.jpg',
   'gelmim': '/images/gelmim/gelmim.png',
   'ain-zarqa': '/images/ain-zarqa/ain-zarqa.png',
   'tilila': '/images/tilila/tilila.png',
