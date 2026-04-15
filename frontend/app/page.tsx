@@ -160,7 +160,7 @@ function ProjectsSection() {
           <div className="gold-line w-12 mx-auto mt-4" />
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-[1600px] mx-auto">
           {FEATURED_PROJECTS.map((project, index) => (
             <motion.div key={project.slug}
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
