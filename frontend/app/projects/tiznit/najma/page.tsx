@@ -14,7 +14,7 @@ const content = {
     subtitle: 'اختر القسم الذي تريد الاطلاع عليه',
     immeuble: {
       title: 'الشقق السكنية',
-      desc: 'استكشف الشقق السكنية الفاخرة المتاحة وتفاصيلها',
+      desc: 'شقق اقتصادية واجتماعية في موقع متميز بقلب مدينة تيزنيت',
     },
     terrain: {
       title: 'البقع الأرضية',
@@ -61,7 +61,7 @@ export default function NajmaSelectionPage() {
       <section className="relative pt-[70px] min-h-[40vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-dark-light">
            <img 
-              src="/images/najma/najma-thumbnail.jpg" 
+              src="/images/najma/najma.png" 
               className="w-full h-full object-cover opacity-30 blur-sm scale-110" 
               alt="Project Background"
            />
@@ -130,11 +130,9 @@ export default function NajmaSelectionPage() {
                 <div className="project-card-luxury bg-white group-hover:-translate-y-4 transition-all duration-500 overflow-hidden">
                   <div className="aspect-[4/3] relative flex items-center justify-center bg-cream/50 overflow-hidden">
                     <div className="absolute inset-0 bg-secondary/5 group-hover:bg-secondary/10 transition-colors duration-500" />
-                    <img 
-                      src="/images/najma/najma-thumbnail.jpg" 
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-                      alt={t('projects.najma.terrains')}
-                    />
+                    <div className="w-24 h-24 rounded-full bg-gold/20 flex items-center justify-center shadow-gold transition-transform duration-500 group-hover:scale-110">
+                      <MapPin className="w-10 h-10 text-gold" />
+                    </div>
                   </div>
                   <div className="p-8 text-center">
                     <h2 className="font-almarai text-2xl md:text-3xl font-black text-secondary mb-4 group-hover:text-gold transition-colors duration-300">
