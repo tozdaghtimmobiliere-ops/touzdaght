@@ -10,7 +10,7 @@ import { Building2, MapPin, ArrowLeft } from 'lucide-react'
 
 const content = {
   ar: {
-    title: 'مشروع تجزئة النجمة',
+    title: 'مشروع تجزءة و شقق النجمة',
     subtitle: 'اختر القسم الذي تريد الاطلاع عليه',
     terrain: {
       title: 'البقع الأرضية',
@@ -21,7 +21,7 @@ const content = {
       desc: 'شقق اقتصادية واجتماعية في موقع متميز بقلب مدينة تيزنيت',
     },
     offices: {
-      title: 'مكاتب إدارية',
+      title: 'مكاتب ادارية - طريق اكلو',
       desc: 'مكاتب إدارية بمساحات متميزة وتشطيبات عصرية لتناسب احتياجاتكم',
     },
     city: 'تيزنيت',
@@ -188,7 +188,7 @@ export default function NajmaSelectionPage() {
                     </h2>
                     <p className="font-cairo text-secondary/60 text-lg leading-relaxed mb-6 dir-rtl">
                       الرابط بالأقمار الصناعية : 
-                      <span className="block text-sm text-gold mt-2 break-all font-sans">
+                      <span className="block text-sm text-blue-600 mt-2 break-all font-sans underline">
                         https://maps.app.goo.gl/fXcf9BPCcLGGPAeo7?g_st=aw
                       </span>
                     </p>

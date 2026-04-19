@@ -80,8 +80,8 @@ function ProjectCard({ project, types, t }: { project: any; types: any; t: any }
           <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 via-secondary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           
           <div className="absolute top-4 right-4 z-10">
-            <span className={cn('px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg',
-              project.status === 'active' ? 'bg-gold text-secondary' : 'bg-secondary/80 text-white backdrop-blur-sm border border-white/10')}>
+            <span className={cn('px-4 py-2 rounded-full text-[12px] font-black uppercase tracking-widest shadow-lg',
+              project.status === 'active' ? 'bg-accent text-white' : 'bg-secondary/80 text-white backdrop-blur-sm border border-white/10')}>
               {project.status === 'active' ? t.filter.active : t.filter.completed}
             </span>
           </div>
@@ -94,8 +94,8 @@ function ProjectCard({ project, types, t }: { project: any; types: any; t: any }
         </div>
         
         <div className="p-6 flex-grow flex flex-col">
-          <div className="flex items-center gap-2 text-gold text-[10px] font-black uppercase tracking-[0.2em] mb-3">
-            <MapPin className="w-3.5 h-3.5" />
+          <div className="flex items-center gap-2 text-accent text-[12px] font-black uppercase tracking-[0.2em] mb-3">
+            <MapPin className="w-4 h-4" />
             {project.city.name}
           </div>
           

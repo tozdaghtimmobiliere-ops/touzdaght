@@ -4,6 +4,8 @@ import './globals.css'
 import { Providers } from '@/components/providers'
 import { SplashScreen } from '@/components/ui/splash-screen'
 
+const baseUrl = process.env.NEXTAUTH_URL || 'https://tozdaght.ma'
+
 const cairo = Cairo({
   subsets: ['arabic', 'latin'],
   weight: ['400', '600', '700', '800'],
@@ -19,7 +21,8 @@ const almarai = Almarai({
 })
 
 export const metadata: Metadata = {
-  title: 'توزدغت للعقار والبناء | Tozdaght Immobilière',
+  metadataBase: new URL('https://tozdaght.ma'),
+  title: 'توزدغت للعقار والبناء | Tozdaght (v22)',
   description: 'شركة متخصصة في مجال العقار والبناء في المغرب - تيزنيت، أكادير، أيت ملول',
   keywords: 'عقار, بناء, تيزنيت, أكادير, المغرب, شقق, أراضي, تجزئة',
   authors: [{ name: 'Tozdaght Immobilière' }],
@@ -27,6 +30,7 @@ export const metadata: Metadata = {
     title: 'توزدغت للعقار والبناء',
     description: 'شركة متخصصة في مجال العقار والبناء في المغرب',
     type: 'website',
+    url: 'https://tozdaght.ma',
     locale: 'ar_MA',
   },
 }

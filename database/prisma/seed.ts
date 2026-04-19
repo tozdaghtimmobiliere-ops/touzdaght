@@ -70,7 +70,7 @@ async function main() {
       where: { slug: 'najma' },
       update: {},
       create: {
-        name: 'تجزئة النجمة',
+        name: 'تجزءة و شقق النجمة',
         slug: 'najma',
         cityId: tiznit.id,
         type: 'lotissement',
@@ -86,7 +86,7 @@ async function main() {
       where: { slug: 'gelmim' },
       update: {},
       create: {
-        name: 'شقق طريق كلميم',
+        name: 'شقق حي سيدي معروف طريق كلميم',
         slug: 'gelmim',
         cityId: tiznit.id,
         type: 'residence',
@@ -134,7 +134,7 @@ async function main() {
       where: { slug: 'touhmo' },
       update: {},
       create: {
-        name: 'توهمو',
+        name: 'شقق حي المزار - توهمو',
         slug: 'touhmo',
         cityId: aitMelloul.id,
         type: 'house',
@@ -150,7 +150,7 @@ async function main() {
       where: { slug: 'hay-ta9adom' },
       update: {},
       create: {
-        name: 'حي التقدم',
+        name: 'شقق حي التقدم',
         slug: 'hay-ta9adom',
         cityId: l9li3a.id,
         type: 'house',

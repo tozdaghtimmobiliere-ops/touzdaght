@@ -141,6 +141,9 @@ function BaseSlider({ slides }: { slides: { src: string; badge?: string }[] }) {
 
 // ─── Static image lists (Vercel can't reliably scan public/ at runtime) ───────
 const TERRAIN_PROGRESS_IMAGES = [
+  '/m/terrain-progress-1.jpg',
+  '/m/terrain-progress-2.jpg',
+  '/m/terrain-progress-3.jpg',
   '/m/WhatsApp%20Image%202026-04-12%20at%2012.14.44.jpeg',
   '/m/WhatsApp%20Image%202026-04-12%20at%2012.14.44%20(1).jpeg',
   '/m/WhatsApp%20Image%202026-04-12%20at%2012.14.44%20(3).jpeg',
@@ -152,6 +155,7 @@ const TERRAIN_PROGRESS_IMAGES = [
 ]
 
 const IMMEUBLE_PROGRESS_IMAGES = [
+  '/m/immeuble-progress-10.jpg',
   '/images/najma/immeuble/progress/1.jpg',
   '/images/najma/immeuble/progress/2.jpg',
   '/images/najma/immeuble/progress/3.jpg',
