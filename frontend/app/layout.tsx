@@ -24,6 +24,20 @@ export const metadata: Metadata = {
   description: 'شركة توزدغت (Tozdaght) المتخصصة في العقار والبناء. شقق متميزة وبقع أرضية للبيع في تيزنيت، أكادير، وأيت ملول. التزام بالثقة والجودة في كل مشروع عقاري.',
   keywords: 'Tozdaght, توزدغت, tozdagh, tozdaght.ma, tozdagt, touzdaght, Tozdaght Immobilière, عقارات تيزنيت, شقق للبيع تيزنيت, بقع أرضية تيزنيت, إقامة النجمة',
   authors: [{ name: 'Tozdaght Immobilière' }],
+  alternates: {
+    canonical: 'https://tozdaght.ma',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   openGraph: {
     title: 'توزدغت للعقار والبناء - جودة ومصداقية',
     description: 'شركة متخصصة في تطوير المشاريع العقارية السكنية والتجارية في المغرب.',
