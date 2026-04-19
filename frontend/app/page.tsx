@@ -42,7 +42,7 @@ function HeroSlider() {
       {slides.map((slide, index) => (
         <div key={slide.id} className="absolute inset-0 transition-opacity duration-1000"
           style={{ opacity: selectedIndex === index ? 1 : 0, zIndex: selectedIndex === index ? 1 : 0 }}>
-          <img src={slide.src} alt={`slide ${index}`}
+          <img src={slide.src} alt={`Tozdaght Immobilière Project Slide ${index}`}
             className="w-full h-full object-cover render-4k" />
           <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
         </div>
@@ -385,6 +385,15 @@ export default function HomePage() {
       <AboutSection />
       <ServicesSection />
       <CTASection />
+      {/* SEO Brand Dominance Section (Hidden from users, visible to crawlers) */}
+      <section className="sr-only">
+        <h2>Tozdaght Immobilière - توزدغت للعقار والبناء</h2>
+        <p>
+          شركة توزدغت المتخصصة في العقار والبناء تقدم لكم أفضل الشقق والبقع الأرضية في تيزنيت.
+          Tozdaght is the leading real estate developer in Tiznit and Souss region.
+          Whether you search for Tozdaght or Tozdagh, our projects like Residence An-Najma are designed for you.
+        </p>
+      </section>
       <Footer />
     </main>
   )

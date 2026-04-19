@@ -20,9 +20,9 @@ const almarai = Almarai({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://tozdaght.ma'),
-  title: 'توزدغت للعقار والبناء | شقق وبقع أرضية للبيع في تيزنيت والمغرب',
-  description: 'اكتشف أفضل المشاريع العقارية مع توزدغت. شقق سكنية عصرية، بقع أرضية مجهزة، ومكاتب إدارية في تيزنيت، أكادير، وأيت ملول. بنينا ثقتكم بجودة إنجازاتنا.',
-  keywords: 'Tozdaght, توزدغت, tozdagh, tozdaght.ma, tozdagt, touzdaght, عقارات تيزنيت, شقق للبيع تيزنيت, إقامة النجمة',
+  title: 'Tozdaght (توزدغت) | توزدغت للعقار والبناء - شقق وبقع أرضية في تيزنيت',
+  description: 'شركة توزدغت (Tozdaght) المتخصصة في العقار والبناء. شقق متميزة وبقع أرضية للبيع في تيزنيت، أكادير، وأيت ملول. التزام بالثقة والجودة في كل مشروع عقاري.',
+  keywords: 'Tozdaght, توزدغت, tozdagh, tozdaght.ma, tozdagt, touzdaght, Tozdaght Immobilière, عقارات تيزنيت, شقق للبيع تيزنيت, بقع أرضية تيزنيت, إقامة النجمة',
   authors: [{ name: 'Tozdaght Immobilière' }],
   openGraph: {
     title: 'توزدغت للعقار والبناء - جودة ومصداقية',
