@@ -80,8 +80,8 @@ function ProjectCard({ project, types, t }: { project: any; types: any; t: any }
           <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 via-secondary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           
           <div className="absolute top-4 right-4 z-10">
-            <span className={cn('px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg',
-              project.status === 'active' ? 'bg-gold text-secondary' : 'bg-secondary/80 text-white backdrop-blur-sm border border-white/10')}>
+            <span className={cn('px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-md',
+              project.status === 'active' ? 'bg-blue-600 text-white' : 'bg-secondary/80 text-white backdrop-blur-sm border border-white/10')}>
               {project.status === 'active' ? t.filter.active : t.filter.completed}
             </span>
           </div>
@@ -94,8 +94,8 @@ function ProjectCard({ project, types, t }: { project: any; types: any; t: any }
         </div>
         
         <div className="p-6 flex-grow flex flex-col">
-          <div className="flex items-center gap-2 text-gold text-[10px] font-black uppercase tracking-[0.2em] mb-3">
-            <MapPin className="w-3.5 h-3.5" />
+          <div className="flex items-center gap-2 text-blue-500 text-sm font-bold uppercase tracking-wider mb-3">
+            <MapPin className="w-4 h-4" />
             {project.city.name}
           </div>
           
@@ -115,7 +115,7 @@ function ProjectCard({ project, types, t }: { project: any; types: any; t: any }
               {project._count?.buildings > 0 ? `${project._count.buildings} Units`
                 : project._count?.parcels > 0 ? `${project._count.parcels} Plots` : 'Units'}
             </div>
-            <span className="text-gold font-black text-[10px] uppercase tracking-widest flex items-center gap-2 group-hover:gap-3 transition-all">
+            <span className="text-blue-500 font-bold text-[10px] uppercase tracking-widest flex items-center gap-2 group-hover:gap-3 transition-all">
               {t.viewDetails} <ArrowLeft className="w-4 h-4" />
             </span>
           </div>

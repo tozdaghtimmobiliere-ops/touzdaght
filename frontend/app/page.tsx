@@ -11,11 +11,11 @@ import { cn } from '@/lib/utils'
 
 // Projets fixes affichés dans l'accueil — najma et gelmim en priorité
 const FEATURED_PROJECTS = [
-  { slug: 'najma', name: 'تجزئة النجمة', city: 'تيزنيت', citySlug: 'tiznit', status: 'active', image: '/images/najma/najma-thumbnail.jpg' },
-  { slug: 'gelmim', name: 'شقق طريق كلميم', city: 'تيزنيت', citySlug: 'tiznit', status: 'active', image: '/images/gelmim/gelmim.png' },
-  { slug: 'touhmo', name: 'توهمو', city: 'أيت ملول', citySlug: 'ait-melloul', status: 'active', image: '/images/touhmo/touhmo.png' },
-  { slug: 'hay-ta9adom', name: 'حي التقدم', city: 'لقليعة', citySlug: 'l9li3a', status: 'active', image: '/images/hay-ta9adom/9li3a.jpg' },
-  { slug: 'najma-plateau', name: 'مكاتب إدارية النجمة', city: 'تيزنيت', citySlug: 'tiznit', status: 'active', image: '/images/najma/plateau.jpg' },
+  { slug: 'najma', name: 'تجزءة و شقق النجمة', city: 'تيزنيت', citySlug: 'tiznit', status: 'active', image: '/images/najma/najma-thumbnail.jpg' },
+  { slug: 'gelmim', name: 'شقق حي سيدي معروف طريق كلميم', city: 'تيزنيت', citySlug: 'tiznit', status: 'active', image: '/images/gelmim/gelmim.png' },
+  { slug: 'touhmo', name: 'شقق حي المزار - توهمو', city: 'أيت ملول', citySlug: 'ait-melloul', status: 'active', image: '/images/touhmo/touhmo.png' },
+  { slug: 'hay-ta9adom', name: 'شقق حي التقدم', city: 'لقليعة', citySlug: 'l9li3a', status: 'active', image: '/images/hay-ta9adom/9li3a.jpg' },
+  { slug: 'najma-plateau', name: 'مكاتب ادارية - طريق اكلو', city: 'تيزنيت', citySlug: 'tiznit', status: 'active', image: '/images/najma/plateau.jpg' },
 ]
 
 // ─── Hero Slider ───────────────────────────────────────────────────────────────
@@ -173,7 +173,7 @@ function ProjectsSection() {
                     <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 via-secondary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     
                     <div className="absolute top-4 right-4 z-10">
-                      <span className="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest bg-gold text-secondary shadow-lg">
+                      <span className="px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest bg-blue-600 text-white shadow-md">
                         {t('status.active')}
                       </span>
                     </div>
@@ -186,8 +186,8 @@ function ProjectsSection() {
                     </div>
                   </div>
                   <div className="p-6">
-                    <div className="flex items-center gap-2 text-gold text-[10px] font-black uppercase tracking-[0.2em] mb-3">
-                      <MapPin className="w-3.5 h-3.5" />
+                    <div className="flex items-center gap-2 text-blue-500 text-sm font-bold uppercase tracking-wider mb-3">
+                      <MapPin className="w-4 h-4" />
                       {project.city}
                     </div>
                     <h3 className="font-almarai font-extrabold text-xl text-secondary group-hover:text-gold transition-colors duration-300">

@@ -19,7 +19,8 @@ const almarai = Almarai({
 })
 
 export const metadata: Metadata = {
-  title: 'توزدغت للعقار والبناء | Tozdaght Immobilière',
+  metadataBase: new URL('https://tozdaght.ma'),
+  title: 'توزدغت للعقار والبناء | Tozdaght',
   description: 'شركة متخصصة في مجال العقار والبناء في المغرب - تيزنيت، أكادير، أيت ملول',
   keywords: 'عقار, بناء, تيزنيت, أكادير, المغرب, شقق, أراضي, تجزئة',
   authors: [{ name: 'Tozdaght Immobilière' }],
