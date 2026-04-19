@@ -161,6 +161,45 @@ export default function NajmaSelectionPage() {
             </motion.div>
 
           </div>
+      {/* Project Location Map Section */}
+      <section className="section-padding py-20" style={{ background: '#FAF7F2' }}>
+        <div className="container-custom">
+          <div className="flex flex-col lg:flex-row gap-12 items-center">
+            {/* Image on the Left */}
+            <div className="lg:w-1/2 w-full order-2 lg:order-1">
+              <div className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+                <img 
+                  src="/images/najma/location.jpeg" 
+                  alt="موقع المشروع" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="mt-4 text-center lg:text-right flex items-center justify-center lg:justify-end gap-2">
+                <span className="text-secondary/70 font-cairo">الرابط بالاقمار الصناعية</span>
+                <a 
+                  href="https://maps.app.goo.gl/fXcf9BPCcLGGPAeo7?g_st=aw" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-blue-600 font-bold underline hover:text-blue-800 transition-colors whitespace-nowrap"
+                >
+                  اضغط هنا
+                </a>
+              </div>
+            </div>
+            {/* Text on the Right */}
+            <div className="lg:w-1/2 order-1 lg:order-2">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="h-px w-8 bg-gold/60" />
+                <span className="text-gold text-xs font-bold uppercase tracking-widest">الموقع</span>
+              </div>
+              <h2 className="font-almarai text-3xl md:text-4xl font-bold text-secondary mb-6">موقع المشروع</h2>
+              <p className="text-secondary/70 text-lg mb-8 leading-relaxed">
+                تتموقع تجزئة النجمة في قلب مدينة تيزنيت، مما يضمن لكم القرب من جميع المرافق الضرورية والخدمات العمومية، مع سهولة الولوج لمختلف أحياء المدينة.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
         </div>
       </section>
 
