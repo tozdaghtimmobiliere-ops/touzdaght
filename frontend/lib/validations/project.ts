@@ -7,7 +7,7 @@ export const ProjectSchema = z.object({
   status: z.enum(["active", "pending", "completed"]),
   city: z.string().min(2),
   images: z.array(z.string().url()).min(1, "At least one image is required"),
-  metadata: z.record(z.any()).optional(),
+  metadata: z.any().optional(),
 })
 
 export type ProjectInput = z.infer<typeof ProjectSchema>
