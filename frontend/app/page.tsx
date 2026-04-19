@@ -59,7 +59,7 @@ function HeroSlider() {
 
             <h1 className="font-almarai font-extrabold mb-8 max-w-5xl mx-auto leading-tight">
               <span className="text-white block text-4xl md:text-6xl lg:text-7xl mb-4">
-                {t('home.hero.title')}
+                توزدغت للعقار والبناء - وجهتكم الرائدة للسكن والاستثمار في تيزنيت وسوس
               </span>
               <div className="h-1 w-24 bg-gold mx-auto mb-6" />
             </h1>
@@ -155,8 +155,12 @@ function ProjectsSection() {
             <span className="text-gold text-xs font-bold uppercase tracking-widest">{language === 'ar' ? 'مشاريعنا' : 'PROJETS'}</span>
             <div className="h-px w-8 bg-gold opacity-60" />
           </div>
-          <h2 className="font-almarai text-3xl md:text-4xl font-bold text-secondary mb-4">{language === 'ar' ? 'مشاريعنا المتميزة' : 'Nos Projets'}</h2>
-          <p className="text-secondary/50 max-w-xl mx-auto text-sm">{language === 'ar' ? 'اكتشف مجموعة مشاريعنا العقارية في مختلف مدن المغرب' : 'Découvrez notre portfolio immobilier à travers le Maroc'}</p>
+          <h2 className="font-almarai text-3xl md:text-4xl font-bold text-secondary mb-4">
+            توزدغت: أفضل المشاريع العقارية في تيزنيت وسوس
+          </h2>
+          <p className="text-secondary/50 max-w-xl mx-auto text-sm">
+            استكشف مجموعتنا الحصرية من الشقق السكنية والبقع الأرضية المجهزة في أرقى أحياء تيزنيت، أكادير، وأيت ملول. استثمارك الآمن يبدأ مع توزدغت.
+          </p>
           <div className="gold-line w-12 mx-auto mt-4" />
         </motion.div>
 
@@ -191,7 +195,7 @@ function ProjectsSection() {
                       {project.city}
                     </div>
                     <h3 className="font-almarai font-extrabold text-xl text-secondary group-hover:text-gold transition-colors duration-300">
-                      {project.name}
+                      {project.name} {project.slug === 'najma' ? '- إقامة النجمة' : ''}
                     </h3>
                     <div className="mt-4 h-[1px] w-8 bg-gold/30 transition-all duration-500 group-hover:w-full" />
                   </div>
@@ -219,11 +223,11 @@ function AboutSection() {
   const content = language === 'ar' ? {
     label: 'من نحن',
     title: 'توزدغت للعقار والبناء',
-    p1: 'توزدغت هي شركة متخصصة في مجال العقار والبناء، تقدم حلولاً متكاملة في تطوير وإنجاز المشاريع العقارية وفق أعلى معايير الجودة والاحترافية.',
-    p2: 'تتمثل مهمة الشركة في تصميم وتنفيذ مشاريع سكنية وعمرانية تلبي احتياجات العملاء، مع توفير مواكبة شاملة في جميع مراحل المشروع.',
-    servicesLabel: 'تقدم توزدغت مجموعة من الخدمات تشمل:',
-    services: ['تطوير المشاريع', 'البناء والتشييد', 'تهيئة الأراضي', 'إدارة المشاريع', 'استشارات عقارية', 'شراكات استثمارية'],
-    cta: 'اعرف المزيد'
+    p1: 'توزدغت هي الشركة الرائدة في مجال العقار والبناء بمدينة تيزنيت ومنطقة سوس، حيث نقدم حلولاً عقارية متكاملة تشمل الشقق السكنية والبقع الأرضية والمكاتب الإدارية وفق أعلى معايير الجودة والاحترافية.',
+    p2: 'تتمثل مهمتنا في توزدغت في تصميم وتنفيذ مشاريع عمرانية متميزة تلبي احتياجات السكن والاستثمار العقاري في المغرب، مع توفير مواكبة شاملة لزبنائنا في جميع مراحل التملك.',
+    servicesLabel: 'لماذا تختار توزدغت للاستثمار العقاري؟',
+    services: ['بناء وتشييد عصري', 'بقع أرضية محفظة ومجهزة', 'مواقع استراتيجية في تيزنيت', 'إدارة مشاريع احترافية', 'استشارات عقارية متخصصة', 'ضمان الجودة والمصداقية'],
+    cta: 'تعرف على مشاريعنا'
   } : {
     label: 'À propos',
     title: 'Tozdaght Immobilier & Construction',
@@ -254,7 +258,7 @@ function AboutSection() {
               <div className="h-px w-8 bg-gold" />
               <span className="text-gold font-bold text-xs uppercase tracking-widest">{content.label}</span>
             </div>
-            <h2 className="font-almarai text-3xl md:text-4xl font-bold text-white mb-4">{content.title}</h2>
+            <h2 className="font-almarai text-3xl md:text-4xl font-bold text-white mb-4">توزدغت للعقار والبناء - جودة ومصداقية</h2>
             <div className="gold-line w-12 mb-6" />
             <p className="text-white/70 mb-4 leading-relaxed">{content.p1}</p>
             <p className="text-white/70 mb-6 leading-relaxed">{content.p2}</p>
@@ -313,7 +317,7 @@ function ServicesSection() {
       <div className="container-custom">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} className="text-center mb-14">
-          <h2 className="font-almarai text-3xl md:text-4xl font-bold text-secondary mb-4">{content.title}</h2>
+          <h2 className="font-almarai text-3xl md:text-4xl font-bold text-secondary mb-4">خدماتنا العقارية المتكاملة</h2>
           <p className="text-secondary/50 max-w-xl mx-auto text-sm">{content.subtitle}</p>
           <div className="gold-line w-12 mx-auto mt-4" />
         </motion.div>
