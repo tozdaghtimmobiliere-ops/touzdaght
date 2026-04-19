@@ -64,6 +64,14 @@ const projectImages: Record<string, string> = {
   'hay-ta9adom': '/images/hay-ta9adom/9li3a.jpg',
 }
 
+const cityOverrides: Record<string, string> = {
+  'najma': 'تيزنيت - R+2/R+3/R+4',
+  'gelmim': 'تيزنيت - R+3',
+  'touhmo': 'أيت ملول - R+2',
+  'hay-ta9adom': 'القليعة - R+1',
+  'najma-plateau': 'تيزنيت - R+3 مع قبو',
+}
+
 function ProjectCard({ project, types, t }: { project: any; types: any; t: any }) {
   return (
     <Link href={`/projects/${project.city.slug}/${project.slug}`}>
@@ -96,7 +104,7 @@ function ProjectCard({ project, types, t }: { project: any; types: any; t: any }
         <div className="p-6 flex-grow flex flex-col">
           <div className="flex items-center gap-2 text-blue-500 text-sm font-bold uppercase tracking-wider mb-3">
             <MapPin className="w-4 h-4" />
-            {project.city.name}
+            {cityOverrides[project.slug] || project.city.name}
           </div>
           
           <h3 className="font-almarai font-extrabold text-xl text-secondary group-hover:text-gold transition-colors duration-300 mb-3">

@@ -11,11 +11,11 @@ import { cn } from '@/lib/utils'
 
 // Projets fixes affichés dans l'accueil — najma et gelmim en priorité
 const FEATURED_PROJECTS = [
-  { slug: 'najma', name: 'تجزءة و شقق النجمة', city: 'تيزنيت', citySlug: 'tiznit', status: 'active', image: '/images/najma/najma-thumbnail.jpg' },
-  { slug: 'gelmim', name: 'شقق حي سيدي معروف طريق كلميم', city: 'تيزنيت', citySlug: 'tiznit', status: 'active', image: '/images/gelmim/gelmim.png' },
-  { slug: 'touhmo', name: 'شقق حي المزار - توهمو', city: 'أيت ملول', citySlug: 'ait-melloul', status: 'active', image: '/images/touhmo/touhmo.png' },
-  { slug: 'hay-ta9adom', name: 'شقق حي التقدم', city: 'لقليعة', citySlug: 'l9li3a', status: 'active', image: '/images/hay-ta9adom/9li3a.jpg' },
-  { slug: 'najma-plateau', name: 'مكاتب ادارية - طريق اكلو', city: 'تيزنيت', citySlug: 'tiznit', status: 'active', image: '/images/najma/plateau.jpg' },
+  { slug: 'najma', name: 'تجزءة و شقق النجمة', city: 'تيزنيت - R+2/R+3/R+4', citySlug: 'tiznit', status: 'active', image: '/images/najma/najma-thumbnail.jpg' },
+  { slug: 'gelmim', name: 'شقق حي سيدي معروف طريق كلميم', city: 'تيزنيت - R+3', citySlug: 'tiznit', status: 'active', image: '/images/gelmim/gelmim.png' },
+  { slug: 'touhmo', name: 'شقق حي المزار - توهمو', city: 'أيت ملول - R+2', citySlug: 'ait-melloul', status: 'active', image: '/images/touhmo/touhmo.png' },
+  { slug: 'hay-ta9adom', name: 'شقق حي التقدم', city: 'القليعة - R+1', citySlug: 'l9li3a', status: 'active', image: '/images/hay-ta9adom/9li3a.jpg' },
+  { slug: 'najma-plateau', name: 'مكاتب ادارية - طريق اكلو', city: 'تيزنيت - R+3 مع قبو', citySlug: 'tiznit', status: 'active', image: '/images/najma/plateau.jpg' },
 ]
 
 // ─── Hero Slider ───────────────────────────────────────────────────────────────
