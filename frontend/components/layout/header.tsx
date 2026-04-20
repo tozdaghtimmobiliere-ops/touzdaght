@@ -76,12 +76,10 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
-    // Check if splash was already seen
     const hasSeen = sessionStorage.getItem('hasSeenSplash_v31')
     if (hasSeen) {
       setIsLanded(true)
     } else {
-      // Trigger shine/bomb slightly after splash is gone
       const landedTimer = setTimeout(() => setIsLanded(true), 3500)
       return () => clearTimeout(landedTimer)
     }
@@ -118,7 +116,6 @@ export function Header() {
         ? 'bg-secondary/70 backdrop-blur-2xl shadow-[0_10px_40px_rgba(0,0,0,0.5)] border-b border-gold/20'
         : 'bg-secondary border-b border-white/5'
     )}>
-      {/* Dynamic Gold top line */}
       <motion.div 
         animate={isScrolled ? { opacity: 1, scaleX: 1 } : { opacity: 0.4, scaleX: 0.8 }}
         className="h-[1px] bg-gradient-to-r from-transparent via-gold to-transparent" 
@@ -130,32 +127,10 @@ export function Header() {
           isScrolled ? "h-[80px]" : "h-[100px]"
         )}>
 
-<<<<<<< HEAD
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative">
-              <img
-                src="/images/logo.png"
-                alt={t('brand.name')}
-                className="h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-                style={{ filter: 'drop-shadow(0 2px 12px rgba(201,168,76,0.3)) brightness(1.1)' }}
-              />
-            </div>
-            <div className="hidden sm:block">
-              <span className="font-almarai font-bold text-xl text-white block leading-tight">
-                {t('brand.name')}
-              </span>
-              <span className="text-gold text-xs font-semibold tracking-widest uppercase">
-                IMMOBILIÈRE
-              </span>
-            </div>
-=======
-          {/* Logo - Restored to static mounting for total reliability */}
           <Link href="/" className="flex items-center gap-3 group h-20 w-48 relative">
             <LogoWithShine t={t} isLanded={isLanded} />
-            {/* Logo Under-glow */}
             <div className="absolute inset-0 bg-gold/5 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
->>>>>>> fddb665599c87882d3b8a8caf043033199a7ea8c
           </Link>
 
           {/* Desktop Navigation */}

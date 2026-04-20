@@ -3,19 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-<<<<<<< HEAD
-  "dev": "next dev",
-    "build": "npx prisma generate --schema=../database/prisma/schema.prisma && next build",
-  "start": "next start",
-  "lint": "next lint"
-},
-=======
     "dev": "next dev",
-    "build": "npx prisma generate --schema=./prisma/schema.prisma && next build",
+    "build": "npx prisma generate --schema=../database/prisma/schema.prisma && next build",
     "start": "next start",
     "lint": "next lint"
   },
->>>>>>> fddb665599c87882d3b8a8caf043033199a7ea8c
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.2",
     "@prisma/client": "^5.22.0",
