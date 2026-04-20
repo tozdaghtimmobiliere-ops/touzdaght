@@ -4,6 +4,8 @@ import './globals.css'
 import { Providers } from '@/components/providers'
 import { SplashScreen } from '@/components/ui/splash-screen'
 
+const baseUrl = process.env.NEXTAUTH_URL || 'https://tozdaght.ma'
+
 const cairo = Cairo({
   subsets: ['arabic', 'latin'],
   weight: ['400', '600', '700', '800'],
@@ -20,6 +22,7 @@ const almarai = Almarai({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://tozdaght.ma'),
+<<<<<<< HEAD
   title: {
     default: 'Tozdaght (توزدغت) | العقار والبناء - شقق وبقع أرضية في تيزنيت وسوس',
     template: '%s | Tozdaght - توزدغت'
@@ -30,6 +33,11 @@ export const metadata: Metadata = {
     'Tozdaght Immobilière', 'العقار والبناء تيزنيت', 'شقق للبيع تيزنيت', 
     'بقع أرضية تيزنيت', 'إقامة النجمة', 'عقارات تيزنيت', 'مشاريع عقارية سوس'
   ],
+=======
+  title: 'توزدغت للعقار والبناء | Tozdaght (v22)',
+  description: 'شركة متخصصة في مجال العقار والبناء في المغرب - تيزنيت، أكادير، أيت ملول',
+  keywords: 'عقار, بناء, تيزنيت, أكادير, المغرب, شقق, أراضي, تجزئة',
+>>>>>>> fddb665599c87882d3b8a8caf043033199a7ea8c
   authors: [{ name: 'Tozdaght Immobilière' }],
   alternates: {
     canonical: 'https://tozdaght.ma',
@@ -49,6 +57,7 @@ export const metadata: Metadata = {
     title: 'توزدغت للعقار والبناء - جودة ومصداقية في تيزنيت',
     description: 'شركة متخصصة في تطوير المشاريع العقارية السكنية والتجارية الأكثر تميزاً في تيزنيت ومنطقة سوس.',
     type: 'website',
+    url: 'https://tozdaght.ma',
     locale: 'ar_MA',
     url: 'https://tozdaght.ma',
     siteName: 'توزدغت للعقار والبناء',

@@ -33,7 +33,8 @@
     "projects": "Projets",
     "contact": "Contact",
     "admin": "Admin",
-    "all_projects": "Tous les projets"
+    "all_projects": "Tous les projets",
+    "estimate": "Devis gratuit"
   },
   "status": {
     "active": "Actif",

@@ -88,8 +88,13 @@ function ProjectCard({ project, types, t }: { project: any; types: any; t: any }
           <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 via-secondary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           
           <div className="absolute top-4 right-4 z-10">
+<<<<<<< HEAD
             <span className={cn('px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-md',
               project.status === 'active' ? 'bg-blue-600 text-white' : 'bg-secondary/80 text-white backdrop-blur-sm border border-white/10')}>
+=======
+            <span className={cn('px-4 py-2 rounded-full text-[12px] font-black uppercase tracking-widest shadow-lg',
+              project.status === 'active' ? 'bg-accent text-white' : 'bg-secondary/80 text-white backdrop-blur-sm border border-white/10')}>
+>>>>>>> fddb665599c87882d3b8a8caf043033199a7ea8c
               {project.status === 'active' ? t.filter.active : t.filter.completed}
             </span>
           </div>
@@ -102,9 +107,15 @@ function ProjectCard({ project, types, t }: { project: any; types: any; t: any }
         </div>
         
         <div className="p-6 flex-grow flex flex-col">
+<<<<<<< HEAD
           <div className="flex items-center gap-2 text-blue-500 text-sm font-bold uppercase tracking-wider mb-3">
             <MapPin className="w-4 h-4" />
             {cityOverrides[project.slug] || project.city.name}
+=======
+          <div className="flex items-center gap-2 text-accent text-[12px] font-black uppercase tracking-[0.2em] mb-3">
+            <MapPin className="w-4 h-4" />
+            {project.city.name}
+>>>>>>> fddb665599c87882d3b8a8caf043033199a7ea8c
           </div>
           
           <h3 className="font-almarai font-extrabold text-xl text-secondary group-hover:text-gold transition-colors duration-300 mb-3">

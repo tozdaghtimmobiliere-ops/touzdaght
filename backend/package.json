@@ -4,7 +4,11 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "tsx watch src/index.ts",
+<<<<<<< HEAD
     "build": "npx prisma generate --schema=../database/prisma/schema.prisma && tsc",
+=======
+    "build": "npx prisma generate --schema=./prisma/schema.prisma && tsc",
+>>>>>>> fddb665599c87882d3b8a8caf043033199a7ea8c
     "start": "npx prisma generate --schema=./prisma/schema.prisma && node dist/index.js",
     "lint": "eslint src --ext .ts"
   },

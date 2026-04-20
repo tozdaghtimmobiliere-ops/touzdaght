@@ -1,14 +1,15 @@
-'use client'
-
-import { useEffect, useState } from 'react'
-import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { ChevronLeft, ChevronRight, Check, ArrowLeft, Building2, Home, MapPin, Briefcase, FileText, Users, Phone } from 'lucide-react'
+import React from 'react'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
-import { useLanguage } from '@/components/providers'
-import { cn } from '@/lib/utils'
+import { Hero } from '@/components/marketing/hero'
+import { FeaturedProjects } from '@/components/marketing/featured-projects'
+import { Stats } from '@/components/marketing/stats'
+import { About } from '@/components/marketing/about'
+import { Services } from '@/components/marketing/services'
+import { EnterpriseCTA } from '@/components/marketing/cta'
+import { Metadata } from 'next'
 
+<<<<<<< HEAD
 // Projets fixes affichés dans l'accueil — najma et gelmim en priorité
 const FEATURED_PROJECTS = [
   { slug: 'najma', name: 'تجزءة و شقق النجمة', city: 'تيزنيت - R+2/R+3/R+4', citySlug: 'tiznit', status: 'active', image: '/images/najma/najma-thumbnail.jpg' },
@@ -106,40 +107,50 @@ function HeroSlider() {
       </div>
     </section>
   )
+=======
+export const metadata: Metadata = {
+  title: 'Tozdaght | Ultra-Premium Real Estate & Architecture',
+  description: 'Enterprise-tier luxury real estate development and high-performance architectural solutions in Morocco.',
+  openGraph: {
+    title: 'Tozdaght | Ultra-Premium Real Estate',
+    description: 'Bespoke architectural excellence.',
+    images: ['/images/og-main.jpg'],
+  },
+>>>>>>> fddb665599c87882d3b8a8caf043033199a7ea8c
 }
 
-// ─── Stats Bar ─────────────────────────────────────────────────────────────────
-function StatsBar({ language }: { language: string }) {
-  const stats = language === 'ar' ? [
-    { number: '+10', label: 'سنوات خبرة' },
-    { number: '+15', label: 'مشاريع' },
-    { number: '+90', label: 'وحدة' },
-    { number: '+50', label: 'زبون' },
-  ] : [
-    { number: '+10', label: 'Ans d\'exp.' },
-    { number: '+15', label: 'Projets' },
-    { number: '+90', label: 'Unités' },
-    { number: '+50', label: 'Clients' },
-  ]
-
+export default async function LandingPage() {
   return (
-    <div className="relative z-10"
-      style={{ background: 'linear-gradient(135deg, #0A1628, #1A2E4A)' }}>
-      <div className="h-[1px] bg-gradient-to-r from-transparent via-gold to-transparent opacity-40" />
-      <div className="container-custom py-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {stats.map((stat: any, i: number) => (
-            <div key={i} className="text-center">
-              <div className="font-almarai text-2xl md:text-3xl font-bold text-gold mb-1">{stat.number}</div>
-              <div className="text-white/50 text-xs tracking-wider">{stat.label}</div>
-            </div>
-          ))}
+    <div className="relative min-h-screen bg-secondary overflow-x-hidden selection:bg-gold selection:text-secondary">
+      {/* 4K Global Noise Texture Background */}
+      <div className="fixed inset-0 bg-luxury-noise pointer-events-none z-[60] opacity-[0.03] mix-blend-overlay" />
+      
+      <Header />
+
+      <main className="relative">
+        <Hero />
+        
+        {/* Transitional Depth Layer */}
+        <div className="relative z-20 -mt-12">
+           <Stats />
         </div>
-      </div>
-      <div className="h-[1px] bg-gradient-to-r from-transparent via-gold to-transparent opacity-20" />
+
+        <FeaturedProjects />
+
+        <div className="bg-cream/5 backdrop-blur-sm">
+          <About />
+        </div>
+
+        <Services />
+
+        <EnterpriseCTA />
+      </main>
+
+      <Footer />
     </div>
   )
 }
+<<<<<<< HEAD
 
 // ─── Projects Section ──────────────────────────────────────────────────────────
 function ProjectsSection() {
@@ -399,3 +410,5 @@ export default function HomePage() {
     </main>
   )
 }
+=======
+>>>>>>> fddb665599c87882d3b8a8caf043033199a7ea8c
