@@ -39,7 +39,7 @@ export function Footer() {
           <div className="lg:col-span-1">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 mb-4 group">
-              <img src="/images/logo.png" alt={t('brand.name')} className="h-14 w-auto object-contain"
+              <img src="/images/logo.png" alt={t('brand.name')} className="h-18 w-auto object-contain"
                 style={{ filter: 'drop-shadow(0 2px 8px rgba(201,168,76,0.25)) brightness(1.05)' }} />
               <div>
                 <span className="font-almarai font-bold text-xl text-white block">{t('brand.name')}</span>

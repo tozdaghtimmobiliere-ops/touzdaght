@@ -60,8 +60,8 @@ export function Header() {
               <img
                 src="/images/logo.png"
                 alt={t('brand.name')}
-                className="h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-110"
-                style={{ filter: 'drop-shadow(0 2px 8px rgba(201,168,76,0.3)) brightness(1.05)' }}
+                className="h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                style={{ filter: 'drop-shadow(0 2px 12px rgba(201,168,76,0.3)) brightness(1.1)' }}
               />
             </div>
             <div className="hidden sm:block">

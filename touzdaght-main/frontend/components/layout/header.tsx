@@ -7,35 +7,13 @@ import { Menu, X, ChevronDown, Phone } from 'lucide-react'
 import { useLanguage } from '@/components/providers'
 import { cn } from '@/lib/utils'
 
-const navLinks = {
-  ar: [
-    { href: '/', label: 'الرئيسية' },
-    { href: '/about', label: 'من نحن' },
-    { href: '/projects', label: 'المشاريع' },
-    { href: '/contact', label: 'اتصل بنا' },
-    { href: '/admin', label: 'لوحة التحكم' },
-  ],
-  fr: [
-    { href: '/', label: 'Accueil' },
-    { href: '/about', label: 'Qui sommes-nous' },
-    { href: '/projects', label: 'Projets' },
-    { href: '/contact', label: 'Contact' },
-    { href: '/admin', label: 'Admin' },
-  ],
-  en: [
-    { href: '/', label: 'Home' },
-    { href: '/about', label: 'About us' },
-    { href: '/projects', label: 'Projects' },
-    { href: '/contact', label: 'Contact' },
-    { href: '/admin', label: 'Admin' },
-  ],
-}
-
-const translations = {
-  ar: { projects: 'جميع المشاريع' },
-  fr: { projects: 'Tous les projets' },
-  en: { projects: 'All projects' },
-}
+const navLinks = [
+  { href: '/', labelKey: 'nav.home' },
+  { href: '/about', labelKey: 'nav.about' },
+  { href: '/projects', labelKey: 'nav.projects' },
+  { href: '/contact', labelKey: 'nav.contact' },
+  { href: '/admin', labelKey: 'nav.admin' },
+]
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -43,7 +21,7 @@ export function Header() {
   const [cities, setCities] = useState<any[]>([])
   const [isProjectsOpen, setIsProjectsOpen] = useState(false)
   const pathname = usePathname()
-  const { language, setLanguage } = useLanguage()
+  const { language, setLanguage, t } = useLanguage()
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50)
@@ -57,9 +35,6 @@ export function Header() {
       .then((data) => { if (data.success) setCities(data.data) })
       .catch(console.error)
   }, [])
-
-  const links = navLinks[language as keyof typeof navLinks] || navLinks.ar
-  const t = translations[language as keyof typeof translations] || translations.ar
 
   const isActive = (href: string) => {
     if (href === '/') return pathname === '/'
@@ -84,15 +59,16 @@ export function Header() {
             <div className="relative">
               <img
                 src="/images/logo.png"
-                alt="توزدغت"
-                className="h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                alt={t('brand.name')}
+                className="h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                style={{ filter: 'drop-shadow(0 2px 12px rgba(201,168,76,0.3)) brightness(1.1)' }}
               />
             </div>
             <div className="hidden sm:block">
               <span className="font-almarai font-bold text-xl text-white block leading-tight">
-                توزدغت
+                {t('brand.name')}
               </span>
-              <span className="text-gold text-xs font-semibold tracking-widest">
+              <span className="text-gold text-xs font-semibold tracking-widest uppercase">
                 IMMOBILIÈRE
               </span>
             </div>
@@ -100,7 +76,7 @@ export function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-1">
-            {links.map((link) => (
+            {navLinks.map((link) => (
               <div key={link.href} className="relative">
                 {link.href === '/projects' ? (
                   <div
@@ -114,7 +90,7 @@ export function Header() {
                         ? 'text-gold'
                         : 'text-white/80 hover:text-gold'
                     )}>
-                      {link.label}
+                      {t(link.labelKey)}
                       <ChevronDown className={cn(
                         'w-3.5 h-3.5 transition-transform duration-200',
                         isProjectsOpen && 'rotate-180'
@@ -127,7 +103,7 @@ export function Header() {
                         {/* Header dropdown */}
                         <div className="px-4 py-2 border-b border-white/5">
                           <span className="text-gold/70 text-xs font-semibold tracking-wider uppercase">
-                            {t.projects}
+                            {t('nav.all_projects')}
                           </span>
                         </div>
                         <Link
@@ -135,7 +111,7 @@ export function Header() {
                           className="flex items-center gap-2 px-4 py-3 text-white/90 hover:text-gold hover:bg-white/5 transition-all text-sm font-semibold border-b border-white/5"
                         >
                           <span className="w-1.5 h-1.5 bg-gold rounded-full" />
-                          {t.projects}
+                          {t('nav.all_projects')}
                         </Link>
                         {cities.map((city) => (
                           <Link
@@ -160,7 +136,7 @@ export function Header() {
                         : 'text-white/80 hover:text-gold'
                     )}
                   >
-                    {link.label}
+                    {t(link.labelKey)}
                     {isActive(link.href) && (
                       <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-gold rounded-full" />
                     )}
@@ -174,7 +150,7 @@ export function Header() {
           <div className="flex items-center gap-3">
             {/* Language Switcher */}
             <div className="hidden sm:flex items-center gap-0.5 bg-white/5 rounded-lg p-1 border border-white/10">
-              {['ar', 'fr', 'en'].map((lang) => (
+              {['ar', 'fr'].map((lang) => (
                 <button
                   key={lang}
                   onClick={() => setLanguage(lang)}
@@ -215,7 +191,7 @@ export function Header() {
         <div className="lg:hidden border-t border-white/5"
           style={{ background: 'linear-gradient(135deg, #0A1628 0%, #1A2E4A 100%)' }}>
           <nav className="container-custom py-4 flex flex-col gap-1">
-            {links.map((link) => (
+            {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -227,7 +203,7 @@ export function Header() {
                     : 'text-white/70 hover:bg-white/5 hover:text-white'
                 )}
               >
-                {link.label}
+                {t(link.labelKey)}
               </Link>
             ))}
 
@@ -249,7 +225,7 @@ export function Header() {
 
             {/* Language Switcher Mobile */}
             <div className="flex gap-2 mt-4 pt-4 border-t border-white/5">
-              {['ar', 'fr', 'en'].map((lang) => (
+              {['ar', 'fr'].map((lang) => (
                 <button
                   key={lang}
                   onClick={() => setLanguage(lang)}
@@ -260,7 +236,7 @@ export function Header() {
                       : 'bg-white/5 text-white/60 hover:text-white border border-white/10'
                   )}
                 >
-                  {lang === 'ar' ? 'العربية' : lang === 'fr' ? 'Français' : 'English'}
+                  {lang === 'ar' ? 'العربية' : 'Français'}
                 </button>
               ))}
             </div>

@@ -246,7 +246,7 @@ function AboutSection() {
             viewport={{ once: true }} transition={{ duration: 0.7 }} className="relative">
             <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
               <img src="https://www.lesmaisonsferrian.be/medias/photos/blog/2023/IMG-comment-vendre-bien-immobilier-rapidement-maison-vente-etapes-hainaut.jpg"
-                alt="Tozdaght" className="w-full h-full object-cover" />
+                alt="توزدغت للعقار والبناء - مشاريع سكنية متميزة في تيزنيت" className="w-full h-full object-cover" />
             </div>
             <div className="absolute -top-3 -right-3 w-16 h-16 border-t-2 border-r-2 border-gold rounded-tr-xl opacity-60" />
             <div className="absolute -bottom-3 -left-3 w-16 h-16 border-b-2 border-l-2 border-gold rounded-bl-xl opacity-60" />
@@ -392,6 +392,7 @@ export default function HomePage() {
           شركة توزدغت المتخصصة في العقار والبناء تقدم لكم أفضل الشقق والبقع الأرضية في تيزنيت.
           Tozdaght is the leading real estate developer in Tiznit and Souss region.
           Whether you search for Tozdaght or Tozdagh, our projects like Residence An-Najma are designed for you.
+          عقارات للبيع في تيزنيت، شقق مجهزة، بقع أرضية للبيع، إقامة النجمة، مشروع كلميم، توهمو أيت ملول.
         </p>
       </section>
       <Footer />
