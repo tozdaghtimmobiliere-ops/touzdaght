@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npx prisma generate --schema=./prisma/schema.prisma && next build",
+    "postinstall": "npx prisma generate --schema=./prisma/schema.prisma",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
