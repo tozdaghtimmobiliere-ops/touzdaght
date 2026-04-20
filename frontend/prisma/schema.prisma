@@ -1,87 +1,123 @@
 generator client {
   provider = "prisma-client-js"
+  output   = "../generated/client"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
-enum Role {
-  USER
-  AGENT
-  ADMIN
-}
-
-model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  role          Role      @default(USER)
-  accounts      Account[]
-  sessions      Session[]
-  payments      Payment[]
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-}
-
-model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String? @db.Text
-  access_token       String? @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String? @db.Text
-  session_state      String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
-}
-
-model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
-
-  @@unique([identifier, token])
+model City {
+  id        Int       @id @default(autoincrement())
+  name      String
+  slug      String    @unique
+  heroImage String?
+  projects  Project[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
 model Project {
-  id          String   @id @default(cuid())
-  slug        String   @unique
-  name_ar     String
-  name_fr     String
-  status      String
-  city        String
-  images      String[]
-  metadata    Json?    // For custom enterprise fields
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id          Int            @id @default(autoincrement())
+  cityId      Int
+  city        City           @relation(fields: [cityId], references: [id])
+  name        String
+  slug        String         @unique
+  type        String         // residence | house | lotissement | commercial
+  status      String         @default("active") // active | completed
+  description String?
+  address     String?
+  totalArea   Float?
+  startDate   DateTime?
+  endDate     DateTime?
+  heroImage   String?
+  mainImage   String?
+  whatsapp    String         @default("212702060323")
+  buildings   Building[]
+  parcels     Parcel[]
+  images      ProjectImage[]
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
 }
 
-model Payment {
-  id          String   @id @default(cuid())
-  amount      Float
-  currency    String   @default("MAD")
-  status      String   @default("PENDING")
-  stripeId    String   @unique
-  userId      String
-  user        User     @relation(fields: [userId], references: [id])
+model ProjectImage {
+  id        Int     @id @default(autoincrement())
+  projectId Int
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  url       String
+  category  String  // plan | chantier | terrain | gallery | slider
+  label     String? // badge displayed in slider
+  order     Int     @default(0)
+  createdAt DateTime @default(now())
+}
+
+model Building {
+  id                 Int         @id @default(autoincrement())
+  projectId          Int
+  project            Project     @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name               String      // A, B, C, D
+  floorsCount        Int
+  apartmentsPerFloor Int
+  totalSurface       Float?
+  apartments         Apartment[]
+  createdAt          DateTime    @default(now())
+  updatedAt          DateTime    @updatedAt
+}
+
+model Apartment {
+  id         Int      @id @default(autoincrement())
+  buildingId Int
+  building   Building @relation(fields: [buildingId], references: [id], onDelete: Cascade)
+  floor      Int      // 0 = RDC
+  unitNumber Int
+  rooms      Int?     @default(2)
+  salons     Int?     @default(1)
+  kitchens   Int?     @default(1)
+  bathrooms  Int?     @default(1)
+  surface    Float?
+  price      Float?
+  status     String   @default("available") // available | sold | reserved
+  updatedAt  DateTime @updatedAt
+  createdAt  DateTime @default(now())
+
+  @@unique([buildingId, floor, unitNumber])
+}
+
+model Parcel {
+  id           Int      @id @default(autoincrement())
+  projectId    Int
+  project      Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  parcelNumber Int
+  parcelCode   String   // HE2 | HC2 | HC3 | HC4 | HE4
+  usageType    String   // residential | commercial
+  zoneType     String   // R+2 | R+3 | R+4
+  surface      Float?
+  price        Float?
+  status       String   @default("available") // available | sold | reserved
+  updatedAt    DateTime @updatedAt
+  createdAt    DateTime @default(now())
+
+  @@unique([projectId, parcelNumber, parcelCode])
+}
+
+model Admin {
+  id           Int      @id @default(autoincrement())
+  username     String   @unique
+  passwordHash String
+  role         String   // super_admin | admin
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model ReservationLog {
+  id          Int      @id @default(autoincrement())
+  adminId     Int
+  unitType    String   // apartment | parcel
+  unitId      Int
+  oldStatus   String
+  newStatus   String
+  messageSent String?
   createdAt   DateTime @default(now())
 }
