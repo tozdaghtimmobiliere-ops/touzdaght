@@ -9,6 +9,9 @@ import { Footer } from '@/components/layout/footer'
 import { useLanguage } from '@/components/providers'
 import { cn } from '@/lib/utils'
 import { BackButton } from '@/components/ui/back-button'
+import { ProjectCard as SharedProjectCard } from '@/components/ui/project-card'
+import { Skeleton } from '@/components/ui/skeleton'
+import { Select } from '@/components/ui/select'
 
 const content = {
   ar: {
@@ -72,66 +75,7 @@ const cityOverrides: Record<string, string> = {
   'najma-plateau': 'تيزنيت - R+3 مع قبو',
 }
 
-function ProjectCard({ project, types, t }: { project: any; types: any; t: any }) {
-  return (
-    <Link href={`/projects/${project.city.slug}/${project.slug}`}>
-      <div className="project-card-luxury group bg-white h-full flex flex-col">
-        <div className="aspect-[16/10] relative overflow-hidden bg-background-alt">
-          {projectImages[project.slug] ? (
-            <img src={projectImages[project.slug]} alt={project.name}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 render-4k" />
-          ) : (
-            <div className="absolute inset-0 flex items-center justify-center bg-secondary/5">
-              <Building className="w-12 h-12 text-gold/20" />
-            </div>
-          )}
-          <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 via-secondary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          
-          <div className="absolute top-4 right-4 z-10">
-            <span className={cn('px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-md',
-              project.status === 'active' ? 'bg-blue-600 text-white' : 'bg-secondary/80 text-white backdrop-blur-sm border border-white/10')}>
-              {project.status === 'active' ? t.filter.active : t.filter.completed}
-            </span>
-          </div>
 
-          <div className="absolute bottom-4 left-4 z-10">
-            <span className="px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg text-[10px] font-black text-white uppercase tracking-widest">
-              {types[project.type] || project.type}
-            </span>
-          </div>
-        </div>
-        
-        <div className="p-6 flex-grow flex flex-col">
-          <div className="flex items-center gap-2 text-blue-500 text-sm font-bold uppercase tracking-wider mb-3">
-            <MapPin className="w-4 h-4" />
-            {cityOverrides[project.slug] || project.city.name}
-          </div>
-          
-          <h3 className="font-almarai font-extrabold text-xl text-secondary group-hover:text-gold transition-colors duration-300 mb-3">
-            {project.name}
-          </h3>
-
-          {project.description && (
-            <p className="text-secondary/60 text-sm line-clamp-2 mb-6 font-cairo">
-              {project.description}
-            </p>
-          )}
-
-          <div className="mt-auto flex items-center justify-between pt-5 border-t border-border/50">
-            <div className="flex items-center gap-2 text-secondary/40 text-[10px] font-bold uppercase tracking-wider">
-              <Building className="w-3.5 h-3.5 text-gold/40" />
-              {project._count?.buildings > 0 ? `${project._count.buildings} Units`
-                : project._count?.parcels > 0 ? `${project._count.parcels} Plots` : 'Units'}
-            </div>
-            <span className="text-blue-500 font-bold text-[10px] uppercase tracking-widest flex items-center gap-2 group-hover:gap-3 transition-all">
-              {t.viewDetails} <ArrowLeft className="w-4 h-4" />
-            </span>
-          </div>
-        </div>
-      </div>
-    </Link>
-  )
-}
 
 export default function ProjectsPage() {
   const { language } = useLanguage()
@@ -172,7 +116,7 @@ export default function ProjectsPage() {
   const completed = filtered.filter((p) => p.status === 'completed')
 
   return (
-    <main className="min-h-screen" style={{ background: '#FAF7F2' }}>
+    <main className="min-h-screen bg-background dark:bg-dark">
       <Header />
 
       {/* Hero */}
@@ -201,22 +145,22 @@ export default function ProjectsPage() {
       </section>
 
       {/* Sticky Filters */}
-      <div className="sticky top-[70px] z-40 bg-white border-b border-border shadow-sm">
+      <div className="sticky top-[70px] z-40 bg-white dark:bg-dark border-b border-border dark:border-white/10 shadow-sm transition-colors">
         <div className="container-custom py-3">
           <div className="flex flex-wrap gap-3 items-center">
-            <select value={selectedCity} onChange={(e) => setSelectedCity(e.target.value)}
-              className="form-input w-auto min-w-[160px] !py-2 text-sm !rounded-lg">
+            <Select value={selectedCity} onChange={(e) => setSelectedCity(e.target.value)}
+              className="w-auto min-w-[160px] !py-2 text-sm">
               <option value="">{t.filter.all}</option>
               {cities.map((c) => <option key={c.slug} value={c.slug}>{c.name}</option>)}
-            </select>
-            <select value={selectedType} onChange={(e) => setSelectedType(e.target.value)}
-              className="form-input w-auto min-w-[160px] !py-2 text-sm !rounded-lg">
+            </Select>
+            <Select value={selectedType} onChange={(e) => setSelectedType(e.target.value)}
+              className="w-auto min-w-[160px] !py-2 text-sm">
               <option value="">{t.filter.allTypes}</option>
               <option value="residence">{types.residence}</option>
               <option value="house">{types.house}</option>
               <option value="lotissement">{types.lotissement}</option>
               <option value="commercial">{types.commercial}</option>
-            </select>
+            </Select>
             {(selectedCity || selectedType) && (
               <button onClick={() => { setSelectedCity(''); setSelectedType('') }}
                 className="px-4 py-2 text-xs font-bold text-gold border border-gold/30 rounded-lg hover:bg-gold hover:text-secondary transition-all">
@@ -231,7 +175,7 @@ export default function ProjectsPage() {
         <div className="container-custom section-padding">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[1,2,3,4,5,6].map((i) => (
-              <div key={i} className="bg-white rounded-2xl h-80 animate-pulse border border-border" />
+              <Skeleton key={i} className="h-[400px] rounded-2xl" />
             ))}
           </div>
         </div>
@@ -239,18 +183,17 @@ export default function ProjectsPage() {
         <>
           {/* المشاريع الحالية */}
           {active.length > 0 && (
-            <section className="section-padding" style={{ background: '#FAF7F2' }}>
+            <section className="section-padding bg-background dark:bg-dark">
               <div className="container-custom">
                 <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }} className="mb-10">
                   <div className="flex items-center gap-4 mb-1">
                     <div className="w-1 h-10 rounded-full" style={{ background: 'linear-gradient(to bottom, #C9A84C, #A8863A)' }} />
                     <div>
-                      <h2 className="font-almarai text-2xl md:text-3xl font-bold text-secondary">{t.currentProjects}</h2>
-                      <p className="text-secondary/40 text-sm">{t.currentSubtitle}</p>
+                      <h2 className="font-almarai text-2xl md:text-3xl font-bold text-secondary dark:text-white">{t.currentProjects}</h2>
+                      <p className="text-secondary/40 dark:text-gray-400 text-sm">{t.currentSubtitle}</p>
                     </div>
-                    <span className="mr-auto px-4 py-1.5 rounded-full text-xs font-bold text-secondary"
-                      style={{ background: 'linear-gradient(135deg, #C9A84C, #A8863A)' }}>
+                    <span className="mr-auto px-4 py-1.5 rounded-full text-xs font-bold text-secondary dark:text-white bg-gold">
                       {active.length}
                     </span>
                   </div>
@@ -262,7 +205,7 @@ export default function ProjectsPage() {
                     <motion.div key={project.id} initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                       transition={{ duration: 0.5, delay: index * 0.1 }}>
-                      <ProjectCard project={project} types={types} t={t} />
+                      <SharedProjectCard project={project} types={types} t={t} projectImages={projectImages} cityOverrides={cityOverrides} />
                     </motion.div>
                   ))}
                 </div>
@@ -272,15 +215,15 @@ export default function ProjectsPage() {
 
           {/* المشاريع السابقة */}
           {completed.length > 0 && (
-            <section className="section-padding" style={{ background: 'linear-gradient(135deg, #F0EDE8, #E8E2D9)' }}>
+            <section className="section-padding bg-background-alt dark:bg-secondary/20">
               <div className="container-custom">
                 <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }} className="mb-10">
                   <div className="flex items-center gap-4 mb-1">
                     <div className="w-1 h-10 rounded-full bg-secondary/30" />
                     <div>
-                      <h2 className="font-almarai text-2xl md:text-3xl font-bold text-secondary">{t.pastProjects}</h2>
-                      <p className="text-secondary/40 text-sm">{t.pastSubtitle}</p>
+                      <h2 className="font-almarai text-2xl md:text-3xl font-bold text-secondary dark:text-white">{t.pastProjects}</h2>
+                      <p className="text-secondary/40 dark:text-gray-400 text-sm">{t.pastSubtitle}</p>
                     </div>
                     <span className="mr-auto px-4 py-1.5 rounded-full text-xs font-bold bg-secondary/10 text-secondary border border-secondary/20">
                       {completed.length}
@@ -295,7 +238,7 @@ export default function ProjectsPage() {
                       whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                       transition={{ duration: 0.5, delay: index * 0.1 }}
                       className="opacity-80">
-                      <ProjectCard project={project} types={types} t={t} />
+                      <SharedProjectCard project={project} types={types} t={t} projectImages={projectImages} cityOverrides={cityOverrides} />
                     </motion.div>
                   ))}
                 </div>

@@ -15,10 +15,129 @@ import { ImageSlider } from '@/components/sections/image-slider'
 import { BookingForm } from '@/components/sections/booking-form'
 import { BackButton } from '@/components/ui/back-button'
 
+const PlateauStatusTable = ({ project }: { project: any }) => {
+  const { language } = useLanguage()
+  const isFrench = language === 'fr'
+
+  const handleBookingClick = (unit: string, floor: string) => {
+    if (!project) return;
+    let message = '';
+    if (isFrench) {
+      message = `Bonjour,\nJe suis intéressé par le projet *${project.name}* à ${project.city.name}.\nJe souhaite réserver le *${unit}* au *${floor}*.\n\n`;
+    } else {
+      message = `مرحباً،\nأنا مهتم بمشروع *${project.name}* في ${project.city.name}.\nأرغب في حجز *${unit}* في *${floor}*.\n\n`;
+    }
+    const url = buildWhatsAppUrl(project.whatsapp || '212702060323', message);
+    window.open(url, '_blank');
+  };
+
+  return (
+    <div className="w-full bg-white rounded-3xl border border-gold/20 overflow-hidden" 
+         style={{ boxShadow: '0 20px 60px rgba(10,22,40,0.08)' }}>
+      {/* Premium Header Banner */}
+      <div className="bg-gradient-to-r from-primary via-primary/95 to-primary p-6 border-b border-gold/20 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-gold/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
+        <h3 className="text-xl font-bold text-white relative z-10 flex items-center gap-3">
+          <div className="w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center border border-gold/30">
+            <Building className="w-4 h-4 text-gold" />
+          </div>
+          {isFrench ? 'Disponibilité des Plateaux' : 'وضعيات المكاتب'}
+        </h3>
+      </div>
+
+      <div className="overflow-x-auto p-4 md:p-8">
+        <table className="w-full text-left border-collapse" dir={isFrench ? 'ltr' : 'rtl'}>
+          <thead>
+            <tr>
+              <th className="p-5 font-bold text-secondary text-sm border-b-2 border-gold/20"></th>
+              <th className="p-5 text-center border-b-2 border-gold/20">
+                <div className="font-bold text-secondary text-lg mb-1">{isFrench ? 'Plateau 1' : 'مكتب 1'}</div>
+                <div className="text-gold font-medium text-xs uppercase tracking-wider">{isFrench ? 'Façade Principale' : 'الواجهة الرئيسية'}</div>
+              </th>
+              <th className="p-5 text-center border-b-2 border-gold/20">
+                <div className="font-bold text-secondary text-lg mb-1">{isFrench ? 'Plateau 2' : 'مكتب 2'}</div>
+                <div className="text-gold font-medium text-xs uppercase tracking-wider">{isFrench ? 'Façade Arrière' : 'الواجهة الخلفية'}</div>
+              </th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-100">
+            <tr className="hover:bg-gray-50/80 transition-all duration-300 group">
+              <td className="p-5 font-bold text-secondary border-gray-100 whitespace-nowrap group-hover:text-primary transition-colors border-x">
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-2 rounded-full bg-gold"></div>
+                  {isFrench ? '1er Etage' : 'الطابق 1'}
+                </div>
+              </td>
+              <td className="p-5 text-center border-r border-gray-100">
+                <span className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold bg-red-50 text-red-600 border border-red-100 shadow-sm">
+                  {isFrench ? 'Réservée' : 'محجوز'}
+                </span>
+              </td>
+              <td className="p-5 text-center border-r border-gray-100">
+                <button 
+                  onClick={() => handleBookingClick(isFrench ? 'Plateau 2' : 'مكتب 2', isFrench ? '1er Etage' : 'الطابق 1')}
+                  className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600 border border-emerald-100 shadow-sm hover:bg-emerald-100 transition-colors cursor-pointer"
+                >
+                  {isFrench ? 'Disponible' : 'متاح'}
+                </button>
+              </td>
+            </tr>
+            <tr className="hover:bg-gray-50/80 transition-all duration-300 group bg-gray-50/30">
+              <td className="p-5 font-bold text-secondary border-gray-100 whitespace-nowrap group-hover:text-primary transition-colors border-x">
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-2 rounded-full bg-gold"></div>
+                  {isFrench ? '2ème Etage' : 'الطابق 2'}
+                </div>
+              </td>
+              <td className="p-5 text-center border-r border-gray-100">
+                <button 
+                  onClick={() => handleBookingClick(isFrench ? 'Plateau 1' : 'مكتب 1', isFrench ? '2ème Etage' : 'الطابق 2')}
+                  className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600 border border-emerald-100 shadow-sm hover:bg-emerald-100 transition-colors cursor-pointer"
+                >
+                  {isFrench ? 'Disponible' : 'متاح'}
+                </button>
+              </td>
+              <td className="p-5 text-center border-r border-gray-100">
+                <span className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold bg-red-50 text-red-600 border border-red-100 shadow-sm">
+                  {isFrench ? 'Réservée' : 'محجوز'}
+                </span>
+              </td>
+            </tr>
+            <tr className="hover:bg-gray-50/80 transition-all duration-300 group border-b border-gray-100">
+              <td className="p-5 font-bold text-secondary border-gray-100 whitespace-nowrap group-hover:text-primary transition-colors border-x">
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-2 rounded-full bg-gold"></div>
+                  {isFrench ? '3ème Etage' : 'الطابق 3'}
+                </div>
+              </td>
+              <td className="p-5 text-center border-r border-gray-100">
+                <button 
+                  onClick={() => handleBookingClick(isFrench ? 'Plateau 1' : 'مكتب 1', isFrench ? '3ème Etage' : 'الطابق 3')}
+                  className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600 border border-emerald-100 shadow-sm hover:bg-emerald-100 transition-colors cursor-pointer"
+                >
+                  {isFrench ? 'Disponible' : 'متاح'}
+                </button>
+              </td>
+              <td className="p-5 text-center border-r border-gray-100">
+                <button 
+                  onClick={() => handleBookingClick(isFrench ? 'Plateau 2' : 'مكتب 2', isFrench ? '3ème Etage' : 'الطابق 3')}
+                  className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600 border border-emerald-100 shadow-sm hover:bg-emerald-100 transition-colors cursor-pointer"
+                >
+                  {isFrench ? 'Disponible' : 'متاح'}
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )
+}
+
 export default function ProjectDetailPage() {
   const params = useParams()
   const { city, slug } = params
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
 
   const APARTMENT_INFO: Record<string, { surface: string; composition: string }> = {
     touhmo: { surface: '81 m²', composition: t('project_detail.specifications.standard') },
@@ -42,6 +161,20 @@ export default function ProjectDetailPage() {
 
   useEffect(() => {
     if (slug) {
+      if (slug === 'najma-plateau') {
+        setProject({
+          name: 'مكاتب ادارية - طريق اكلو',
+          slug: 'najma-plateau',
+          city: { name: 'تيزنيت' },
+          type: 'immeuble',
+          status: 'active',
+          description: 'مشروع المكاتب الإدارية بطريق أكلو، فضاءات عصرية مجهزة بأحدث الوسائل لتنمية أعمالكم.',
+          buildings: []
+        })
+        setIsLoading(false)
+        return
+      }
+
       fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/projects/${slug}`)
         .then((res) => res.json())
         .then((data) => {
@@ -90,16 +223,6 @@ export default function ProjectDetailPage() {
   const whatsappMessage = generateWhatsAppMessage(project.name, project.city.name, {})
   const whatsappUrl = buildWhatsAppUrl(project.whatsapp || '212702060323', whatsappMessage)
 
-  const showDesignTab = true
-  const showStatusTab = project.buildings?.length > 0
-  const showProgressTab = true
-  const showBookingTab = hasAvailableUnits && project.status === 'active' && !isLotissement
-  const showParcelsTab = isLotissement
-
-  const defaultTab = showDesignTab ? 'design' : showStatusTab ? 'status' : 'parcels'
-  const apartmentInfo = APARTMENT_INFO[projectSlug]
-  const displayArea = APARTMENT_SURFACE[projectSlug] || (project.totalArea ? `${project.totalArea} م²` : null)
-
   const heroImage = {
     'najma': '/images/najma/najma-hero.png',
     'gelmim': '/images/gelmim/gelmim-hero.png',
@@ -107,41 +230,81 @@ export default function ProjectDetailPage() {
     'tilila': '/images/tilila/tilila-hero.png',
     'touhmo': '/images/touhmo/touhmo-hero.png',
     'hay-ta9adom': '/images/hay-ta9adom/hay-ta9adom-hero.png',
+    'najma-plateau': '/images/najma/plateau.jpg',
   }[projectSlug] || '/images/najma/najma-thumbnail.jpg'
+
+  // Special logic for Najma Plateau (Coming Soon)
+  const isPlateau = projectSlug === 'najma-plateau'
+  const apartmentInfo = APARTMENT_INFO[projectSlug]
+  const displayArea = APARTMENT_SURFACE[projectSlug] || (project.totalArea ? `${project.totalArea} م²` : null)
+  
+  const showDesignTab = true
+  const showStatusTab = project.buildings?.length > 0 || isPlateau
+  const showProgressTab = true
+  const showBookingTab = (hasAvailableUnits && project.status === 'active' && !isLotissement) || isPlateau
+  const showParcelsTab = isLotissement
+
+  const defaultTab = showDesignTab ? 'design' : showStatusTab ? 'status' : 'parcels'
+
+  const ComingSoon = () => (
+    <div className="flex flex-col items-center justify-center py-32 bg-white rounded-2xl border border-border">
+      <div className="w-20 h-20 bg-gold/10 rounded-full flex items-center justify-center mb-6">
+        <Building className="w-10 h-10 text-gold animate-pulse" />
+      </div>
+      <h3 className="font-almarai text-2xl font-bold text-secondary mb-2">Coming Soon</h3>
+      <p className="text-secondary/40 font-bold uppercase tracking-[0.2em] text-xs">قريباً إن شاء الله</p>
+    </div>
+  )
 
   return (
     <main className="min-h-screen bg-cream">
       <Header />
 
       {/* Hero */}
-      <section className="relative pt-[70px] min-h-[60vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0">
-          <img src={heroImage} alt={project.name}
-            className="w-full h-full object-cover render-4k" 
-            onError={(e) => { (e.target as HTMLImageElement).src = '/images/najma/najma-thumbnail.jpg' }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-black/20" />
-        </div>
+      <section className={cn(
+        "relative pt-[70px] overflow-hidden",
+        isPlateau ? "bg-secondary" : "bg-dark"
+      )}>
+        {isPlateau && <div className="absolute inset-0 hero-overlay opacity-50" />}
+        {!isPlateau && (
+          <div className="absolute inset-0 overflow-hidden">
+            <img src={heroImage} alt={project.name}
+              className="w-full h-full object-cover render-4k blur-[4px] scale-110" 
+              onError={(e) => { (e.target as HTMLImageElement).src = '/images/najma/najma-thumbnail.jpg' }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/70 to-black/40" />
+          </div>
+        )}
         
-        <div className="container-custom relative z-10 py-16 md:py-24">
-          <BackButton />
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full border border-gold/30 bg-black/30 backdrop-blur-md mb-8">
-              <MapPin className="w-4 h-4 text-gold" />
-              <span className="text-white text-xs font-black uppercase tracking-[0.2em]">{project.city.name}</span>
+        <div className="container-custom relative z-10 py-12 md:py-20">
+          <div className="flex flex-col items-start gap-4 mb-4">
+            <BackButton />
+            <div className={cn(
+              "flex items-center gap-2",
+              isPlateau ? "text-accent" : "text-gold"
+            )}>
+              <MapPin className="w-4 h-4" />
+              <span className="text-xs font-black uppercase tracking-widest">{project.city.name}</span>
             </div>
-            
-            <h1 className="font-almarai text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 max-w-4xl leading-tight">
+          </div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }} 
+            animate={{ opacity: 1, y: 0 }}
+            className={cn(isPlateau ? "text-right" : "text-left")}
+          >
+            <h1 className={cn(
+              "font-almarai font-bold text-white mb-4 leading-tight",
+              isPlateau ? "text-3xl md:text-5xl" : "text-4xl md:text-6xl lg:text-7xl max-w-4xl"
+            )}>
               {project.name}
             </h1>
-            
-            {project.description && (
-              <p className="font-cairo text-white/70 text-xl md:text-2xl max-w-3xl leading-relaxed">
+
+            {isPlateau && (
+              <p className="text-white/80 text-lg max-w-2xl ml-auto">
                 {project.description}
               </p>
             )}
-            
-            <div className="mt-12 h-1 w-24 bg-gold shadow-[0_0_20px_#C9A84C]" />
           </motion.div>
         </div>
       </section>
@@ -228,31 +391,31 @@ export default function ProjectDetailPage() {
             <TabsList className="w-full flex flex-wrap justify-start gap-4 mb-12 p-3 rounded-2xl bg-white border border-border shadow-2xl">
               {showDesignTab && (
                 <TabsTrigger value="design"
-                  className="px-8 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all data-[state=active]:bg-secondary data-[state=active]:text-gold data-[state=inactive]:text-secondary/40 hover:text-secondary">
+                  className="px-8 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all data-[state=active]:bg-gold data-[state=active]:text-secondary data-[state=inactive]:text-secondary/40 hover:text-secondary">
                   {t('project_detail.tabs.design')}
                 </TabsTrigger>
               )}
               {showStatusTab && (
                 <TabsTrigger value="status"
-                  className="px-8 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all data-[state=active]:bg-secondary data-[state=active]:text-gold data-[state=inactive]:text-secondary/40 hover:text-secondary">
-                  {t('project_detail.tabs.status')}
+                  className="px-8 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all data-[state=active]:bg-gold data-[state=active]:text-secondary data-[state=inactive]:text-secondary/40 hover:text-secondary">
+                  {isPlateau ? (language === 'fr' ? 'État des Bureaux' : 'وضعيات المكاتب') : t('project_detail.tabs.status')}
                 </TabsTrigger>
               )}
               {showProgressTab && (
                 <TabsTrigger value="progress"
-                  className="px-8 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all data-[state=active]:bg-secondary data-[state=active]:text-gold data-[state=inactive]:text-secondary/40 hover:text-secondary">
+                  className="px-8 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all data-[state=active]:bg-gold data-[state=active]:text-secondary data-[state=inactive]:text-secondary/40 hover:text-secondary">
                   {t('project_detail.tabs.progress')}
                 </TabsTrigger>
               )}
               {showBookingTab && (
                 <TabsTrigger value="booking"
-                  className="px-8 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all data-[state=active]:bg-secondary data-[state=active]:text-gold data-[state=inactive]:text-secondary/40 hover:text-secondary">
+                  className="px-8 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all data-[state=active]:bg-gold data-[state=active]:text-secondary data-[state=inactive]:text-secondary/40 hover:text-secondary">
                   {t('project_detail.tabs.booking')}
                 </TabsTrigger>
               )}
               {showParcelsTab && (
                 <TabsTrigger value="parcels"
-                  className="px-8 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all data-[state=active]:bg-secondary data-[state=active]:text-gold data-[state=inactive]:text-secondary/40 hover:text-secondary">
+                  className="px-8 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all data-[state=active]:bg-gold data-[state=active]:text-secondary data-[state=inactive]:text-secondary/40 hover:text-secondary">
                   {t('project_detail.tabs.parcels')}
                 </TabsTrigger>
               )}
@@ -261,10 +424,18 @@ export default function ProjectDetailPage() {
             {/* Design Tab */}
             {showDesignTab && (
               <TabsContent value="design">
-                <div className="bg-white rounded-2xl border border-border overflow-hidden"
-                  style={{ boxShadow: '0 8px 40px rgba(10,22,40,0.06)' }}>
-                  <div className="p-1">
-                    <ImageSlider images={[]} projectSlug={projectSlug} category="plans" />
+                <div className="overflow-hidden">
+                  <div className="p-0">
+                    {isPlateau ? (
+                      <ImageSlider 
+                        images={[
+                          { id: '4', url: '/images/najma/plateau/4.jpg', label: '' },
+                          { id: '5', url: '/images/najma/plateau/5.jpg', label: '' },
+                        ]} 
+                      />
+                    ) : (
+                      <ImageSlider images={[]} projectSlug={projectSlug} category="plans" />
+                    )}
                   </div>
                 </div>
               </TabsContent>
@@ -273,16 +444,11 @@ export default function ProjectDetailPage() {
             {/* Status Tab */}
             {showStatusTab && (
               <TabsContent value="status">
-                {/* Apartment Info Card */}
                 {apartmentInfo && (
-                  <div className="mb-6 p-5 rounded-2xl border border-gold/20 flex flex-wrap gap-6 items-center"
-                    style={{ background: 'linear-gradient(135deg, rgba(201,168,76,0.06), rgba(201,168,76,0.02))' }}>
+                  <div className="mb-8 flex flex-wrap gap-8 items-center opacity-80">
                     {apartmentInfo.surface && (
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl flex items-center justify-center"
-                          style={{ background: 'linear-gradient(135deg, #C9A84C, #A8863A)' }}>
-                          <Ruler className="w-5 h-5 text-secondary" />
-                        </div>
+                        <Ruler className="w-5 h-5 text-gold" />
                         <div>
                           <p className="text-secondary/40 text-[10px] font-black uppercase tracking-wider">{t('project_detail.info.area')}</p>
                           <p className="font-bold text-secondary text-lg">{apartmentInfo.surface}</p>
@@ -290,10 +456,7 @@ export default function ProjectDetailPage() {
                       </div>
                     )}
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl flex items-center justify-center"
-                        style={{ background: 'linear-gradient(135deg, #C9A84C, #A8863A)' }}>
-                        <Building className="w-5 h-5 text-secondary" />
-                      </div>
+                      <Building className="w-5 h-5 text-gold" />
                       <div>
                         <p className="text-secondary/40 text-[10px] font-black uppercase tracking-wider">{t('project_detail.info.composition')}</p>
                         <p className="font-bold text-secondary">{apartmentInfo.composition}</p>
@@ -301,24 +464,33 @@ export default function ProjectDetailPage() {
                     </div>
                   </div>
                 )}
-                <div className="bg-white rounded-2xl border border-border overflow-hidden"
-                  style={{ boxShadow: '0 8px 40px rgba(10,22,40,0.06)' }}>
+                {isPlateau ? (
+                  <PlateauStatusTable project={project} />
+                ) : (
                   <ApartmentStatus
                     buildings={project.buildings}
                     projectName={project.name}
                     cityName={project.city.name}
                   />
-                </div>
+                )}
               </TabsContent>
             )}
 
             {/* Progress Tab */}
             {showProgressTab && (
               <TabsContent value="progress">
-                <div className="bg-white rounded-2xl border border-border overflow-hidden"
-                  style={{ boxShadow: '0 8px 40px rgba(10,22,40,0.06)' }}>
-                  <div className="p-1">
-                    <ImageSlider images={[]} projectSlug={projectSlug} category="chantier" />
+                <div className="overflow-hidden">
+                  <div className="p-0">
+                    {isPlateau ? (
+                      <ImageSlider 
+                        images={[
+                          { id: '6', url: '/images/najma/plateau/6.jpg', label: '' },
+                          { id: '7', url: '/images/najma/plateau/7.jpg', label: '' },
+                        ]} 
+                      />
+                    ) : (
+                      <ImageSlider images={[]} projectSlug={projectSlug} category="chantier" />
+                    )}
                   </div>
                 </div>
               </TabsContent>
@@ -327,8 +499,7 @@ export default function ProjectDetailPage() {
             {/* Booking Tab */}
             {showBookingTab && (
               <TabsContent value="booking">
-                <div className="bg-white rounded-2xl border border-border overflow-hidden"
-                  style={{ boxShadow: '0 8px 40px rgba(10,22,40,0.06)' }}>
+                <div className="overflow-hidden">
                   <BookingForm project={project} buildings={project.buildings} />
                 </div>
               </TabsContent>

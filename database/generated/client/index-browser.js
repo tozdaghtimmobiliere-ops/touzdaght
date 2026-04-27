@@ -167,6 +167,8 @@ exports.Prisma.BuildingScalarFieldEnum = {
   floorsCount: 'floorsCount',
   apartmentsPerFloor: 'apartmentsPerFloor',
   totalSurface: 'totalSurface',
+  floorLabels: 'floorLabels',
+  tableauSection: 'tableauSection',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

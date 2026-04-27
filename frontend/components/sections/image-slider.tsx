@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
 // ─── Image Components with Quality Filters ─────────────────────────────────────
-function HighQualityImage({ src, alt, className }: { src: string, alt: string, className?: string }) {
+function HighQualityImage({ src, alt, className, contain }: { src: string, alt: string, className?: string, contain?: boolean }) {
   return (
     <div className="relative w-full h-full overflow-hidden">
       <img
@@ -14,12 +14,13 @@ function HighQualityImage({ src, alt, className }: { src: string, alt: string, c
         alt={alt}
         loading="lazy"
         className={cn(
-          "w-full h-full object-cover transition-all duration-700",
-          "render-4k", // Custom class for sharpness
+          "w-full h-full transition-all duration-700",
+          contain ? "object-contain" : "object-cover",
+          "render-4k",
           className
         )}
         style={{
-          filter: 'contrast(1.15) saturate(1.1) brightness(1.03)',
+          filter: 'contrast(1.1) saturate(1.1) brightness(1.02)',
           imageRendering: 'auto'
         }}
       />
@@ -59,7 +60,7 @@ function ImageModal({ src, onClose }: { src: string, onClose: () => void }) {
 }
 
 // ─── Base Slider (Improved) ───────────────────────────────────────────────────
-function BaseSlider({ slides }: { slides: { src: string; badge?: string }[] }) {
+function BaseSlider({ slides, contain }: { slides: { src: string; badge?: string }[], contain?: boolean }) {
   const [index, setIndex] = useState(0)
   const [showModal, setShowModal] = useState(false)
 
@@ -87,13 +88,14 @@ function BaseSlider({ slides }: { slides: { src: string; badge?: string }[] }) {
             className="absolute inset-0 cursor-zoom-in"
             onClick={() => setShowModal(true)}
           >
-            <HighQualityImage src={slides[index].src} alt={slides[index].badge || "Real Estate"} />
+            <HighQualityImage src={slides[index].src} alt={slides[index].badge || "Real Estate"} contain={contain} />
 
             {slides[index].badge && (
-              <div className="absolute top-6 right-6 z-10 px-6 py-2.5 rounded-2xl text-xs font-black tracking-widest shadow-xl backdrop-blur-md bg-black/40 border border-white/20 text-gold uppercase">
+              <div className="absolute top-8 right-8 z-10 px-12 py-6 rounded-full text-2xl font-black tracking-[0.2em] shadow-2xl backdrop-blur-2xl bg-red-950/80 border border-red-500/50 text-red-500 uppercase scale-125">
                 {slides[index].badge}
               </div>
             )}
+
 
             <div className="absolute bottom-6 left-6 z-10 text-white/50 text-xs font-mono">
               {String(index + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}
@@ -176,9 +178,10 @@ interface ImageSliderProps {
   projectSlug?: string
   category?: 'plans' | 'chantier'
   type?: 'immeuble' | 'terrain'
+  contain?: boolean
 }
 
-export function ImageSlider({ images, projectSlug, category = 'plans', type }: ImageSliderProps) {
+export function ImageSlider({ images, projectSlug, category = 'plans', type, contain = true }: ImageSliderProps) {
   const [modalImage, setModalImage] = useState<string | null>(null)
 
   const getSlides = () => {
@@ -192,9 +195,9 @@ export function ImageSlider({ images, projectSlug, category = 'plans', type }: I
     if (projectSlug === 'najma') {
       if (type === 'immeuble') {
         return [
-          { src: '/images/najma/immeuble/plans/3.jpeg', badge: 'المخطط العام 1' },
-          { src: '/images/najma/immeuble/plans/4.jpeg', badge: 'المخطط العام 2' },
-          { src: '/images/najma/immeuble/plans/5.jpeg', badge: 'المخطط العام 3' },
+          { src: '/images/najma/immeuble/plans/3.jpeg', badge: 'منظر ثلاتي الابعاد 1' },
+          { src: '/images/najma/immeuble/plans/4.jpeg', badge: 'منظر ثلاتي الابعاد 2' },
+          { src: '/images/najma/immeuble/plans/5.jpeg', badge: 'منظر ثلاتي الابعاد 3' },
           { src: '/images/najma/immeuble/plans/plan-etage0najma.png', badge: 'مخطط الطابق السفلي' },
           { src: '/images/najma/immeuble/plans/plan-etage1najma.png', badge: 'مخطط الطابق الأول' },
         ]
@@ -273,7 +276,7 @@ export function ImageSlider({ images, projectSlug, category = 'plans', type }: I
 
   return (
     <div className="overflow-hidden">
-      <BaseSlider slides={slides} />
+      <BaseSlider slides={slides} contain={contain} />
     </div>
   )
 }

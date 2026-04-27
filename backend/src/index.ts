@@ -17,8 +17,13 @@ dotenv.config()
 const app = express()
 const PORT = process.env.PORT || 5000
 
+app.set('trust proxy', 1);
 
 // Security middleware
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.originalUrl}`);
+  next();
+});
 app.use(helmet())
 app.use(cors({
   origin: (origin, callback) => {
@@ -27,6 +32,7 @@ app.use(cors({
       'http://localhost:3000',
       'https://touzdaght.vercel.app',
       'https://touzdaght-frontend.vercel.app',
+      'https://tozdaght.ma'
     ]
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true)
@@ -37,17 +43,22 @@ app.use(cors({
   credentials: true,
 }))
 
+// Health check (before rate limiter)
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', timestamp: new Date().toISOString() })
+})
+
 // Rate limiting
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
+  windowMs: 15 * 60 * 1000, 
+  max: 100, 
 })
 app.use(limiter)
 
 // Stricter rate limit for auth endpoints
 const authLimiter = rateLimit({
-  windowMs: 60 * 1000, // 1 minute
-  max: 5, // 5 attempts per minute
+  windowMs: 60 * 1000, 
+  max: 20, // Increased for testing
   message: { error: 'Too many login attempts, please try again later' },
 })
 
@@ -55,18 +66,16 @@ app.use(express.json({ limit: '10mb' }))
 app.use(express.urlencoded({ extended: true }))
 
 // Routes
-app.use('/api/auth', authLimiter, authRoutes)
-app.use('/api/cities', cityRoutes)
-app.use('/api/projects', projectRoutes)
-app.use('/api/buildings', buildingRoutes)
-app.use('/api/apartments', apartmentRoutes)
-app.use('/api/parcels', parcelRoutes)
-app.use('/api/upload', uploadRoutes)
+const apiRouter = express.Router();
+apiRouter.use('/auth', authLimiter, authRoutes);
+apiRouter.use('/cities', cityRoutes);
+apiRouter.use('/projects', projectRoutes);
+apiRouter.use('/buildings', buildingRoutes);
+apiRouter.use('/apartments', apartmentRoutes);
+apiRouter.use('/parcels', parcelRoutes);
+apiRouter.use('/upload', uploadRoutes);
 
-// Health check
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() })
-})
+app.use('/api', apiRouter);
 
 // Error handling
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
@@ -95,6 +104,10 @@ setInterval(async () => {
   }
 }, 5 * 60 * 1000) // every 5 minutes
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`)
-})
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`)
+  })
+}
+
+export default app

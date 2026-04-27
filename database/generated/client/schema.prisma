@@ -61,6 +61,8 @@ model Building {
   floorsCount        Int
   apartmentsPerFloor Int
   totalSurface       Float?
+  floorLabels        String? // JSON array of custom row labels e.g. ["طابق أرضي","R+1","R+2"]
+  tableauSection     String? // optional section name for the tableau
   apartments         Apartment[]
   createdAt          DateTime    @default(now())
   updatedAt          DateTime    @updatedAt

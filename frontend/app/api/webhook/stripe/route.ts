@@ -28,11 +28,12 @@ export async function POST(req: Request) {
   const session = event.data.object as Stripe.Checkout.Session
 
   if (event.type === "checkout.session.completed") {
-    // Update Order / Project Payment Status
-    await prisma.payment.update({
-      where: { stripeId: session.id },
-      data: { status: "COMPLETED" },
-    })
+    // NOTE: prisma.payment model not implemented — placeholder for future Stripe integration
+    // await prisma.payment.update({
+    //   where: { stripeId: session.id },
+    //   data: { status: "COMPLETED" },
+    // })
+    console.log("Stripe checkout completed for session:", session.id)
   }
 
   return new NextResponse(null, { status: 200 })

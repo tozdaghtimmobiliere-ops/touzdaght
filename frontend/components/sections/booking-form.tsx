@@ -3,6 +3,11 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { MessageCircle } from 'lucide-react'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+import { Textarea } from '@/components/ui/textarea'
+import { Select } from '@/components/ui/select'
+import { toast } from 'sonner'
 import { cn, buildWhatsAppUrl, generateWhatsAppMessage, getFloorName } from '@/lib/utils'
 import { useLanguage } from '@/components/providers'
 
@@ -73,11 +78,13 @@ export function BookingForm({ project, buildings }: BookingFormProps) {
   const t = content[language as keyof typeof content] || content.ar
 
   const isSingleBuilding = SINGLE_BUILDING_PROJECTS.includes(project?.slug)
+  const isPlateau = project?.slug === 'najma-plateau'
 
   // Pour projet à une seule عمارة, on prend directement le premier building
   const [selectedBuilding, setSelectedBuilding] = useState(
     isSingleBuilding && buildings.length > 0 ? String(buildings[0].id) : ''
   )
+
   const [selectedFloor, setSelectedFloor] = useState('')
   const [selectedUnit, setSelectedUnit] = useState('')
   const [formData, setFormData] = useState({ name: '', phone: '', notes: '' })
@@ -103,18 +110,42 @@ export function BookingForm({ project, buildings }: BookingFormProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (!selectedApartment) return
+    
+    if (!isPlateau && !selectedApartment) return
 
-    const message = generateWhatsAppMessage(project.name, project.city.name, {
-      unitNumber: selectedApartment.unitNumber,
-      floor: selectedApartment.floor,
-      building: isSingleBuilding ? undefined : building?.name,
-    })
+    let message = ''
+    if (isPlateau) {
+      if (language === 'fr') {
+        message = `Bonjour,\nJe suis intéressé par le projet *${project.name}* à ${project.city.name}.\n`
+      } else {
+        message = `مرحباً،\nأنا مهتم بمشروع *${project.name}* في ${project.city.name}.\n`
+      }
+    } else {
+      message = generateWhatsAppMessage(project.name, project.city.name, {
+        unitNumber: selectedApartment.unitNumber,
+        floor: selectedApartment.floor,
+        building: isSingleBuilding ? undefined : building?.name,
+      })
+      message += `\n`
+    }
+
+    if (formData.name) {
+      message += language === 'fr' ? `\nNom complet: ${formData.name}` : `\nالاسم الكامل: ${formData.name}`
+    }
+    if (formData.phone) {
+      message += language === 'fr' ? `\nTéléphone: ${formData.phone}` : `\nرقم الهاتف: ${formData.phone}`
+    }
+    if (formData.notes) {
+      message += language === 'fr' ? `\nNotes: ${formData.notes}` : `\nملاحظات: ${formData.notes}`
+    }
+    message += `\n`
 
     const url = buildWhatsAppUrl(project.whatsapp || '212702060323', message)
     window.open(url, '_blank')
+    toast.success(t.success)
     setIsSubmitted(true)
   }
+
 
   if (isSubmitted) {
     return (
@@ -131,7 +162,7 @@ export function BookingForm({ project, buildings }: BookingFormProps) {
     b.apartments?.some((a: any) => a.status === 'available')
   )
 
-  if (!hasAvailableApartments) {
+  if (!hasAvailableApartments && !isPlateau) {
     return (
       <div className="bg-white rounded-xl p-12 text-center">
         <p className="text-text-muted">{t.noAvailable}</p>
@@ -148,21 +179,20 @@ export function BookingForm({ project, buildings }: BookingFormProps) {
         <form onSubmit={handleSubmit} className="space-y-6">
 
           {/* Projet */}
-          <div>
-            <label className="form-label">{t.project}</label>
-            <input
+          <div className="space-y-2">
+            <label className="text-sm font-bold text-text-primary dark:text-gray-300">{t.project}</label>
+            <Input
               type="text"
               value={`${project.name} - ${project.city.name}`}
               disabled
-              className="form-input bg-background-alt"
             />
           </div>
 
-          {/* العمارة — seulement si plusieurs bâtiments */}
-          {!isSingleBuilding && (
-            <div>
-              <label className="form-label">{t.building} *</label>
-              <select
+          {/* العمارة — seulement si plusieurs bâtiments et pas plateau */}
+          {!isSingleBuilding && !isPlateau && (
+            <div className="space-y-2">
+              <label className="text-sm font-bold text-text-primary dark:text-gray-300">{t.building} *</label>
+              <Select
                 required
                 value={selectedBuilding}
                 onChange={(e) => {
@@ -170,7 +200,6 @@ export function BookingForm({ project, buildings }: BookingFormProps) {
                   setSelectedFloor('')
                   setSelectedUnit('')
                 }}
-                className="form-input"
               >
                 <option value="">{t.selectBuilding}</option>
                 {buildings.map((b) => (
@@ -178,22 +207,21 @@ export function BookingForm({ project, buildings }: BookingFormProps) {
                     {b.name}
                   </option>
                 ))}
-              </select>
+              </Select>
             </div>
           )}
 
           {/* الطابق */}
           {(selectedBuilding || isSingleBuilding) && (
-            <div>
-              <label className="form-label">{t.floor} *</label>
-              <select
+            <div className="space-y-2">
+              <label className="text-sm font-bold text-text-primary dark:text-gray-300">{t.floor} *</label>
+              <Select
                 required
                 value={selectedFloor}
                 onChange={(e) => {
                   setSelectedFloor(e.target.value)
                   setSelectedUnit('')
                 }}
-                className="form-input"
               >
                 <option value="">{t.selectFloor}</option>
                 {availableFloors.map((floor: number) => (
@@ -201,19 +229,18 @@ export function BookingForm({ project, buildings }: BookingFormProps) {
                     {getFloorName(floor, language)}
                   </option>
                 ))}
-              </select>
+              </Select>
             </div>
           )}
 
           {/* الشقة */}
-          {selectedFloor && (
-            <div>
-              <label className="form-label">{t.unit} *</label>
-              <select
+          {selectedFloor && !isPlateau && (
+            <div className="space-y-2">
+              <label className="text-sm font-bold text-text-primary dark:text-gray-300">{t.unit} *</label>
+              <Select
                 required
                 value={selectedUnit}
                 onChange={(e) => setSelectedUnit(e.target.value)}
-                className="form-input"
               >
                 <option value="">{t.selectUnit}</option>
                 {availableUnits?.map((unit: any) => (
@@ -221,60 +248,56 @@ export function BookingForm({ project, buildings }: BookingFormProps) {
                     {t.unit} {unit.unitNumber}
                   </option>
                 ))}
-              </select>
+              </Select>
             </div>
           )}
 
           {/* Infos contact */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="form-label">{t.name} *</label>
-              <input
+            <div className="space-y-2">
+              <label className="text-sm font-bold text-text-primary dark:text-gray-300">{t.name} *</label>
+              <Input
                 type="text"
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="form-input"
                 placeholder={t.name}
               />
             </div>
-            <div>
-              <label className="form-label">{t.phone} *</label>
-              <input
+            <div className="space-y-2">
+              <label className="text-sm font-bold text-text-primary dark:text-gray-300">{t.phone} *</label>
+              <Input
                 type="tel"
                 required
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="form-input"
                 placeholder={t.phone}
               />
             </div>
           </div>
 
-          <div>
-            <label className="form-label">{t.notes}</label>
-            <textarea
-              rows={3}
+          <div className="space-y-2">
+            <label className="text-sm font-bold text-text-primary dark:text-gray-300">{t.notes}</label>
+            <Textarea
               value={formData.notes}
               onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-              className="form-input resize-none"
               placeholder={t.notes}
             />
           </div>
 
-          <button
+          <Button
             type="submit"
-            disabled={!selectedUnit}
+            size="lg"
+            variant="luxury"
+            disabled={!isPlateau && !selectedUnit}
             className={cn(
-              'w-full inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg font-bold text-lg transition-colors',
-              selectedUnit
-                ? 'bg-status-available text-white hover:bg-green-600'
-                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              "w-full flex items-center justify-center gap-2",
+              (!isPlateau && !selectedUnit) && "opacity-50 select-none pointer-events-none"
             )}
           >
             <MessageCircle className="w-5 h-5" />
             {t.submit}
-          </button>
+          </Button>
         </form>
       </motion.div>
     </div>

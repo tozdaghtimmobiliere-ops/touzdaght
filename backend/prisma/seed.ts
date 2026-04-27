@@ -1,5 +1,8 @@
-import { PrismaClient } from '../generated/client'
+import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcryptjs'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const prisma = new PrismaClient()
 
@@ -8,7 +11,7 @@ async function main() {
 
   // Create admin users
   const superAdminPassword = await bcrypt.hash('nezhatouzdght2026', 12)
-  const adminPassword = await bcrypt.hash('rachidtouzdght2026', 12)
+  const adminPassword = await bcrypt.hash('rachid123456', 12)
 
   await prisma.admin.upsert({
     where: { username: 'nezha@touzdght' },

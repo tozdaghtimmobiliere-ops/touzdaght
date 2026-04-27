@@ -94,7 +94,7 @@ export default function NajmaSelectionPage() {
       {/* Selection Cards */}
       <section className="py-24 relative">
         <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto px-4">
 
             {/* Card Immeuble */}
             <motion.div
@@ -160,46 +160,6 @@ export default function NajmaSelectionPage() {
               </Link>
             </motion.div>
 
-            {/* Card Location */}
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.8 }}
-              className="md:col-span-2 lg:col-span-1 lg:max-w-md mx-auto w-full"
-            >
-              <a 
-                href="https://maps.app.goo.gl/fXcf9BPCcLGGPAeo7?g_st=aw" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="block group"
-              >
-                <div className="project-card-luxury bg-white group-hover:-translate-y-4 transition-all duration-500 overflow-hidden">
-                  <div className="aspect-[4/3] relative flex items-center justify-center bg-cream/50 overflow-hidden">
-                    <div className="absolute inset-0 bg-secondary/5 group-hover:bg-secondary/10 transition-colors duration-500" />
-                    <img
-                      src="/images/najma/location.jpeg"
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      alt="موقع المشروع"
-                    />
-                  </div>
-                  <div className="p-8 text-center">
-                    <h2 className="font-almarai text-2xl md:text-3xl font-black text-secondary mb-4 group-hover:text-gold transition-colors duration-300">
-                      موقع المشروع
-                    </h2>
-                    <p className="font-cairo text-secondary/60 text-lg leading-relaxed mb-6 dir-rtl">
-                      الرابط بالأقمار الصناعية : 
-                      <span className="block text-sm text-blue-600 mt-2 break-all font-sans underline">
-                        https://maps.app.goo.gl/fXcf9BPCcLGGPAeo7?g_st=aw
-                      </span>
-                    </p>
-                    <div className="inline-flex items-center gap-2 text-gold font-black uppercase tracking-widest text-xs border-b border-gold/30 pb-1 group-hover:border-gold transition-all">
-                      فتح الخريطة
-                      <ArrowLeft className="w-4 h-4 rotate-180" />
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </motion.div>
 
           </div>
       {/* Project Location Map Section */}

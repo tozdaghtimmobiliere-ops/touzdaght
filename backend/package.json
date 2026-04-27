@@ -4,8 +4,9 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "build": "npx prisma generate --schema=../database/prisma/schema.prisma && tsc",
-    "start": "npx prisma generate --schema=../database/prisma/schema.prisma && node dist/index.js",
+    "build": "npx prisma generate && tsc",
+    "postinstall": "prisma generate",
+    "start": "npx prisma generate && node dist/index.js",
     "lint": "eslint src --ext .ts"
   },
   "dependencies": {

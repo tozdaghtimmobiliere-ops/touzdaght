@@ -15,6 +15,7 @@ import {
   Menu,
   X,
   ChevronLeft,
+  LayoutGrid,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -22,12 +23,14 @@ const sidebarLinks = {
   super_admin: [
     { href: '/admin/dashboard', label: 'لوحة التحكم', icon: LayoutDashboard },
     { href: '/admin/projects', label: 'إدارة المشاريع', icon: Building2 },
+    { href: '/admin/tableaux', label: 'إدارة الجداول', icon: LayoutGrid },
     { href: '/admin/units', label: 'إدارة الوحدات', icon: Home },
     { href: '/admin/parcels', label: 'إدارة البقع', icon: MapPin },
     { href: '/admin/media', label: 'إدارة الصور', icon: Image },
     { href: '/admin/cities', label: 'إدارة المدن', icon: Globe },
   ],
   admin: [
+    { href: '/admin/tableaux', label: 'إدارة الجداول', icon: LayoutGrid },
     { href: '/admin/units', label: 'إدارة الوحدات', icon: Home },
     { href: '/admin/parcels', label: 'إدارة البقع', icon: MapPin },
   ],
@@ -51,7 +54,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       return
     }
 
-    setUser(JSON.parse(userData))
+    try {
+      setUser(JSON.parse(userData))
+    } catch (e) {
+      console.error('Failed to parse user data', e)
+      localStorage.removeItem('tozdaght_user')
+      localStorage.removeItem('tozdaght_token')
+      router.push('/admin')
+    }
   }, [pathname, router])
 
   const handleLogout = () => {
@@ -171,13 +181,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-primary-light rounded-full flex items-center justify-center">
                 <span className="text-primary font-bold">
-                  {user.username.charAt(0).toUpperCase()}
+                  {user?.username ? user.username.charAt(0).toUpperCase() : 'A'}
                 </span>
               </div>
               <div className="hidden sm:block">
-                <p className="font-semibold text-text-primary text-sm">{user.username}</p>
+                <p className="font-semibold text-text-primary text-sm">{user?.username || 'Admin'}</p>
                 <p className="text-text-muted text-xs">
-                  {user.role === 'super_admin' ? 'مدير النظام' : 'مدير'}
+                  {user?.role === 'super_admin' ? 'مدير النظام' : 'مدير'}
                 </p>
               </div>
             </div>

@@ -4764,6 +4764,8 @@ export namespace Prisma {
     floorsCount: number | null
     apartmentsPerFloor: number | null
     totalSurface: number | null
+    floorLabels: string | null
+    tableauSection: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -4775,6 +4777,8 @@ export namespace Prisma {
     floorsCount: number | null
     apartmentsPerFloor: number | null
     totalSurface: number | null
+    floorLabels: string | null
+    tableauSection: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -4786,6 +4790,8 @@ export namespace Prisma {
     floorsCount: number
     apartmentsPerFloor: number
     totalSurface: number
+    floorLabels: number
+    tableauSection: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -4815,6 +4821,8 @@ export namespace Prisma {
     floorsCount?: true
     apartmentsPerFloor?: true
     totalSurface?: true
+    floorLabels?: true
+    tableauSection?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -4826,6 +4834,8 @@ export namespace Prisma {
     floorsCount?: true
     apartmentsPerFloor?: true
     totalSurface?: true
+    floorLabels?: true
+    tableauSection?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -4837,6 +4847,8 @@ export namespace Prisma {
     floorsCount?: true
     apartmentsPerFloor?: true
     totalSurface?: true
+    floorLabels?: true
+    tableauSection?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -4935,6 +4947,8 @@ export namespace Prisma {
     floorsCount: number
     apartmentsPerFloor: number
     totalSurface: number | null
+    floorLabels: string | null
+    tableauSection: string | null
     createdAt: Date
     updatedAt: Date
     _count: BuildingCountAggregateOutputType | null
@@ -4965,6 +4979,8 @@ export namespace Prisma {
     floorsCount?: boolean
     apartmentsPerFloor?: boolean
     totalSurface?: boolean
+    floorLabels?: boolean
+    tableauSection?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     project?: boolean | ProjectDefaultArgs<ExtArgs>
@@ -4979,6 +4995,8 @@ export namespace Prisma {
     floorsCount?: boolean
     apartmentsPerFloor?: boolean
     totalSurface?: boolean
+    floorLabels?: boolean
+    tableauSection?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     project?: boolean | ProjectDefaultArgs<ExtArgs>
@@ -4991,6 +5009,8 @@ export namespace Prisma {
     floorsCount?: boolean
     apartmentsPerFloor?: boolean
     totalSurface?: boolean
+    floorLabels?: boolean
+    tableauSection?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
@@ -5017,6 +5037,8 @@ export namespace Prisma {
       floorsCount: number
       apartmentsPerFloor: number
       totalSurface: number | null
+      floorLabels: string | null
+      tableauSection: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["building"]>
@@ -5420,6 +5442,8 @@ export namespace Prisma {
     readonly floorsCount: FieldRef<"Building", 'Int'>
     readonly apartmentsPerFloor: FieldRef<"Building", 'Int'>
     readonly totalSurface: FieldRef<"Building", 'Float'>
+    readonly floorLabels: FieldRef<"Building", 'String'>
+    readonly tableauSection: FieldRef<"Building", 'String'>
     readonly createdAt: FieldRef<"Building", 'DateTime'>
     readonly updatedAt: FieldRef<"Building", 'DateTime'>
   }
@@ -9876,6 +9900,8 @@ export namespace Prisma {
     floorsCount: 'floorsCount',
     apartmentsPerFloor: 'apartmentsPerFloor',
     totalSurface: 'totalSurface',
+    floorLabels: 'floorLabels',
+    tableauSection: 'tableauSection',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -10293,6 +10319,8 @@ export namespace Prisma {
     floorsCount?: IntFilter<"Building"> | number
     apartmentsPerFloor?: IntFilter<"Building"> | number
     totalSurface?: FloatNullableFilter<"Building"> | number | null
+    floorLabels?: StringNullableFilter<"Building"> | string | null
+    tableauSection?: StringNullableFilter<"Building"> | string | null
     createdAt?: DateTimeFilter<"Building"> | Date | string
     updatedAt?: DateTimeFilter<"Building"> | Date | string
     project?: XOR<ProjectRelationFilter, ProjectWhereInput>
@@ -10306,6 +10334,8 @@ export namespace Prisma {
     floorsCount?: SortOrder
     apartmentsPerFloor?: SortOrder
     totalSurface?: SortOrderInput | SortOrder
+    floorLabels?: SortOrderInput | SortOrder
+    tableauSection?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     project?: ProjectOrderByWithRelationInput
@@ -10322,6 +10352,8 @@ export namespace Prisma {
     floorsCount?: IntFilter<"Building"> | number
     apartmentsPerFloor?: IntFilter<"Building"> | number
     totalSurface?: FloatNullableFilter<"Building"> | number | null
+    floorLabels?: StringNullableFilter<"Building"> | string | null
+    tableauSection?: StringNullableFilter<"Building"> | string | null
     createdAt?: DateTimeFilter<"Building"> | Date | string
     updatedAt?: DateTimeFilter<"Building"> | Date | string
     project?: XOR<ProjectRelationFilter, ProjectWhereInput>
@@ -10335,6 +10367,8 @@ export namespace Prisma {
     floorsCount?: SortOrder
     apartmentsPerFloor?: SortOrder
     totalSurface?: SortOrderInput | SortOrder
+    floorLabels?: SortOrderInput | SortOrder
+    tableauSection?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: BuildingCountOrderByAggregateInput
@@ -10354,6 +10388,8 @@ export namespace Prisma {
     floorsCount?: IntWithAggregatesFilter<"Building"> | number
     apartmentsPerFloor?: IntWithAggregatesFilter<"Building"> | number
     totalSurface?: FloatNullableWithAggregatesFilter<"Building"> | number | null
+    floorLabels?: StringNullableWithAggregatesFilter<"Building"> | string | null
+    tableauSection?: StringNullableWithAggregatesFilter<"Building"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Building"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Building"> | Date | string
   }
@@ -10948,6 +10984,8 @@ export namespace Prisma {
     floorsCount: number
     apartmentsPerFloor: number
     totalSurface?: number | null
+    floorLabels?: string | null
+    tableauSection?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutBuildingsInput
@@ -10961,6 +10999,8 @@ export namespace Prisma {
     floorsCount: number
     apartmentsPerFloor: number
     totalSurface?: number | null
+    floorLabels?: string | null
+    tableauSection?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     apartments?: ApartmentUncheckedCreateNestedManyWithoutBuildingInput
@@ -10971,6 +11011,8 @@ export namespace Prisma {
     floorsCount?: IntFieldUpdateOperationsInput | number
     apartmentsPerFloor?: IntFieldUpdateOperationsInput | number
     totalSurface?: NullableFloatFieldUpdateOperationsInput | number | null
+    floorLabels?: NullableStringFieldUpdateOperationsInput | string | null
+    tableauSection?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutBuildingsNestedInput
@@ -10984,6 +11026,8 @@ export namespace Prisma {
     floorsCount?: IntFieldUpdateOperationsInput | number
     apartmentsPerFloor?: IntFieldUpdateOperationsInput | number
     totalSurface?: NullableFloatFieldUpdateOperationsInput | number | null
+    floorLabels?: NullableStringFieldUpdateOperationsInput | string | null
+    tableauSection?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     apartments?: ApartmentUncheckedUpdateManyWithoutBuildingNestedInput
@@ -10996,6 +11040,8 @@ export namespace Prisma {
     floorsCount: number
     apartmentsPerFloor: number
     totalSurface?: number | null
+    floorLabels?: string | null
+    tableauSection?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -11005,6 +11051,8 @@ export namespace Prisma {
     floorsCount?: IntFieldUpdateOperationsInput | number
     apartmentsPerFloor?: IntFieldUpdateOperationsInput | number
     totalSurface?: NullableFloatFieldUpdateOperationsInput | number | null
+    floorLabels?: NullableStringFieldUpdateOperationsInput | string | null
+    tableauSection?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11016,6 +11064,8 @@ export namespace Prisma {
     floorsCount?: IntFieldUpdateOperationsInput | number
     apartmentsPerFloor?: IntFieldUpdateOperationsInput | number
     totalSurface?: NullableFloatFieldUpdateOperationsInput | number | null
+    floorLabels?: NullableStringFieldUpdateOperationsInput | string | null
+    tableauSection?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11744,6 +11794,8 @@ export namespace Prisma {
     floorsCount?: SortOrder
     apartmentsPerFloor?: SortOrder
     totalSurface?: SortOrder
+    floorLabels?: SortOrder
+    tableauSection?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -11763,6 +11815,8 @@ export namespace Prisma {
     floorsCount?: SortOrder
     apartmentsPerFloor?: SortOrder
     totalSurface?: SortOrder
+    floorLabels?: SortOrder
+    tableauSection?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -11774,6 +11828,8 @@ export namespace Prisma {
     floorsCount?: SortOrder
     apartmentsPerFloor?: SortOrder
     totalSurface?: SortOrder
+    floorLabels?: SortOrder
+    tableauSection?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -12682,6 +12738,8 @@ export namespace Prisma {
     floorsCount: number
     apartmentsPerFloor: number
     totalSurface?: number | null
+    floorLabels?: string | null
+    tableauSection?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     apartments?: ApartmentCreateNestedManyWithoutBuildingInput
@@ -12693,6 +12751,8 @@ export namespace Prisma {
     floorsCount: number
     apartmentsPerFloor: number
     totalSurface?: number | null
+    floorLabels?: string | null
+    tableauSection?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     apartments?: ApartmentUncheckedCreateNestedManyWithoutBuildingInput
@@ -12824,6 +12884,8 @@ export namespace Prisma {
     floorsCount?: IntFilter<"Building"> | number
     apartmentsPerFloor?: IntFilter<"Building"> | number
     totalSurface?: FloatNullableFilter<"Building"> | number | null
+    floorLabels?: StringNullableFilter<"Building"> | string | null
+    tableauSection?: StringNullableFilter<"Building"> | string | null
     createdAt?: DateTimeFilter<"Building"> | Date | string
     updatedAt?: DateTimeFilter<"Building"> | Date | string
   }
@@ -13165,6 +13227,8 @@ export namespace Prisma {
     floorsCount: number
     apartmentsPerFloor: number
     totalSurface?: number | null
+    floorLabels?: string | null
+    tableauSection?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutBuildingsInput
@@ -13177,6 +13241,8 @@ export namespace Prisma {
     floorsCount: number
     apartmentsPerFloor: number
     totalSurface?: number | null
+    floorLabels?: string | null
+    tableauSection?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -13202,6 +13268,8 @@ export namespace Prisma {
     floorsCount?: IntFieldUpdateOperationsInput | number
     apartmentsPerFloor?: IntFieldUpdateOperationsInput | number
     totalSurface?: NullableFloatFieldUpdateOperationsInput | number | null
+    floorLabels?: NullableStringFieldUpdateOperationsInput | string | null
+    tableauSection?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutBuildingsNestedInput
@@ -13214,6 +13282,8 @@ export namespace Prisma {
     floorsCount?: IntFieldUpdateOperationsInput | number
     apartmentsPerFloor?: IntFieldUpdateOperationsInput | number
     totalSurface?: NullableFloatFieldUpdateOperationsInput | number | null
+    floorLabels?: NullableStringFieldUpdateOperationsInput | string | null
+    tableauSection?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13399,6 +13469,8 @@ export namespace Prisma {
     floorsCount: number
     apartmentsPerFloor: number
     totalSurface?: number | null
+    floorLabels?: string | null
+    tableauSection?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -13430,6 +13502,8 @@ export namespace Prisma {
     floorsCount?: IntFieldUpdateOperationsInput | number
     apartmentsPerFloor?: IntFieldUpdateOperationsInput | number
     totalSurface?: NullableFloatFieldUpdateOperationsInput | number | null
+    floorLabels?: NullableStringFieldUpdateOperationsInput | string | null
+    tableauSection?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     apartments?: ApartmentUpdateManyWithoutBuildingNestedInput
@@ -13441,6 +13515,8 @@ export namespace Prisma {
     floorsCount?: IntFieldUpdateOperationsInput | number
     apartmentsPerFloor?: IntFieldUpdateOperationsInput | number
     totalSurface?: NullableFloatFieldUpdateOperationsInput | number | null
+    floorLabels?: NullableStringFieldUpdateOperationsInput | string | null
+    tableauSection?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     apartments?: ApartmentUncheckedUpdateManyWithoutBuildingNestedInput
@@ -13452,6 +13528,8 @@ export namespace Prisma {
     floorsCount?: IntFieldUpdateOperationsInput | number
     apartmentsPerFloor?: IntFieldUpdateOperationsInput | number
     totalSurface?: NullableFloatFieldUpdateOperationsInput | number | null
+    floorLabels?: NullableStringFieldUpdateOperationsInput | string | null
+    tableauSection?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

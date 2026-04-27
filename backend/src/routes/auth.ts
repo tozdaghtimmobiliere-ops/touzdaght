@@ -19,18 +19,24 @@ router.post('/login', [
     }
 
     const { username, password } = req.body
+    const cleanedUsername = username.trim().toLowerCase();
+    
+    console.log(`Login attempt for: [${cleanedUsername}]`);
 
     const admin = await prisma.admin.findUnique({
-      where: { username },
+      where: { username: cleanedUsername },
     })
 
     if (!admin) {
+      console.log(`User not found in DB: [${cleanedUsername}]`);
       return res.status(401).json({ error: 'Invalid credentials' })
     }
 
     const isValidPassword = await bcrypt.compare(password, admin.passwordHash)
+    console.log(`Password match for ${cleanedUsername}: ${isValidPassword}`);
 
     if (!isValidPassword) {
+      console.log(`Password mismatch for ${cleanedUsername}`);
       return res.status(401).json({ error: 'Invalid credentials' })
     }
 
@@ -51,9 +57,13 @@ router.post('/login', [
         tokens,
       },
     })
-  } catch (error) {
-    console.error('Login error:', error)
-    res.status(500).json({ error: 'Internal server error' })
+  } catch (error: any) {
+    console.error('FULL LOGIN ERROR:', error.message, error.stack)
+    res.status(500).json({ 
+      error: 'Internal server error',
+      details: error.message,
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+    })
   }
 })
 
@@ -87,6 +97,25 @@ router.get('/me', async (req: Request, res: Response) => {
 // Logout
 router.post('/logout', async (req: Request, res: Response) => {
   res.json({ success: true, message: 'Logged out successfully' })
+})
+
+// Emergency create admin (REMOVE AFTER USE)
+router.get('/create-test-admin', async (req: Request, res: Response) => {
+  try {
+    const passwordHash = await bcrypt.hash('admin123456', 12)
+    const admin = await prisma.admin.upsert({
+      where: { username: 'admin@touzdght' },
+      update: { passwordHash },
+      create: {
+        username: 'admin@touzdght',
+        passwordHash,
+        role: 'super_admin',
+      },
+    })
+    res.json({ success: true, message: 'Admin created/updated', username: admin.username })
+  } catch (error: any) {
+    res.status(500).json({ error: error.message })
+  }
 })
 
 export default router

@@ -2,13 +2,24 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { cn, getStatusColor, getStatusText, getFloorName, buildWhatsAppUrl, generateWhatsAppMessage } from '@/lib/utils'
+import { cn, getFloorName, buildWhatsAppUrl, generateWhatsAppMessage } from '@/lib/utils'
 import { useLanguage } from '@/components/providers'
 
 interface ApartmentStatusProps {
   buildings: any[]
   projectName: string
   cityName: string
+}
+
+// Helper: get floor label from building's custom labels or fall back to default
+function getCustomFloorLabel(building: any, floor: number, language: string): string {
+  if (building?.floorLabels) {
+    try {
+      const labels = JSON.parse(building.floorLabels) as string[]
+      if (labels[floor]) return labels[floor]
+    } catch {}
+  }
+  return getFloorName(floor, language)
 }
 
 const content = {
@@ -114,7 +125,7 @@ export function ApartmentStatus({ buildings, projectName, cityName }: ApartmentS
               className="border border-border rounded-xl p-6"
             >
               <h4 className="font-almarai font-bold text-lg text-text-primary mb-4">
-                {getFloorName(parseInt(floor), language)}
+                {getCustomFloorLabel(building, parseInt(floor), language)}
               </h4>
               <div className="flex flex-wrap gap-4">
                 {apartmentsByFloor[floor]

@@ -1,9 +1,8 @@
 import axios from 'axios'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'
-
+// Use a relative path to trigger Next.js rewrites, ensuring it works in both local and production
 const api = axios.create({
-  baseURL: `${API_URL}/api`,
+  baseURL: '/api',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -67,7 +66,15 @@ export const buildingsApi = {
   getByProject: (projectId: number) =>
     api.get('/buildings', { params: { project: projectId } }),
   getById: (id: number) => api.get(`/buildings/${id}`),
-  create: (data: any) => api.post('/buildings', data),
+  create: (data: {
+    projectId: number
+    name: string
+    floorsCount: number
+    apartmentsPerFloor: number
+    totalSurface?: number
+    floorLabels?: string[]
+    tableauSection?: string
+  }) => api.post('/buildings', data),
   update: (id: number, data: any) => api.put(`/buildings/${id}`, data),
   delete: (id: number) => api.delete(`/buildings/${id}`),
 }

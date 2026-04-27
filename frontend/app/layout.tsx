@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import { Cairo, Almarai } from 'next/font/google'
 import './globals.css'
 import { Providers } from '@/components/providers'
-import { SplashScreen } from '@/components/ui/splash-screen'
+import { ThemeProvider } from '@/components/providers/theme-provider'
+import { Toaster } from 'sonner'
 
 const baseUrl = process.env.NEXTAUTH_URL || 'https://tozdaght.ma'
 
@@ -53,7 +54,6 @@ export const metadata: Metadata = {
     type: 'website',
     url: 'https://tozdaght.ma',
     locale: 'ar_MA',
-    url: 'https://tozdaght.ma',
     siteName: 'توزدغت للعقار والبناء',
     images: [
       {
@@ -187,10 +187,12 @@ export default function RootLayout({
         />
       </head>
       <body className="font-cairo antialiased">
-        <Providers>
-          <SplashScreen />
-          {children}
-        </Providers>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Toaster position="bottom-center" richColors />
+          <Providers>
+            {children}
+          </Providers>
+        </ThemeProvider>
       </body>
     </html>
   )

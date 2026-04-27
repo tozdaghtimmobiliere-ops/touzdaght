@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/index.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/index.ts"
+    }
+  ],
+  "env": {
+    "DATABASE_URL": "postgresql://neondb_owner:npg_KF9fhyo3eVuJ@ep-mute-morning-anbgnh7i-pooler.c-6.us-east-1.aws.neon.tech/neondb?channel_binding=require&connect_timeout=15&sslmode=require",
+    "DIRECT_URL": "postgresql://neondb_owner:npg_KF9fhyo3eVuJ@ep-mute-morning-anbgnh7i.c-6.us-east-1.aws.neon.tech/neondb?channel_binding=require&sslmode=require",
+    "JWT_SECRET": "your_jwt_secret_here_2026",
+    "NODE_ENV": "production",
+    "FRONTEND_URL": "https://tozdaght.ma"
+  }
+}
