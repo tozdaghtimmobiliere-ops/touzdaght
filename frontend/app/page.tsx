@@ -34,11 +34,11 @@ const projectTypes: Record<string, Record<string, string>> = {
 
 // Projets fixes affichés dans l'accueil — najma et gelmim en priorité
 const FEATURED_PROJECTS = [
-  { id: 1, slug: 'najma', name: 'تجزءة و شقق النجمة', status: 'active', type: 'residence', city: { name: 'تيزنيت', slug: 'tiznit' } },
+  { id: 1, slug: 'najma', name: 'تجزئة النجمة — الشقق السكنية', status: 'active', type: 'residence', city: { name: 'تيزنيت', slug: 'tiznit' } },
+  { id: 5, slug: 'najma-plateau', name: 'مكاتب ادارية - طريق اكلو', status: 'active', type: 'commercial', city: { name: 'تيزنيت', slug: 'tiznit' } },
   { id: 2, slug: 'gelmim', name: 'شقق حي سيدي معروف طريق كلميم', status: 'active', type: 'residence', city: { name: 'تيزنيت', slug: 'tiznit' } },
   { id: 3, slug: 'touhmo', name: 'شقق حي المزار - توهمو', status: 'active', type: 'residence', city: { name: 'أيت ملول', slug: 'ait-melloul' } },
   { id: 4, slug: 'hay-ta9adom', name: 'شقق حي التقدم', status: 'active', type: 'residence', city: { name: 'القليعة', slug: 'l9li3a' } },
-  { id: 5, slug: 'najma-plateau', name: 'مكاتب ادارية - طريق اكلو', status: 'active', type: 'commercial', city: { name: 'تيزنيت', slug: 'tiznit' } },
 ]
 
 // ─── Hero Slider ───────────────────────────────────────────────────────────────
@@ -227,7 +227,7 @@ function AboutSection() {
   const content = language === 'ar' ? {
     label: 'من نحن',
     title: 'توزدغت للعقار والبناء',
-    p1: 'توزدغت هي الشركة الرائدة في مجال العقار والبناء بمدينة تيزنيت ومنطقة سوس، حيث نقدم حلولاً عقارية متكاملة تشمل الشقق السكنية والبقع الأرضية والمكاتب الإدارية وفق أعلى معايير الجودة والاحترافية.',
+    p1: 'توزدغت هي شركة ناشئة في مجال العقار والبناء بمدينة تيزنيت ومنطقة سوس، حيث نقدم حلولاً عقارية متكاملة تشمل الشقق السكنية والبقع الأرضية والمكاتب الإدارية وفق معايير الجودة والاحترافية.',
     p2: 'تتمثل مهمتنا في توزدغت في تصميم وتنفيذ مشاريع عمرانية متميزة تلبي احتياجات السكن والاستثمار العقاري في المغرب، مع توفير مواكبة شاملة لزبنائنا في جميع مراحل التملك.',
     servicesLabel: 'لماذا تختار توزدغت للاستثمار العقاري؟',
     services: ['بناء وتشييد عصري', 'بقع أرضية محفظة ومجهزة', 'مواقع استراتيجية في تيزنيت', 'إدارة مشاريع احترافية', 'استشارات عقارية متخصصة', 'ضمان الجودة والمصداقية'],
@@ -264,8 +264,8 @@ function AboutSection() {
             </div>
             <h2 className="font-almarai text-3xl md:text-4xl font-bold text-white mb-4">توزدغت للعقار والبناء - جودة ومصداقية</h2>
             <div className="gold-line w-12 mb-6" />
-            <p className="text-white/70 mb-4 leading-relaxed">{content.p1}</p>
-            <p className="text-white/70 mb-6 leading-relaxed">{content.p2}</p>
+            <p className="text-white mb-4 leading-relaxed">{content.p1}</p>
+            <p className="text-white mb-6 leading-relaxed">{content.p2}</p>
             <p className="font-bold text-white mb-4 text-sm">{content.servicesLabel}</p>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-8">
               {content.services.map((service, index) => (
@@ -297,11 +297,11 @@ function ServicesSection() {
     subtitle: 'نقدم مجموعة شاملة من الخدمات العقارية بأعلى معايير الجودة',
     items: [
       { title: 'البناء والعمارة', desc: 'تشييد المباني السكنية والتجارية بأعلى معايير الجودة', icon: Building2 },
-      { title: 'تجهيز الأراضي', desc: 'تهيئة وتجهيز الأراضي وتحويلها إلى مشاريع سكنية متكاملة', icon: MapPin },
-      { title: 'تسيير المشاريع', desc: 'إدارة شاملة لجميع مراحل المشاريع العقارية', icon: Briefcase },
-      { title: 'الأعمال العقارية', desc: 'خدمات متكاملة في بيع وشراء وتأجير العقارات', icon: Home },
-      { title: 'الدراسات التقنية', desc: 'دراسات تقنية ومعمارية دقيقة لضمان نجاح المشاريع', icon: FileText },
-      { title: 'شراكات استثمارية', desc: 'فرص استثمارية مميزة بشراكات استراتيجية ناجحة', icon: Users },
+      { title: 'تجهيز الأراضي', desc: 'تهيئة وتجهيز الأراضي وتحويلها إلى مشاريع تجزئات و بقع للبيع أو البناء', icon: MapPin },
+      { title: 'تسيير المشاريع', desc: 'إدارة شاملة لجميع مراحل المشاريع العقارية من مرحلة التصميم الى الاستغلال', icon: Briefcase },
+      { title: 'الأعمال العقارية', desc: 'خدمات متكاملة في بيع وشراء و كراء العقارات', icon: Home },
+      { title: 'الدراسات التقنية', desc: 'دراسات تقنية ومعمارية دقيقة لضمان نجاح المشاريع الصغيرة و الكبيرة', icon: FileText },
+      { title: 'شراكات استثمارية', desc: 'فرص استثمارية مميزة بشراكات استراتيجية ناجحة تضمن لك مداخيل عالية', icon: Users },
     ]
   } : {
     title: 'Nos Services',
@@ -334,7 +334,7 @@ function ServicesSection() {
                 <service.icon className="w-6 h-6 text-gold" />
               </div>
               <h3 className="font-almarai font-bold text-lg text-secondary dark:text-white mb-2">{service.title}</h3>
-              <p className="text-secondary/50 dark:text-gray-400 text-sm">{service.desc}</p>
+              <p className="text-secondary dark:text-gray-300 text-sm">{service.desc}</p>
             </motion.div>
           ))}
         </div>

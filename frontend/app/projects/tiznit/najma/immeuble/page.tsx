@@ -26,7 +26,7 @@ const fallbackProjectData = {
         { id: 102, unitNumber: '2', floor: 0, surface: 80, rooms: 3, status: 'available' },
         { id: 111, unitNumber: '1', floor: 1, surface: 80, rooms: 3, status: 'available' },
         { id: 112, unitNumber: '2', floor: 1, surface: 80, rooms: 3, status: 'available' },
-        { id: 121, unitNumber: '1', floor: 2, surface: 80, rooms: 3, status: 'sold' },
+        { id: 121, unitNumber: '1', floor: 2, surface: 80, rooms: 3, status: 'available' },
         { id: 122, unitNumber: '2', floor: 2, surface: 80, rooms: 3, status: 'available' },
         { id: 131, unitNumber: '1', floor: 3, surface: 80, rooms: 3, status: 'sold' },
         { id: 132, unitNumber: '2', floor: 3, surface: 80, rooms: 3, status: 'available' },
@@ -38,22 +38,72 @@ const fallbackProjectData = {
       id: 2,
       name: 'B',
       apartments: [
-        { id: 201, unitNumber: '1', floor: 0, surface: 80, rooms: 3, status: 'available' }, { id: 202, unitNumber: '2', floor: 0, surface: 80, rooms: 3, status: 'sold' }, { id: 203, unitNumber: '3', floor: 0, surface: 80, rooms: 3, status: 'available' }, { id: 204, unitNumber: '4', floor: 0, surface: 80, rooms: 3, status: 'available' }, { id: 205, unitNumber: '5', floor: 0, surface: 80, rooms: 3, status: 'available' },
-        { id: 211, unitNumber: '1', floor: 1, surface: 80, rooms: 3, status: 'available' }, { id: 212, unitNumber: '2', floor: 1, surface: 80, rooms: 3, status: 'sold' }, { id: 213, unitNumber: '3', floor: 1, surface: 80, rooms: 3, status: 'available' }, { id: 214, unitNumber: '4', floor: 1, surface: 80, rooms: 3, status: 'available' }, { id: 215, unitNumber: '5', floor: 1, surface: 80, rooms: 3, status: 'available' },
-        { id: 221, unitNumber: '1', floor: 2, surface: 80, rooms: 3, status: 'sold' }, { id: 222, unitNumber: '2', floor: 2, surface: 80, rooms: 3, status: 'sold' }, { id: 223, unitNumber: '3', floor: 2, surface: 80, rooms: 3, status: 'available' }, { id: 224, unitNumber: '4', floor: 2, surface: 80, rooms: 3, status: 'available' }, { id: 225, unitNumber: '5', floor: 2, surface: 80, rooms: 3, status: 'available' },
-        { id: 231, unitNumber: '1', floor: 3, surface: 80, rooms: 3, status: 'available' }, { id: 232, unitNumber: '2', floor: 3, surface: 80, rooms: 3, status: 'sold' }, { id: 233, unitNumber: '3', floor: 3, surface: 80, rooms: 3, status: 'available' }, { id: 234, unitNumber: '4', floor: 3, surface: 80, rooms: 3, status: 'available' }, { id: 235, unitNumber: '5', floor: 3, surface: 80, rooms: 3, status: 'available' },
-        { id: 241, unitNumber: '1', floor: 4, surface: 80, rooms: 3, status: 'available' }, { id: 242, unitNumber: '2', floor: 4, surface: 80, rooms: 3, status: 'sold' }, { id: 243, unitNumber: '3', floor: 4, surface: 80, rooms: 3, status: 'available' }, { id: 244, unitNumber: '4', floor: 4, surface: 80, rooms: 3, status: 'available' }, { id: 245, unitNumber: '5', floor: 4, surface: 80, rooms: 3, status: 'available' },
+        // Floor 0 (Ground): 2,4,5 sold
+        { id: 201, unitNumber: '1', floor: 0, surface: 80, rooms: 3, status: 'available' },
+        { id: 202, unitNumber: '2', floor: 0, surface: 80, rooms: 3, status: 'sold' },
+        { id: 203, unitNumber: '3', floor: 0, surface: 80, rooms: 3, status: 'available' },
+        { id: 204, unitNumber: '4', floor: 0, surface: 80, rooms: 3, status: 'sold' },
+        { id: 205, unitNumber: '5', floor: 0, surface: 80, rooms: 3, status: 'sold' },
+        // Floor 1: 4,5 sold; 1,2,3 unavailable
+        { id: 211, unitNumber: '1', floor: 1, surface: 80, rooms: 3, status: 'unavailable' },
+        { id: 212, unitNumber: '2', floor: 1, surface: 80, rooms: 3, status: 'unavailable' },
+        { id: 213, unitNumber: '3', floor: 1, surface: 80, rooms: 3, status: 'unavailable' },
+        { id: 214, unitNumber: '4', floor: 1, surface: 80, rooms: 3, status: 'sold' },
+        { id: 215, unitNumber: '5', floor: 1, surface: 80, rooms: 3, status: 'sold' },
+        // Floor 2: 1,2 sold; 3,4,5 unavailable
+        { id: 221, unitNumber: '1', floor: 2, surface: 80, rooms: 3, status: 'sold' },
+        { id: 222, unitNumber: '2', floor: 2, surface: 80, rooms: 3, status: 'sold' },
+        { id: 223, unitNumber: '3', floor: 2, surface: 80, rooms: 3, status: 'unavailable' },
+        { id: 224, unitNumber: '4', floor: 2, surface: 80, rooms: 3, status: 'unavailable' },
+        { id: 225, unitNumber: '5', floor: 2, surface: 80, rooms: 3, status: 'unavailable' },
+        // Floor 3: 2 sold
+        { id: 231, unitNumber: '1', floor: 3, surface: 80, rooms: 3, status: 'available' },
+        { id: 232, unitNumber: '2', floor: 3, surface: 80, rooms: 3, status: 'sold' },
+        { id: 233, unitNumber: '3', floor: 3, surface: 80, rooms: 3, status: 'available' },
+        { id: 234, unitNumber: '4', floor: 3, surface: 80, rooms: 3, status: 'available' },
+        { id: 235, unitNumber: '5', floor: 3, surface: 80, rooms: 3, status: 'available' },
+        // Floor 4: available
+        { id: 241, unitNumber: '1', floor: 4, surface: 80, rooms: 3, status: 'available' },
+        { id: 242, unitNumber: '2', floor: 4, surface: 80, rooms: 3, status: 'available' },
+        { id: 243, unitNumber: '3', floor: 4, surface: 80, rooms: 3, status: 'available' },
+        { id: 244, unitNumber: '4', floor: 4, surface: 80, rooms: 3, status: 'available' },
+        { id: 245, unitNumber: '5', floor: 4, surface: 80, rooms: 3, status: 'available' },
       ]
     },
     {
       id: 3,
       name: 'C',
       apartments: [
-        { id: 301, unitNumber: '1', floor: 0, surface: 80, rooms: 3, status: 'available' }, { id: 302, unitNumber: '2', floor: 0, surface: 80, rooms: 3, status: 'sold' }, { id: 303, unitNumber: '3', floor: 0, surface: 80, rooms: 3, status: 'available' }, { id: 304, unitNumber: '4', floor: 0, surface: 80, rooms: 3, status: 'available' }, { id: 305, unitNumber: '5', floor: 0, surface: 80, rooms: 3, status: 'available' },
-        { id: 311, unitNumber: '1', floor: 1, surface: 80, rooms: 3, status: 'available' }, { id: 312, unitNumber: '2', floor: 1, surface: 80, rooms: 3, status: 'available' }, { id: 313, unitNumber: '3', floor: 1, surface: 80, rooms: 3, status: 'available' }, { id: 314, unitNumber: '4', floor: 1, surface: 80, rooms: 3, status: 'available' }, { id: 315, unitNumber: '5', floor: 1, surface: 80, rooms: 3, status: 'available' },
-        { id: 321, unitNumber: '1', floor: 2, surface: 80, rooms: 3, status: 'available' }, { id: 322, unitNumber: '2', floor: 2, surface: 80, rooms: 3, status: 'sold' }, { id: 323, unitNumber: '3', floor: 2, surface: 80, rooms: 3, status: 'available' }, { id: 324, unitNumber: '4', floor: 2, surface: 80, rooms: 3, status: 'sold' }, { id: 325, unitNumber: '5', floor: 2, surface: 80, rooms: 3, status: 'available' },
-        { id: 331, unitNumber: '1', floor: 3, surface: 80, rooms: 3, status: 'sold' }, { id: 332, unitNumber: '2', floor: 3, surface: 80, rooms: 3, status: 'sold' }, { id: 333, unitNumber: '3', floor: 3, surface: 80, rooms: 3, status: 'available' }, { id: 334, unitNumber: '4', floor: 3, surface: 80, rooms: 3, status: 'available' }, { id: 335, unitNumber: '5', floor: 3, surface: 80, rooms: 3, status: 'available' },
-        { id: 341, unitNumber: '1', floor: 4, surface: 80, rooms: 3, status: 'available' }, { id: 342, unitNumber: '2', floor: 4, surface: 80, rooms: 3, status: 'available' }, { id: 343, unitNumber: '3', floor: 4, surface: 80, rooms: 3, status: 'available' }, { id: 344, unitNumber: '4', floor: 4, surface: 80, rooms: 3, status: 'sold' }, { id: 345, unitNumber: '5', floor: 4, surface: 80, rooms: 3, status: 'available' },
+        // Floor 0: 2 sold; 1,3,4 unavailable
+        { id: 301, unitNumber: '1', floor: 0, surface: 80, rooms: 3, status: 'unavailable' },
+        { id: 302, unitNumber: '2', floor: 0, surface: 80, rooms: 3, status: 'sold' },
+        { id: 303, unitNumber: '3', floor: 0, surface: 80, rooms: 3, status: 'unavailable' },
+        { id: 304, unitNumber: '4', floor: 0, surface: 80, rooms: 3, status: 'unavailable' },
+        { id: 305, unitNumber: '5', floor: 0, surface: 80, rooms: 3, status: 'available' },
+        // Floor 1: 3,4,5 sold; 1,2 unavailable
+        { id: 311, unitNumber: '1', floor: 1, surface: 80, rooms: 3, status: 'unavailable' },
+        { id: 312, unitNumber: '2', floor: 1, surface: 80, rooms: 3, status: 'unavailable' },
+        { id: 313, unitNumber: '3', floor: 1, surface: 80, rooms: 3, status: 'sold' },
+        { id: 314, unitNumber: '4', floor: 1, surface: 80, rooms: 3, status: 'sold' },
+        { id: 315, unitNumber: '5', floor: 1, surface: 80, rooms: 3, status: 'sold' },
+        // Floor 2: 2,4 sold; 1,3,5 unavailable
+        { id: 321, unitNumber: '1', floor: 2, surface: 80, rooms: 3, status: 'unavailable' },
+        { id: 322, unitNumber: '2', floor: 2, surface: 80, rooms: 3, status: 'sold' },
+        { id: 323, unitNumber: '3', floor: 2, surface: 80, rooms: 3, status: 'unavailable' },
+        { id: 324, unitNumber: '4', floor: 2, surface: 80, rooms: 3, status: 'sold' },
+        { id: 325, unitNumber: '5', floor: 2, surface: 80, rooms: 3, status: 'unavailable' },
+        // Floor 3: 1 sold; 3 unavailable
+        { id: 331, unitNumber: '1', floor: 3, surface: 80, rooms: 3, status: 'sold' },
+        { id: 332, unitNumber: '2', floor: 3, surface: 80, rooms: 3, status: 'available' },
+        { id: 333, unitNumber: '3', floor: 3, surface: 80, rooms: 3, status: 'unavailable' },
+        { id: 334, unitNumber: '4', floor: 3, surface: 80, rooms: 3, status: 'available' },
+        { id: 335, unitNumber: '5', floor: 3, surface: 80, rooms: 3, status: 'available' },
+        // Floor 4: 4 sold
+        { id: 341, unitNumber: '1', floor: 4, surface: 80, rooms: 3, status: 'available' },
+        { id: 342, unitNumber: '2', floor: 4, surface: 80, rooms: 3, status: 'available' },
+        { id: 343, unitNumber: '3', floor: 4, surface: 80, rooms: 3, status: 'available' },
+        { id: 344, unitNumber: '4', floor: 4, surface: 80, rooms: 3, status: 'sold' },
+        { id: 345, unitNumber: '5', floor: 4, surface: 80, rooms: 3, status: 'available' },
       ]
     },
     {
@@ -62,10 +112,13 @@ const fallbackProjectData = {
       apartments: [
         { id: 401, unitNumber: '1', floor: 0, surface: 80, rooms: 3, status: 'available' },
         { id: 402, unitNumber: '2', floor: 0, surface: 80, rooms: 3, status: 'available' },
-        { id: 411, unitNumber: '1', floor: 1, surface: 80, rooms: 3, status: 'available' },
-        { id: 412, unitNumber: '2', floor: 1, surface: 80, rooms: 3, status: 'available' },
+        // Floor 1: 1,2 sold
+        { id: 411, unitNumber: '1', floor: 1, surface: 80, rooms: 3, status: 'sold' },
+        { id: 412, unitNumber: '2', floor: 1, surface: 80, rooms: 3, status: 'sold' },
+        // Floor 2: 2 sold
         { id: 421, unitNumber: '1', floor: 2, surface: 80, rooms: 3, status: 'available' },
         { id: 422, unitNumber: '2', floor: 2, surface: 80, rooms: 3, status: 'sold' },
+        // Floor 3: 2 sold
         { id: 431, unitNumber: '1', floor: 3, surface: 80, rooms: 3, status: 'available' },
         { id: 432, unitNumber: '2', floor: 3, surface: 80, rooms: 3, status: 'sold' },
         { id: 441, unitNumber: '1', floor: 4, surface: 80, rooms: 3, status: 'available' },
@@ -81,7 +134,7 @@ export default function NajmaImmeublePage() {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/projects/najma`)
+    fetch(`https://tozdaght-backend-api.vercel.app/api/projects/najma`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success && data.data) {
@@ -109,7 +162,7 @@ export default function NajmaImmeublePage() {
   }
 
   const whatsappMessage = generateWhatsAppMessage('تجزئة النجمة - الشقق السكنية', 'تيزنيت', {})
-  const whatsappUrl = buildWhatsAppUrl('212702060323', whatsappMessage)
+  const whatsappUrl = buildWhatsAppUrl('212713379197', whatsappMessage)
 
   const hasAvailableUnits = project?.buildings?.some((b: any) =>
     b.apartments?.some((a: any) => a.status === 'available')

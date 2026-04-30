@@ -157,10 +157,12 @@ const TERRAIN_PROGRESS_IMAGES = [
 ]
 
 const IMMEUBLE_PROGRESS_IMAGES = [
+  '/images/najma/immeuble/progress/new-progress-1.jpeg',
+  '/images/najma/immeuble/progress/new-progress-2.jpeg',
+  '/images/najma/immeuble/progress/new-progress-4.jpeg',
   '/m/immeuble-progress-10.jpg',
   '/images/najma/immeuble/progress/1.jpg',
   '/images/najma/immeuble/progress/2.jpg',
-  '/images/najma/immeuble/progress/3.jpg',
   '/images/najma/immeuble/progress/6.jpeg',
   '/images/najma/immeuble/progress/7.jpeg',
   '/m/new/WhatsApp%20Image%202026-04-14%20at%2018.41.04.jpeg',
@@ -168,7 +170,6 @@ const IMMEUBLE_PROGRESS_IMAGES = [
   '/m/new/WhatsApp%20Image%202026-04-14%20at%2018.41.05%20(1).jpeg',
   '/m/new/WhatsApp%20Image%202026-04-14%20at%2018.41.05%20(2).jpeg',
   '/m/new/WhatsApp%20Image%202026-04-14%20at%2018.41.05%20(3).jpeg',
-  '/m/new/WhatsApp%20Image%202026-04-14%20at%2018.41.05%20(4).jpeg',
   '/m/new/WhatsApp%20Image%202026-04-14%20at%2018.41.05%20(5).jpeg',
 ]
 

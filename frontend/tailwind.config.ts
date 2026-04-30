@@ -48,6 +48,7 @@ const config: Config = {
           available: '#38A169',
           sold: '#E53E3E',
           reserved: '#F6AD55',
+          unavailable: '#94a3b8',
         },
       },
       fontFamily: {

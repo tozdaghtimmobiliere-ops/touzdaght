@@ -327,20 +327,6 @@ export default function ProjectDetailPage() {
               </div>
             </div>
 
-            {/* Type */}
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl flex items-center justify-center opacity-80"
-                style={{ background: 'linear-gradient(135deg, rgba(201,168,76,0.3), rgba(201,168,76,0.1))' }}>
-                <Building className="w-4 h-4 text-gold" />
-              </div>
-              <div>
-                <p className="text-secondary/40 text-[10px] font-black uppercase tracking-wider">{t('project_detail.info.type')}</p>
-                <p className="font-bold text-secondary text-sm">
-                  {t(`project_detail.types.${project.type}`)}
-                </p>
-              </div>
-            </div>
-
             {/* Status */}
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-xl flex items-center justify-center opacity-80"
@@ -429,8 +415,11 @@ export default function ProjectDetailPage() {
                     {isPlateau ? (
                       <ImageSlider 
                         images={[
-                          { id: '4', url: '/images/najma/plateau/4.jpg', label: '' },
                           { id: '5', url: '/images/najma/plateau/5.jpg', label: '' },
+                          { id: '4', url: '/images/najma/plateau/4.jpg', label: '' },
+                          { id: '1', url: '/images/najma/plateau/1.jpg', label: '' },
+                          { id: '2', url: '/images/najma/plateau/2.jpg', label: '' },
+                          { id: '3', url: '/images/najma/plateau/3.jpg', label: '' },
                         ]} 
                       />
                     ) : (

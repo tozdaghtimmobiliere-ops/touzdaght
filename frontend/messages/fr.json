@@ -10,7 +10,7 @@
   },
   "home": {
     "hero": {
-      "badge": "Projet An-Najma – Tiznit",
+      "badge": "Nouveau",
       "title": "Quartier résidentiel et commercial moderne au cœur de Tiznit",
       "subtitle": "Nous proposons des projets immobiliers de standing alliant luxe et praticité.",
       "cta": "Découvrir le projet",
@@ -41,6 +41,7 @@
     "sold": "Vendu",
     "reserved": "Réservé",
     "available": "Disponible",
+    "unavailable": "Indisponible actuellement",
     "completed": "Terminé"
   },
   "project_detail": {

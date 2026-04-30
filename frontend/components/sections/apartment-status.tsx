@@ -28,9 +28,11 @@ const content = {
     floor: 'الطابق',
     unit: 'شقة',
     available: 'متاحة',
-    sold: 'مباعة',
+    sold: 'محجوزة',
     reserved: 'محجوزة',
+    unavailable: 'غير متوفرة حاليا',
     soldAlert: 'هذه الشقة تم بيعها، الرجاء اختيار شقة أخرى.',
+    unavailableAlert: 'هذه الشقة غير متوفرة حاليا.',
     legend: 'الحالة:',
   },
   fr: {
@@ -40,7 +42,9 @@ const content = {
     available: 'Disponible',
     sold: 'Vendu',
     reserved: 'Réservé',
+    unavailable: 'Indisponible actuellement',
     soldAlert: 'Cet appartement est déjà vendu. Veuillez en choisir un autre.',
+    unavailableAlert: 'Cet appartement est indisponible actuellement.',
     legend: 'Légende:',
   },
   en: {
@@ -50,7 +54,9 @@ const content = {
     available: 'Available',
     sold: 'Sold',
     reserved: 'Reserved',
+    unavailable: 'Unavailable',
     soldAlert: 'This apartment has already been sold. Please choose another one.',
+    unavailableAlert: 'This apartment is currently unavailable.',
     legend: 'Legend:',
   },
 }
@@ -78,13 +84,18 @@ export function ApartmentStatus({ buildings, projectName, cityName }: ApartmentS
       return
     }
 
+    if (apartment.status === 'unavailable') {
+      alert(t.unavailableAlert)
+      return
+    }
+
     if (apartment.status === 'available') {
       const message = generateWhatsAppMessage(projectName, cityName, {
         unitNumber: apartment.unitNumber,
         floor: apartment.floor,
         building: building?.name,
       })
-      const url = buildWhatsAppUrl('212702060323', message)
+      const url = buildWhatsAppUrl('212713379197', message)
       window.open(url, '_blank')
     }
   }
@@ -134,11 +145,20 @@ export function ApartmentStatus({ buildings, projectName, cityName }: ApartmentS
                     <button
                       key={apartment.id}
                       onClick={() => handleApartmentClick(apartment)}
-                      className={cn(
-                        'apartment-circle',
-                        apartment.status,
-                        apartment.status === 'available' && 'hover:scale-110'
-                      )}
+                      className="w-12 h-12 rounded-full flex items-center justify-center font-bold text-sm text-white transition-all duration-300 cursor-pointer"
+                      style={{
+                        background:
+                          apartment.status === 'sold'
+                            ? 'linear-gradient(135deg, #E53E3E, #C53030)'
+                            : apartment.status === 'reserved'
+                            ? 'linear-gradient(135deg, #F6AD55, #DD6B20)'
+                            : apartment.status === 'unavailable'
+                            ? 'linear-gradient(135deg, #94a3b8, #64748b)'
+                            : 'linear-gradient(135deg, #38A169, #2F855A)',
+                        boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+                        cursor: (apartment.status === 'sold' || apartment.status === 'unavailable') ? 'not-allowed' : 'pointer',
+                        opacity: apartment.status === 'sold' ? 0.7 : 1,
+                      }}
                       title={`${t.unit} ${apartment.unitNumber}`}
                     >
                       {apartment.unitNumber}
@@ -162,9 +182,10 @@ export function ApartmentStatus({ buildings, projectName, cityName }: ApartmentS
             <span className="w-4 h-4 rounded-full bg-status-sold" />
             <span className="text-text-secondary text-sm">{t.sold}</span>
           </div>
+
           <div className="flex items-center gap-2">
-            <span className="w-4 h-4 rounded-full bg-status-reserved" />
-            <span className="text-text-secondary text-sm">{t.reserved}</span>
+            <span className="w-4 h-4 rounded-full bg-status-unavailable" />
+            <span className="text-text-secondary text-sm">{t.unavailable}</span>
           </div>
         </div>
       </div>

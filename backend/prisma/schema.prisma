@@ -13,19 +13,18 @@ model City {
   name      String
   slug      String    @unique
   heroImage String?
-  projects  Project[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+  projects  Project[]
 }
 
 model Project {
   id          Int            @id @default(autoincrement())
   cityId      Int
-  city        City           @relation(fields: [cityId], references: [id])
   name        String
   slug        String         @unique
-  type        String         // residence | house | lotissement | commercial
-  status      String         @default("active") // active | completed
+  type        String
+  status      String         @default("active")
   description String?
   address     String?
   totalArea   Float?
@@ -34,44 +33,44 @@ model Project {
   heroImage   String?
   mainImage   String?
   whatsapp    String         @default("212702060323")
-  buildings   Building[]
-  parcels     Parcel[]
-  images      ProjectImage[]
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
+  buildings   Building[]
+  parcels     Parcel[]
+  city        City           @relation(fields: [cityId], references: [id])
+  images      ProjectImage[]
 }
 
 model ProjectImage {
-  id        Int     @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   projectId Int
-  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
   url       String
-  category  String  // plan | chantier | terrain | gallery | slider
-  label     String? // badge displayed in slider
-  order     Int     @default(0)
+  category  String
+  label     String?
+  order     Int      @default(0)
   createdAt DateTime @default(now())
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
 }
 
 model Building {
   id                 Int         @id @default(autoincrement())
   projectId          Int
-  project            Project     @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  name               String      // A, B, C, D
+  name               String
   floorsCount        Int
   apartmentsPerFloor Int
   totalSurface       Float?
-  floorLabels        String?     // JSON array of custom row labels e.g. ["طابق أرضي","R+1","R+2"]
-  tableauSection     String?     // optional section name for the tableau
-  apartments         Apartment[]
+  floorLabels        String?
+  tableauSection     String?
   createdAt          DateTime    @default(now())
   updatedAt          DateTime    @updatedAt
+  apartments         Apartment[]
+  project            Project     @relation(fields: [projectId], references: [id], onDelete: Cascade)
 }
 
 model Apartment {
   id         Int      @id @default(autoincrement())
   buildingId Int
-  building   Building @relation(fields: [buildingId], references: [id], onDelete: Cascade)
-  floor      Int      // 0 = RDC
+  floor      Int
   unitNumber Int
   rooms      Int?     @default(2)
   salons     Int?     @default(1)
@@ -79,9 +78,10 @@ model Apartment {
   bathrooms  Int?     @default(1)
   surface    Float?
   price      Float?
-  status     String   @default("available") // available | sold | reserved
+  status     String   @default("available")
   updatedAt  DateTime @updatedAt
   createdAt  DateTime @default(now())
+  building   Building @relation(fields: [buildingId], references: [id], onDelete: Cascade)
 
   @@unique([buildingId, floor, unitNumber])
 }
@@ -89,16 +89,16 @@ model Apartment {
 model Parcel {
   id           Int      @id @default(autoincrement())
   projectId    Int
-  project      Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
   parcelNumber Int
-  parcelCode   String   // HE2 | HC2 | HC3 | HC4 | HE4
-  usageType    String   // residential | commercial
-  zoneType     String   // R+2 | R+3 | R+4
+  parcelCode   String
+  usageType    String
+  zoneType     String
   surface      Float?
   price        Float?
-  status       String   @default("available") // available | sold | reserved
+  status       String   @default("available")
   updatedAt    DateTime @updatedAt
   createdAt    DateTime @default(now())
+  project      Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
 
   @@unique([projectId, parcelNumber, parcelCode])
 }
@@ -107,7 +107,7 @@ model Admin {
   id           Int      @id @default(autoincrement())
   username     String   @unique
   passwordHash String
-  role         String   // super_admin | admin
+  role         String
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
@@ -115,7 +115,7 @@ model Admin {
 model ReservationLog {
   id          Int      @id @default(autoincrement())
   adminId     Int
-  unitType    String   // apartment | parcel
+  unitType    String
   unitId      Int
   oldStatus   String
   newStatus   String

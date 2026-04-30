@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 import { Menu, X, ChevronDown, Phone } from 'lucide-react'
 import { useLanguage } from '@/components/providers'
 import { cn } from '@/lib/utils'
-import { ThemeToggle } from '@/components/ui/theme-toggle'
+
 
 const navLinks = [
   { href: '/', labelKey: 'nav.home' },
@@ -46,8 +46,8 @@ export function Header() {
     <header className={cn(
       'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
       isScrolled
-        ? 'bg-white/95 dark:bg-dark/95 backdrop-blur-md shadow-xl border-b border-border dark:border-white/5'
-        : 'bg-white dark:bg-dark'
+        ? 'bg-secondary/95 dark:bg-dark/95 backdrop-blur-md shadow-xl border-b border-white/5'
+        : 'bg-secondary dark:bg-dark'
     )}>
       {/* Gold top line */}
       <div className="h-[2px] bg-gradient-to-r from-transparent via-gold to-transparent opacity-60" />
@@ -134,7 +134,7 @@ export function Header() {
                       'px-4 py-2 rounded-lg transition-all duration-200 font-semibold text-sm relative group',
                       isActive(link.href)
                         ? 'text-gold'
-                        : 'text-secondary/80 dark:text-white/80 hover:text-gold'
+                        : 'text-white/80 hover:text-gold'
                     )}
                   >
                     {t(link.labelKey)}
@@ -149,13 +149,10 @@ export function Header() {
 
           {/* Right side */}
           <div className="flex items-center gap-3">
-            {/* Theme Toggle */}
-            <div className="hidden sm:block">
-              <ThemeToggle />
-            </div>
+
 
             {/* Language Switcher */}
-            <div className="hidden sm:flex items-center gap-0.5 bg-secondary/5 dark:bg-white/5 rounded-lg p-1 border border-border dark:border-white/10">
+            <div className="hidden sm:flex items-center gap-0.5 bg-white/10 rounded-lg p-1 border border-white/10">
               {['ar', 'fr'].map((lang) => (
                 <button
                   key={lang}

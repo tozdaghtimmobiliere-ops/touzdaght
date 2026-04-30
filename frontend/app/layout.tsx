@@ -187,7 +187,7 @@ export default function RootLayout({
         />
       </head>
       <body className="font-cairo antialiased">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} forcedTheme="light">
           <Toaster position="bottom-center" richColors />
           <Providers>
             {children}

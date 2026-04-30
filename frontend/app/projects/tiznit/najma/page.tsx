@@ -10,7 +10,7 @@ import { Building2, MapPin, ArrowLeft } from 'lucide-react'
 
 const content = {
   ar: {
-    title: 'مشروع تجزءة و شقق النجمة',
+    title: 'تجزئة النجمة',
     subtitle: 'اختر القسم الذي تريد الاطلاع عليه',
     terrain: {
       title: 'البقع الأرضية',
@@ -113,10 +113,22 @@ export default function NajmaSelectionPage() {
                     />
                   </div>
                   <div className="p-8 text-center">
-                    <h2 className="font-almarai text-2xl md:text-3xl font-black text-secondary mb-4 group-hover:text-gold transition-colors duration-300">
-                      {t('projects.najma.apartments')}
+                    <h2 className="font-almarai text-2xl md:text-3xl font-black text-secondary mb-4 group-hover:text-gold transition-colors duration-300 flex flex-col gap-1">
+                      {(() => {
+                        const name = t('projects.najma.apartments');
+                        const parts = name.split(/\s*(?:\u2014|\u2013|-)\s+/);
+                        if (parts.length > 1) {
+                          return (
+                            <>
+                              <span className="block">{parts[0]}</span>
+                              <span className="block text-red-600 text-2xl md:text-3xl font-black leading-tight drop-shadow-sm">{parts.slice(1).join(' ')}</span>
+                            </>
+                          );
+                        }
+                        return name;
+                      })()}
                     </h2>
-                    <p className="font-cairo text-secondary/60 text-lg leading-relaxed mb-6">
+                    <p className="font-cairo text-secondary text-lg leading-relaxed mb-6">
                       {t('projects.najma.apartments_desc')}
                     </p>
                     <div className="inline-flex items-center gap-2 text-gold font-black uppercase tracking-widest text-xs border-b border-gold/30 pb-1 group-hover:border-gold transition-all">
@@ -145,10 +157,22 @@ export default function NajmaSelectionPage() {
                     />
                   </div>
                   <div className="p-8 text-center">
-                    <h2 className="font-almarai text-2xl md:text-3xl font-black text-secondary mb-4 group-hover:text-gold transition-colors duration-300">
-                      {t('projects.najma.terrains')}
+                    <h2 className="font-almarai text-2xl md:text-3xl font-black text-secondary mb-4 group-hover:text-gold transition-colors duration-300 flex flex-col gap-1">
+                      {(() => {
+                        const name = t('projects.najma.terrains');
+                        const parts = name.split(/\s*(?:\u2014|\u2013|-)\s+/);
+                        if (parts.length > 1) {
+                          return (
+                            <>
+                              <span className="block">{parts[0]}</span>
+                              <span className="block text-red-600 text-2xl md:text-3xl font-black leading-tight drop-shadow-sm">{parts.slice(1).join(' ')}</span>
+                            </>
+                          );
+                        }
+                        return name;
+                      })()}
                     </h2>
-                    <p className="font-cairo text-secondary/60 text-lg leading-relaxed mb-6">
+                    <p className="font-cairo text-secondary text-lg leading-relaxed mb-6">
                       {t('projects.najma.terrains_desc')}
                     </p>
                     <div className="inline-flex items-center gap-2 text-gold font-black uppercase tracking-widest text-xs border-b border-gold/30 pb-1 group-hover:border-gold transition-all">

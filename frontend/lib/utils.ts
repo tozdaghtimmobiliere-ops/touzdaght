@@ -47,7 +47,8 @@ export function getStatusText(status: string, language: string = 'ar'): string {
   return translations[language]?.[status] || status
 }
 
-export function getFloorName(floor: number, language: string = 'ar'): string {
+export function getFloorName(floor: number | undefined, language: string = 'ar'): string {
+  if (floor === undefined) return ''
   const floors: Record<string, Record<number, string>> = {
     ar: {
       0: 'الطابق الأرضي',
@@ -85,26 +86,28 @@ export function generateWhatsAppMessage(
   projectName: string,
   cityName: string,
   unitInfo: {
-    unitNumber?: number
+    unitNumber?: number | string
     floor?: number
     building?: string
-    parcelNumber?: number
+    parcelNumber?: number | string
     parcelCode?: string
     zone?: string
   }
 ): string {
   const { unitNumber, floor, building, parcelNumber, parcelCode, zone } = unitInfo
+  const projectInfo = `${projectName || ''}${cityName ? `، ${cityName}` : ''}`
 
-  if (parcelNumber !== undefined) {
-    // Parcel message
-    return `السلام عليكم، أرغب في الاستفسار عن البقعة رقم ${parcelNumber} (${parcelCode}) منطقة ${zone} - مشروع ${projectName}، ${cityName}`
+  if (parcelNumber !== undefined && parcelNumber !== null && parcelNumber !== '') {
+    return `السلام عليكم، أرغب في الاستفسار عن البقعة رقم ${parcelNumber}${parcelCode ? ` (${parcelCode})` : ''}${zone ? ` منطقة ${zone}` : ''} - مشروع ${projectInfo}`
   }
 
-  // Apartment message
-  const floorText = floor !== undefined ? getFloorName(floor, 'ar') : ''
-  const buildingText = building ? `عمارة ${building}` : ''
-  
-  return `السلام عليكم، أرغب في الاستفسار عن الشقة رقم ${unitNumber} في ${floorText}${buildingText ? ` - ${buildingText}` : ''} - مشروع ${projectName}، ${cityName}`
+  if (unitNumber !== undefined && unitNumber !== null && unitNumber !== '') {
+    const floorText = getFloorName(floor, 'ar')
+    const buildingText = building ? `عمارة ${building}` : ''
+    return `السلام عليكم، أرغب في الاستفسار عن الشقة رقم ${unitNumber}${floorText ? ` في ${floorText}` : ''}${buildingText ? ` - ${buildingText}` : ''} - مشروع ${projectInfo}`
+  }
+
+  return `السلام عليكم، أرغب في الاستفسار عن مشروع ${projectInfo}`
 }
 
 export function slugify(text: string): string {

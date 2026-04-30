@@ -36,6 +36,7 @@ const STATUS_CONFIG = {
   available: { label: 'متاحة', color: 'bg-emerald-500', border: 'border-emerald-500', text: 'text-emerald-700', bg: 'bg-emerald-50' },
   reserved:  { label: 'محجوزة', color: 'bg-amber-400',  border: 'border-amber-400',  text: 'text-amber-700',  bg: 'bg-amber-50'  },
   sold:      { label: 'مباعة',  color: 'bg-red-500',    border: 'border-red-500',    text: 'text-red-700',    bg: 'bg-red-50'    },
+  unavailable: { label: 'غير متوفرة حاليا', color: 'bg-slate-400', border: 'border-slate-400', text: 'text-slate-700', bg: 'bg-slate-50' },
 }
 
 // ─── Main Page ────────────────────────────────────────────────────────────────

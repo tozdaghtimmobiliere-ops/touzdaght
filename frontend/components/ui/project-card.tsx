@@ -40,19 +40,19 @@ export function ProjectCard({ project, types, t, projectImages, cityOverrides }:
         </div>
         
         <div className="p-6 flex-grow flex flex-col">
-          <div className="flex items-center gap-2 text-primary text-sm font-bold uppercase tracking-wider mb-3">
+          <div className="flex items-center gap-2 text-accent text-sm font-bold uppercase tracking-wider mb-3">
             <MapPin className="w-4 h-4" />
             {cityOverrides[project.slug] || project.city.name}
           </div>
           
-          <h3 className="font-almarai font-extrabold text-xl text-secondary dark:text-white group-hover:text-primary transition-colors duration-300 mb-3">
+          <h3 className="font-almarai text-xl font-bold text-secondary dark:text-white group-hover:text-gold transition-colors duration-300 mb-3">
             {project.name}
           </h3>
 
           {project.description && (
-            <p className="text-secondary/60 dark:text-gray-400 text-sm line-clamp-2 mb-6 font-cairo">
-              {project.description}
-            </p>
+            <p className="text-sm text-secondary font-cairo line-clamp-2 leading-relaxed">
+            {project.description}
+          </p>
           )}
 
           <div className="mt-auto flex items-center justify-between pt-5 border-t border-border/50 dark:border-white/5">
@@ -61,7 +61,7 @@ export function ProjectCard({ project, types, t, projectImages, cityOverrides }:
               {project._count?.buildings > 0 ? `${project._count.buildings} Units`
                 : project._count?.parcels > 0 ? `${project._count.parcels} Plots` : 'Units'}
             </div>
-            <span className="text-primary font-bold text-[10px] uppercase tracking-widest flex items-center gap-2 group-hover:gap-3 transition-all">
+            <span className="text-accent font-bold text-[10px] uppercase tracking-widest flex items-center gap-2 group-hover:gap-3 transition-all">
               {t.viewDetails} <ArrowLeft className="w-4 h-4" />
             </span>
           </div>
